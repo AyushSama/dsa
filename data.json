@@ -7,115 +7,344 @@
     ]
   },
   "guide": {
-    "intro": "Built for 5–6 focused hours/day, interviews starting month 3–4, currently ~3–4/10 on unseen mediums. Diagnosis: topic exposure but not retrieval. ~250 new problems, ~400 re-solves. That ratio is the whole plan.",
+    "intro": "Google DSA roadmap, research-updated Sept 2026. For 5–6 focused hours/day, first interviews month 3–4, ~3–4/10 on unseen mediums. Built from LeetCode Discuss candidate reports (2024–2026), topic-frequency analysis across ~600 reported Google problems, and Google's 2026 process changes. ~200 new problems on purpose — candidates who cleared report 150–250 with deep understanding, not 500+ shallow.",
+    "phases": {
+      "0": "Week 0 — gate",
+      "1": "Phase 1 — Build",
+      "2": "Phase 2 — Conversion",
+      "3": "Buffer"
+    },
+    "research": [
+      {
+        "title": "There's a gate before the interviews: the GHA",
+        "text": "The Google Hiring Assessment is a pass/fail behavioural screen that arrives 24–72 h after applying — 50–75 Likert statements, 30 minutes, one sitting, no back button, ~4–5 day deadline, reported six-month reapply window. It measures integrity, collaboration, ownership, ambiguity-handling and communication, and cross-checks consistency. Handle it in week 0."
+      },
+      {
+        "title": "Google problems come wrapped in ambiguity",
+        "text": "The most consistent 2025–2026 theme isn't difficulty — it's deliberately vague framing. \"Parse a chat log and return the K most talkative users\", \"a network of teleporters, some broken, return the path\". Underneath: top-K heap, BFS, DP. The algorithm is standard; the statement is not. Nobody practises this, and it's why strong LeetCode solvers fail Google specifically."
+      },
+      {
+        "title": "The 2026 process has changed",
+        "text": "In-person rounds are back at many locations. AI is banned in standard loops (policy varies by round — confirm with your recruiter). A code-comprehension round is piloting (read and debug an unfamiliar 200–500 line codebase in CoderPad). L3 has no system design round; L4 sometimes chooses three coding rounds."
+      },
+      {
+        "title": "Topic frequency decides where hours go",
+        "text": "Arrays + Trees + DP + Graphs ≈ 63% of ~600 reported problems; those four are weeks 1–9. Google has the highest hard share in FAANG (~19%), and graph problems are displacing pure string problems in 2026 OA rounds."
+      },
+      {
+        "title": "On the Premium Google tag",
+        "text": "Contested value. Use the Discuss interview-experience compilations instead — one L3 offer-holder compiled every Google question from 2022–2024 posts and hit three verbatim in his loop. If you buy Premium, one month for weeks 9–14 only."
+      }
+    ],
+    "topicFrequency": [
+      {
+        "topic": "Arrays & two pointers",
+        "share": "18%",
+        "difficulty": "Med/Hard",
+        "weeks": "Weeks 8–9"
+      },
+      {
+        "topic": "Trees & binary search",
+        "share": "16%",
+        "difficulty": "Med/Hard",
+        "weeks": "Weeks 1–2"
+      },
+      {
+        "topic": "Dynamic programming",
+        "share": "15%",
+        "difficulty": "Hard",
+        "weeks": "Weeks 6–7"
+      },
+      {
+        "topic": "Graphs (BFS/DFS)",
+        "share": "14%",
+        "difficulty": "Med/Hard",
+        "weeks": "Weeks 3–4"
+      },
+      {
+        "topic": "Strings",
+        "share": "12%",
+        "difficulty": "Med",
+        "weeks": "Week 8"
+      },
+      {
+        "topic": "Heaps & priority queues",
+        "share": "9%",
+        "difficulty": "Med",
+        "weeks": "Week 10"
+      },
+      {
+        "topic": "Backtracking",
+        "share": "7%",
+        "difficulty": "Hard",
+        "weeks": "Week 5"
+      },
+      {
+        "topic": "Linked lists",
+        "share": "5%",
+        "difficulty": "Easy/Med",
+        "weeks": "Week 10, 1 day"
+      },
+      {
+        "topic": "Math & bit manipulation",
+        "share": "4%",
+        "difficulty": "Med",
+        "weeks": "Week 11"
+      }
+    ],
     "rules": [
-      "No editorial before 25 minutes. Not a hint, not a tag, not an LLM. The struggle is the training stimulus; removing it removes the training.",
-      "Every problem is re-solved on day +3 and day +14. From a blank file. This is the single mechanism that converts exposure into retrieval.",
-      "After the editorial, close it and re-implement from scratch. Reading a solution and understanding it produces zero retention. Typing it from memory produces most of it.",
-      "After week 9, never practise topic-tagged. Tags tell you the answer before you start and will inflate your self-assessment badly."
+      "No editorial before 25 minutes. Not a hint, not a tag, not an LLM.",
+      "Every problem is re-solved at +3 and +14 days, from a blank file. This converts exposure into retrieval and is the direct fix for 3–4/10.",
+      "After the editorial: close it, re-implement from scratch.",
+      "Tagged practice is fine in Phase 1. Untagged from Phase 2, except the weekly measurement set which is untagged from week 1.",
+      "20% of all practice happens in a blank Google Doc or on paper. No IDE, no autocomplete, no execution. With in-person rounds back, add whiteboard or paper sessions from week 9."
     ],
     "dailyTemplate": [
       {
         "block": "A — New",
         "duration": "2h 30m",
-        "content": "3 new problems. 25-min hard timer each. If stuck at 25, spend 5 more writing down what you know and which constraint you haven't used. Then editorial → close → re-implement blank."
+        "content": "3 new problems (2 on hard days and all of weeks 6–7). 25-min hard timer → 5 min writing what you know and which constraint you haven't used → editorial → close → re-implement blank."
       },
       {
         "block": "B — Revision",
         "duration": "1h",
-        "content": "The day's queue of +3 and +14 re-solves. Do this even on bad days. If time runs short, cut Block A, never Block B."
+        "content": "The day's +3 and +14 queue. Even on bad days. Short on time? Cut Block A, never Block B."
       },
       {
         "block": "C — Consolidate",
         "duration": "1h",
-        "content": "Read the day's editorials properly (including alternate approaches). Write trigger notes. Generate and solve one variant of one problem."
+        "content": "Editorials incl. alternate approaches · trigger notes · triage drill (15 min) · one variant, mandatory."
       },
       {
         "block": "D — Drill",
-        "duration": "45m",
-        "content": "Mon & Thu: blind primitives. Other days: one extra hard, unrushed."
+        "duration": "1h",
+        "content": "Blind primitives — pick 5 (daily, 20 min) + rotation: Tue debug hunt · Wed code quality · Thu ambiguity drill · Fri code comprehension · Sat cold-combo."
       }
     ],
     "dailyNotes": [
-      "Day 7 = contest day. LeetCode weekly or biweekly, 90 min. Then 90 min post-mortem: solve every problem you missed, no time limit.",
-      "Every third week, take a full rest day instead. Burnout around week 6 is the most common way plans at this intensity die."
+      "Weekly shape: 5 full days + 1 contest half-day + 1 full rest day.",
+      "Contest day (3h): 90-min LeetCode weekly or biweekly, 90-min post-mortem solving everything missed, untimed. Then stop."
     ],
     "phase2Template": [
       {
         "block": "A",
         "duration": "2h",
-        "content": "2 problems, random and untagged, 50% medium / 50% hard, spoken aloud and recorded."
+        "content": "2 problems, random and untagged, 40/60 medium/hard, spoken aloud, recorded, 2 variants each, half of them posed as ambiguous scenarios."
       },
       {
         "block": "B",
         "duration": "1h",
-        "content": "Revision queue + all remaining past failures."
+        "content": "Revision queue + every unretired failure."
       },
       {
         "block": "C",
         "duration": "1h",
-        "content": "Company-tagged list for your targets, last 6 months, timed."
+        "content": "Discuss interview-experience compilations, timed, 2024–2026 posts."
       },
       {
         "block": "D",
         "duration": "1h 30m",
-        "content": "Mock interview (3× per week) or blind primitives + one hard."
+        "content": "Mock interview (3×/week) · code comprehension · primitives."
       }
     ],
+    "drills": [
+      {
+        "name": "Spaced re-solve",
+        "when": "Daily · Block B",
+        "text": "12-minute timebox. Can't finish → failure → re-queue +3/+14 from today. Clean pass at +14 → retire. Failed twice → add +30. Passing means you reconstructed the reasoning, not recalled the code — typed something memorised and can't state the invariant out loud? Fail, even if it submits green."
+      },
+      {
+        "name": "Ambiguity drill",
+        "when": "Thursdays · 30 min",
+        "star": true,
+        "text": "Take a solved problem and rewrite it as a vague real-world scenario the way a Google interviewer would pose it. Come back to it a week later (or have a friend read it cold) and practise the derivation out loud: clarifying questions, stated assumptions, explicit edge cases. Source scenarios from Discuss Google interview-experience posts."
+      },
+      {
+        "name": "Variant generation",
+        "when": "Daily · mandatory",
+        "text": "After solving anything, pick one variant and solve it. Reported Google rounds routinely include 2–3 follow-ups after the initial solve — this drill is the second half of every round."
+      },
+      {
+        "name": "Triage",
+        "when": "Daily · 15 min, inside Block C",
+        "text": "Ten problems you will not solve, 90 seconds each: constraints suggest · trigger phrase · pattern guess · why not greedy. Then check tags. Ten pattern-recognition reps at a tenth the cost of solving ten."
+      },
+      {
+        "name": "Blind primitives",
+        "when": "Daily · 20 min, pick 5",
+        "text": "2 you failed most recently (from the bug log) · 2 you haven't touched in a week · 1 from this week's topic. Instantiate, don't stub. Verify every attempt by pasting into a real problem. Retire nothing, but taper: clean four times running → monthly spot-check."
+      },
+      {
+        "name": "Debug hunt",
+        "when": "Tuesdays · 20 min",
+        "text": "Break a solved problem deliberately (off-by-one, flipped comparison, missing base case, answer recorded before the shrink). Wait a day. Find it by hand-tracing a small input — no execution. Exactly what a shared-doc round demands."
+      },
+      {
+        "name": "Code quality pass",
+        "when": "Wednesdays · 20 min",
+        "text": "Rewrite two of the week's solutions as if for code review: descriptive names, extracted helpers, guard clauses, no magic numbers. Could an interviewer follow this while you narrate? Google grades readability explicitly."
+      },
+      {
+        "name": "Code comprehension",
+        "when": "Fridays · 30 min (new for 2026)",
+        "text": "Open an unfamiliar 200–500 line file from a real open-source repo, ideally a language you don't write daily. Out loud: what does it do in two sentences · inputs, outputs, invariants · where would a bug hide · complexity of the hot path · what would you change. This is the pilot round's exact shape."
+      },
+      {
+        "name": "Cold-combo",
+        "when": "Saturdays · 30 min",
+        "text": "Write a primitive inside an actual problem under time pressure, rather than in isolation. The check against a skeleton becoming its own memorised artifact."
+      }
+    ],
+    "bugLog": "Every failed primitive attempt gets one line, e.g. \"Dijkstra — forgot to skip stale PQ entries on pop\". This selects your first two primitives each day; after a month it maps your personal bug fingerprint. Keep it in Notes.",
     "primitives": [
       {
-        "name": "Binary search: first-true and last-true boundary forms",
-        "from": 1
+        "n": 1,
+        "name": "Binary search, first-true form (one template — derive last-true from it)",
+        "target": 3
       },
       {
-        "name": "Union-Find with path compression + union by rank",
-        "from": 1
+        "n": 2,
+        "name": "Binary search on answer — lo/hi + can(x) shell",
+        "target": 4
       },
       {
-        "name": "Dijkstra with a priority queue",
-        "from": 1
+        "n": 3,
+        "name": "Variable sliding window — expand right, shrink while invalid",
+        "target": 4
       },
       {
-        "name": "Topological sort: Kahn's and DFS three-colour",
-        "from": 1
+        "n": 4,
+        "name": "atMost(k) − atMost(k−1) counting shell",
+        "target": 4
       },
       {
-        "name": "LIS in O(n log n)",
-        "from": 1
+        "n": 5,
+        "name": "Prefix sum + hashmap of counts",
+        "target": 3
       },
       {
-        "name": "Trie: insert / search / startsWith",
-        "from": 1
+        "n": 6,
+        "name": "Monotonic stack — next greater / prev smaller, with index bookkeeping",
+        "target": 4
       },
       {
-        "name": "Quickselect",
-        "from": 1
+        "n": 7,
+        "name": "Monotonic deque — sliding window maximum",
+        "target": 4
       },
       {
-        "name": "Merge sort and quicksort with partition",
-        "from": 1
+        "n": 8,
+        "name": "BFS by level — size = len(queue) loop",
+        "target": 3
       },
       {
-        "name": "KMP prefix function",
-        "from": 13
+        "n": 9,
+        "name": "BFS with parent map → reconstruct and return the path",
+        "target": 5
       },
       {
-        "name": "Segment tree: build / point update / range query",
-        "from": 13
+        "n": 10,
+        "name": "Grid DFS with visited handling",
+        "target": 3
       },
       {
-        "name": "Fenwick tree",
-        "from": 13
+        "n": 11,
+        "name": "Post-order tree shell — tuple up, combine, update global",
+        "target": 4
+      },
+      {
+        "n": 12,
+        "name": "Iterative inorder traversal with explicit stack",
+        "target": 4
+      },
+      {
+        "n": 13,
+        "name": "Trie — insert / search / startsWith",
+        "target": 6
+      },
+      {
+        "n": 14,
+        "name": "Backtracking shell — choose → explore → un-choose, with duplicate skip",
+        "target": 4
+      },
+      {
+        "n": 15,
+        "name": "Union-Find — path compression + union by rank",
+        "target": 5
+      },
+      {
+        "n": 16,
+        "name": "Kahn's topological sort",
+        "target": 5
+      },
+      {
+        "n": 17,
+        "name": "DFS three-colour topological sort / cycle detection",
+        "target": 5
+      },
+      {
+        "n": 18,
+        "name": "Dijkstra with priority queue — and the path, not just the distance",
+        "target": 8
+      },
+      {
+        "n": 19,
+        "name": "Memo → tabulation conversion on a 1D DP",
+        "target": 5
+      },
+      {
+        "n": 20,
+        "name": "2D DP fill — knapsack table one day, edit distance the next",
+        "target": 6
+      },
+      {
+        "n": 21,
+        "name": "LIS in O(n log n) — and reconstruct the subsequence",
+        "target": 6
+      },
+      {
+        "n": 22,
+        "name": "Quickselect — write partition once, reuse it",
+        "target": 6
+      },
+      {
+        "n": 23,
+        "name": "Segment tree — build / point update / range query (optional)",
+        "target": 10,
+        "from": 11
+      },
+      {
+        "n": 24,
+        "name": "Fenwick tree (optional)",
+        "target": 8,
+        "from": 11
+      },
+      {
+        "n": 25,
+        "name": "KMP prefix function (optional)",
+        "target": 8,
+        "from": 11
       }
     ],
-    "primitivesGoal": "Blank file, zero reference, timed. Goal: each under 10 minutes, correct first run.",
+    "primitivesGoal": "Blank file, zero reference, timed. 22 primitives; targets are fluency targets, not learning targets. Daily: pick 5 — 2 you failed most recently, 2 untouched for a week, 1 from this week's topic. #9, #18 and #21 carry path reconstruction deliberately: \"return the actual sequence, not the value\" is one of Google's most common follow-ups.",
     "variantPrompts": [
-      "What if values can be negative?",
-      "What if it's a stream?",
-      "What if I need the k-th instead of the max?",
-      "What if the graph is weighted / directed / has cycles?",
-      "What if I can't modify the input?",
-      "What if n is 10⁹ but the answer range is small?"
+      "Negatives allowed",
+      "Streaming input",
+      "k-th instead of max",
+      "Can't modify the input",
+      "Weighted",
+      "Directed",
+      "Duplicates allowed",
+      "n is 10⁹ but the answer range is small",
+      "Return the actual sequence/path, not just its length/value",
+      "O(1) space",
+      "Repeated queries"
+    ],
+    "triage": [
+      "constraints suggest: O(n log n), n ≤ 1e5",
+      "trigger phrase: \"minimum number of X such that...\"",
+      "pattern guess: binary search on answer",
+      "why not greedy: choices interact, no exchange argument"
     ],
     "triggers": [
       {
@@ -141,61 +370,169 @@
       {
         "cue": "tree question about paths",
         "pattern": "post-order, return tuple upward"
+      },
+      {
+        "cue": "\"return the path\", not the distance",
+        "pattern": "BFS/Dijkstra with parent map, reconstruct backwards"
+      },
+      {
+        "cue": "vague real-world scenario",
+        "pattern": "clarify → specify → then name the algorithm"
       }
     ],
     "verbalProtocol": [
-      "Restate the problem in your own words. Confirm you have it right.",
-      "Ask 2–3 clarifying questions. Input size? Duplicates? Sorted? Empty input? Return value or in-place?",
-      "State a brute force and its complexity. Never skip this.",
+      "Restate the problem in your own words. Confirm.",
+      "Ask 2–3 clarifying questions and state your assumptions explicitly — with Google's ambiguous framing this is scored. Input size? Duplicates? Ties? Who parses the input? Fits in memory? Return the value or the actual path?",
+      "State a brute force and its complexity. Skipping this reads as pattern-matching.",
       "Name the bottleneck explicitly.",
       "Propose the optimisation and its complexity before coding.",
-      "Code, narrating as you go.",
-      "Dry-run on a small example by hand, out loud.",
-      "Volunteer edge cases yourself. Offer a follow-up improvement unprompted."
+      "Code, narrating. Clean names — readability is graded.",
+      "Dry-run a small example by hand, out loud. No execution available.",
+      "Volunteer your own test cases — interviewers ask candidates to enumerate test scenarios unprompted.",
+      "State time and space complexity, justified. Offer a follow-up improvement."
+    ],
+    "googleyness": [
+      "Conflict with a teammate",
+      "Disagreeing with a senior engineer's technical decision (reported 2026 prompt)",
+      "A failure and what changed",
+      "Ambiguity you navigated",
+      "A time you were wrong",
+      "Something you taught yourself",
+      "A project you drove without authority",
+      "Feedback that stung",
+      "A decision on incomplete data",
+      "Why Google"
     ],
     "exitCriteria": [
-      "Unseen medium: pattern identified in ≤5 min, solved in ≤25, bug-free first submission, ~80% of the time.",
-      "From memory in under 10 minutes each: Dijkstra · Union-Find · topological sort (both) · LIS O(n log n) · trie · segment tree · KMP · quickselect.",
-      "Complexity stated instantly and justified, including amortised cases.",
-      "New DP problem: state / transition / base / order written correctly before any code.",
-      "3 of 4 on a LeetCode weekly, consistently."
+      "Unseen medium: pattern in ≤5 min, solved in ≤25, bug-free first submission, ~80% of the time.",
+      "Unseen hard: solved in 40–45 min about half the time.",
+      "Ambiguous scenario → correct specification in ≤5 min of clarifying questions.",
+      "Two follow-up variants handled on the spot without restarting.",
+      "From memory in under 8 min: Dijkstra · Union-Find · both topological sorts · LIS O(n log n) · trie · quickselect · two-heaps median · edit distance grid.",
+      "New DP problem: state / transition / base / order correct before any code.",
+      "Time and space stated and justified unprompted, every time.",
+      "Ten Googleyness stories written and rehearsed; GHA completed."
     ],
     "failureModes": [
-      "Skipping Block B. Revision feels unproductive because you're re-solving things you \"already know.\" You do not already know them.",
-      "Peeking early. Every minute before 25 that you spend reading is a minute of training discarded.",
-      "Burnout at week 6. Take the rest days. A missed rest day costs a week.",
-      "Staying topic-tagged. Feels great, measures nothing.",
-      "Chasing volume. 250 problems deeply beats 900 skimmed, and it isn't close.",
-      "Silent practice. You can be a 9/10 solver and a 4/10 interviewee. Talk out loud from week 9."
+      "Failing the GHA before you ever code. Handle it in week 0.",
+      "Skipping Block B. Revision feels unproductive because you're re-solving things you \"already know.\" You don't.",
+      "Practising only clean problem statements. Google's ambiguity is intentional; the Thursday drill exists for this.",
+      "Skipping variants. At Google that's skipping half of every round.",
+      "Jumping straight to optimal. Reads as memorisation. State the brute force.",
+      "Practising only mediums. Google has the highest hard share in FAANG.",
+      "Only practising in an IDE. Shared doc, no autocomplete, no execution — and in-person rounds mean paper too.",
+      "Skipping the rest day. A burnout crash costs two weeks you don't have."
+    ],
+    "recruiter": [
+      "In-person or remote? Determines paper vs shared-doc practice.",
+      "Does my loop include the code-comprehension round? If yes, weight the Friday drill heavily.",
+      "Is AI permitted in any round? Policy is per-round now. Assume banned unless you have it in writing."
     ],
     "resources": [
       {
+        "name": "LeetCode Discuss — Google interview experiences, 2024–2026",
+        "use": "Highest-value free resource. Real problems and real framing. Compile them into a spreadsheet."
+      },
+      {
         "name": "NeetCode 250",
-        "use": "Primary pattern coverage — best signal-to-noise available"
+        "use": "Primary pattern coverage"
       },
       {
         "name": "CSES Problem Set",
-        "use": "Graphs (weeks 3–4) and DP (weeks 6–7). Free, and better than LeetCode for these two"
+        "use": "Graphs (week 4), DP (week 7). Free, better than LeetCode for both"
       },
       {
         "name": "LeetCode contests",
-        "use": "Weekly from week 1, even when you only solve one"
+        "use": "Weekly from week 1"
       },
       {
-        "name": "Striver A2Z",
-        "use": "Supplementary volume if a pattern feels thin"
-      },
-      {
-        "name": "Codeforces Div 3",
-        "use": "Optional. Speed well beyond the typical candidate"
+        "name": "Codeforces Div 2 A–C",
+        "use": "Optional; Google-style difficulty"
       },
       {
         "name": "Pramp / interviewing.io",
         "use": "Mocks, from week 9"
+      },
+      {
+        "name": "LeetCode Premium Google tag",
+        "use": "Optional, one month, weeks 9–14 only. Contested value versus Discuss compilations."
       }
-    ]
+    ],
+    "excluded": "Premium-locked and excluded: Alien Dictionary (269), Sliding Window Median (480), Minimize Max Distance to Gas Station (774), Walls and Gates (286), Number of Islands II (305). Substitutes in the plan cover the same patterns.",
+    "scope": "L3 has no system design round. L4 sometimes chooses three coding rounds over two coding + one design. Targeting L3/L4, the only non-DSA prep is the GHA and the Googleyness round. L5+ needs a separate system design track. Process details reflect reporting as of September 2026 — re-check before your loop."
   },
   "weeks": [
+    {
+      "week": 0,
+      "phase": 0,
+      "title": "Week 0 — GHA & diagnostic",
+      "days": [
+        {
+          "day": 1,
+          "focus": "Google Hiring Assessment prep (3h total)",
+          "items": [
+            {
+              "name": "Read Google's published values and the \"Googleyness\" language",
+              "type": "task"
+            },
+            {
+              "name": "Write your genuine positions: owning a mistake under pressure · disagreeing with a senior engineer · ambiguous requirements · sharing credit · escalating vs resolving · handling sensitive data",
+              "type": "task"
+            },
+            {
+              "name": "Decide: answer decisively and consistently, as yourself. Block a quiet 60 min when the invite arrives — no pause, no back button",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "focus": "Diagnostic · 10 random unseen mediums, 30 min each, no hints",
+          "items": [
+            {
+              "name": "Diagnostic 1–3 · random button, no topic filter · record WHY for every failure",
+              "type": "task"
+            },
+            {
+              "name": "Diagnostic 4–5",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Diagnostic, continued",
+          "items": [
+            {
+              "name": "Diagnostic 6–8",
+              "type": "task"
+            },
+            {
+              "name": "Diagnostic 9–10",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "focus": "Read the diagnostic",
+          "items": [
+            {
+              "name": "Classify each failure: didn't see the pattern → triage 15/day · saw it, couldn't code → primitives daily · bugs → weekly debug hunt + dry-run habit · too slow → tighter timers, both contests",
+              "type": "task"
+            },
+            {
+              "name": "Record the score in Notes — weeks 4, 8 and 11 measure against it",
+              "type": "task"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "The GHA is a pass/fail behavioural screen that arrives 24–72 h after applying: 50–75 Likert statements, 30 minutes, one sitting, ~4–5 day deadline, reported six-month reapply window. You could do 400 hours of DSA and never reach a coding round. Handle it now.",
+        "It rewards defensible, decisive choices and cross-checks consistency across rephrased items. Answer as yourself, consistently — not as an imagined ideal candidate."
+      ]
+    },
     {
       "week": 1,
       "phase": 1,
@@ -223,7 +560,10 @@
           "day": 3,
           "focus": "Post-order aggregate, hard",
           "items": [
-            "Binary Tree Maximum Path Sum",
+            {
+              "name": "Binary Tree Maximum Path Sum",
+              "hot": true
+            },
             "House Robber III",
             "Longest Univalue Path"
           ]
@@ -241,34 +581,40 @@
           "day": 5,
           "focus": "BST invariants",
           "items": [
-            "Validate BST",
+            {
+              "name": "Validate BST",
+              "hot": true
+            },
             "Kth Smallest Element in a BST",
             "LCA of a BST"
           ]
         },
         {
           "day": 6,
-          "focus": "Paths & ancestry",
+          "focus": "Contest",
           "items": [
-            "LCA of a Binary Tree",
-            "Path Sum II",
-            "Path Sum III"
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 7,
-          "focus": "Contest",
+          "focus": "Rest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "The one pattern that matters most: post-order aggregate — recurse into children, get a tuple back from each, combine at the current node, return a (possibly different) tuple upward while updating a global answer. Diameter, Max Path Sum, Balanced, House Robber III and Longest Univalue Path are all the same algorithm wearing different clothes.",
-        "What you return upward is often not what you record as the answer. In Max Path Sum you return the best single-branch path but record the best split path."
+        "Flagged problems are verified high-frequency in Google reports. Max Path Sum and Validate BST both appear repeatedly; Max Path Sum was identified as the basis of an actual Google India OA problem.",
+        "The pattern that matters most: post-order aggregate — recurse into children, get a tuple from each, combine at the node, return a possibly-different tuple upward while updating a global. Diameter, Max Path Sum, Balanced, House Robber III and Longest Univalue Path are the same algorithm in different clothes.",
+        "The recurring subtlety: what you return upward is often not what you record as the answer.",
+        "Block D aligned slot this week: post-order tree shell and iterative inorder."
       ]
     },
     {
@@ -278,6 +624,18 @@
       "days": [
         {
           "day": 1,
+          "focus": "Paths & ancestry",
+          "items": [
+            {
+              "name": "LCA of a Binary Tree",
+              "hot": true
+            },
+            "Path Sum II",
+            "Path Sum III"
+          ]
+        },
+        {
+          "day": 2,
           "focus": "Construction",
           "items": [
             "Construct BT from Preorder & Inorder",
@@ -286,66 +644,63 @@
           ]
         },
         {
-          "day": 2,
+          "day": 3,
           "focus": "Structural comparison",
           "items": [
-            "Serialize and Deserialize Binary Tree",
+            {
+              "name": "Serialize and Deserialize Binary Tree",
+              "hot": true
+            },
             "Subtree of Another Tree",
             "Symmetric Tree"
           ]
         },
         {
-          "day": 3,
-          "focus": "Tree as graph",
+          "day": 4,
+          "focus": "Tree as graph (hard, 2)",
           "items": [
             "All Nodes Distance K in Binary Tree",
-            "Vertical Order Traversal",
             "Binary Tree Cameras"
           ]
         },
         {
-          "day": 4,
-          "focus": "Trie",
+          "day": 5,
+          "focus": "Tries",
           "items": [
             "Implement Trie",
             "Design Add and Search Words Data Structure",
-            "Replace Words"
-          ]
-        },
-        {
-          "day": 5,
-          "focus": "Trie, hard",
-          "items": [
-            "Word Search II",
-            "Maximum XOR of Two Numbers in an Array",
-            "Longest Word in Dictionary"
+            {
+              "name": "Word Search II",
+              "hot": true
+            }
           ]
         },
         {
           "day": 6,
-          "focus": "Consolidation",
+          "focus": "Contest",
           "items": [
             {
-              "name": "Re-solve your 6 worst problems from weeks 1–2, blank file",
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
             }
           ]
         },
         {
           "day": 7,
-          "focus": "Contest",
+          "focus": "Rest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "All Nodes Distance K is the bridge to graphs: convert the tree to an undirected graph with parent pointers, then BFS. Feel that transition happen."
+        "Serialize/Deserialize is a Google favourite because it has infinite follow-ups — make it compact, make it N-ary, make it streaming. Run three variants on it.",
+        "All Nodes Distance K bridges into next week: convert the tree to an undirected graph with parent pointers, then BFS."
       ],
-      "checkpoint": "Post-order aggregate written without conscious thought. Trie and iterative traversal both blind-writable."
+      "checkpoint": "Post-order aggregate automatic. Iterative inorder and trie both blind-writable. Otherwise repeat week 1 days 2–3."
     },
     {
       "week": 3,
@@ -356,14 +711,17 @@
           "day": 1,
           "focus": "Grid as implicit graph",
           "items": [
-            "Number of Islands",
+            {
+              "name": "Number of Islands",
+              "hot": true
+            },
             "Max Area of Island",
             "Surrounded Regions"
           ]
         },
         {
           "day": 2,
-          "focus": "Multi-source BFS",
+          "focus": "Multi-source / border-source",
           "items": [
             "Rotting Oranges",
             "01 Matrix",
@@ -376,50 +734,61 @@
           "items": [
             "Word Ladder",
             "Open the Lock",
-            "Shortest Path in Binary Matrix"
+            {
+              "name": "Shortest Path in Binary Matrix",
+              "hot": true
+            }
           ]
         },
         {
           "day": 4,
           "focus": "Topological sort",
           "items": [
-            "Course Schedule",
+            {
+              "name": "Course Schedule",
+              "hot": true
+            },
             "Course Schedule II",
-            "Alien Dictionary"
+            "Find Eventual Safe States"
           ]
         },
         {
           "day": 5,
-          "focus": "Cycles & colouring",
+          "focus": "Colouring & structure",
           "items": [
-            "Find Eventual Safe States",
-            "Is Graph Bipartite?",
-            "Possible Bipartition"
+            {
+              "name": "Is Graph Bipartite?",
+              "hot": true
+            },
+            "Possible Bipartition",
+            "Minimum Height Trees"
           ]
         },
         {
           "day": 6,
-          "focus": "Union-Find",
+          "focus": "Contest",
           "items": [
-            "Number of Provinces",
-            "Accounts Merge",
-            "Redundant Connection"
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 7,
-          "focus": "Rest day",
+          "focus": "Rest",
           "items": [
             {
-              "name": "Full rest day (every third week). Contest optional only if you feel fresh.",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "Write topological sort both ways — Kahn's with in-degrees and DFS with three-colour marking. Kahn's gives you cycle detection and lexicographic ordering for free; DFS is shorter and gives you the finish-time ordering.",
-        "Cycle detection in a directed graph (three-colour) and in an undirected graph (parent-tracking, or union-find) are genuinely different algorithms. Know why."
+        "Graphs are the topic rising in Google OA rounds for 2026 — graph problems are displacing pure string problems. Give this and next week full effort.",
+        "Write topological sort both ways — Kahn's and DFS three-colour — and say why you'd pick each. Directed cycle detection (three-colour) and undirected (parent-tracking or union-find) are genuinely different algorithms.",
+        "Ambiguity note: every grid problem here has an obvious real-world disguise. Practise them that way on Thursday."
       ]
     },
     {
@@ -429,7 +798,16 @@
       "days": [
         {
           "day": 1,
-          "focus": "Union-Find, applied",
+          "focus": "Union-Find",
+          "items": [
+            "Number of Provinces",
+            "Redundant Connection",
+            "Accounts Merge"
+          ]
+        },
+        {
+          "day": 2,
+          "focus": "Union-Find applied",
           "items": [
             "Making A Large Island",
             "Satisfiability of Equality Equations",
@@ -437,16 +815,19 @@
           ]
         },
         {
-          "day": 2,
+          "day": 3,
           "focus": "Dijkstra",
           "items": [
-            "Network Delay Time",
+            {
+              "name": "Network Delay Time",
+              "hot": true
+            },
             "Path With Minimum Effort",
             "Swim in Rising Water"
           ]
         },
         {
-          "day": 3,
+          "day": 4,
           "focus": "Relaxation variants",
           "items": [
             "Cheapest Flights Within K Stops (Bellman-Ford)",
@@ -455,46 +836,44 @@
           ]
         },
         {
-          "day": 4,
+          "day": 5,
           "focus": "MST & all-pairs",
           "items": [
             "Min Cost to Connect All Points (Prim and Kruskal)",
-            "Find the City With the Smallest Number of Neighbors (Floyd-Warshall)"
-          ]
-        },
-        {
-          "day": 5,
-          "focus": "CSES",
-          "items": [
+            "Find the City With the Smallest Number of Neighbors (Floyd-Warshall)",
             "CSES: Building Roads",
-            "CSES: Message Route",
-            "CSES: Labyrinth"
+            {
+              "name": "Measurement set: 10 random untagged mediums — compare with the week 0 diagnostic",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 6,
-          "focus": "CSES",
+          "focus": "Contest",
           "items": [
-            "CSES: Round Trip",
-            "CSES: Shortest Routes I",
-            "CSES: Flight Discount"
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 7,
-          "focus": "Contest",
+          "focus": "Rest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "Use CSES for graphs. It forces genuine understanding rather than pattern-matching against a known LeetCode problem. Days 5–6 will hurt. That's the point."
+        "Block D this week goes to CSES: Message Route · Labyrinth · Round Trip · Shortest Routes I · Flight Discount. It will hurt; Google graph rounds hurt the same way.",
+        "On every shortest-path problem, also return the actual path, not just the distance. A reported Google round asked exactly this (\"list of nodes in travel sequence\") and it breaks people who only ever computed the number."
       ],
-      "checkpoint": "Dijkstra, Union-Find (both optimisations), and topological sort each written blind in under 10 minutes. Unseen mediums at 5–6/10."
+      "checkpoint": "Dijkstra, Union-Find (both optimisations) and both topological sorts blind in under 8 min. Unseen mediums 5–6/10. Missing badly → repeat week 4 from the buffer."
     },
     {
       "week": 5,
@@ -514,7 +893,10 @@
           "day": 2,
           "focus": "Permutations",
           "items": [
-            "Permutations",
+            {
+              "name": "Permutations",
+              "hot": true
+            },
             "Permutations II",
             "Letter Combinations of a Phone Number"
           ]
@@ -532,43 +914,47 @@
           "day": 4,
           "focus": "Grid & string backtracking",
           "items": [
-            "Word Search",
+            {
+              "name": "Word Search",
+              "hot": true
+            },
             "Palindrome Partitioning",
             "Restore IP Addresses"
           ]
         },
         {
           "day": 5,
-          "focus": "Constraint satisfaction",
+          "focus": "Constraint satisfaction (hard, 2)",
           "items": [
             "N-Queens",
-            "Sudoku Solver",
-            "Generate Parentheses"
+            "Sudoku Solver"
           ]
         },
         {
           "day": 6,
-          "focus": "Backtracking + pruning",
+          "focus": "Contest",
           "items": [
-            "Partition to K Equal Sum Subsets",
-            "Matchsticks to Square",
-            "Word Break II"
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 7,
-          "focus": "Contest",
+          "focus": "Rest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "Backtracking is one template: choose → explore → un-choose. What varies is the pruning and the duplicate-handling. Get duplicate handling right once (sort, then skip i > start && nums[i] == nums[i-1]) and reuse it forever.",
-        "Watch the constraints. n ≤ 20 is a loud signal for backtracking or bitmask; n ≤ 10⁵ rules it out entirely."
+        "Only 7% of reported problems but classified Hard when it appears — depth beats breadth this week.",
+        "One template: choose → explore → un-choose. What varies is pruning and duplicate handling. Get duplicates right once — sort, then skip i > start && nums[i] == nums[i-1] — and reuse forever.",
+        "Google angle: they rarely stop at \"generate all subsets.\" Expect prune it, count without generating, return the k-th lexicographically."
       ]
     },
     {
@@ -578,10 +964,9 @@
       "days": [
         {
           "day": 1,
-          "focus": "1D linear",
+          "focus": "1D linear (2/day)",
           "items": [
             "Climbing Stairs",
-            "House Robber",
             "House Robber II"
           ]
         },
@@ -589,7 +974,6 @@
           "day": 2,
           "focus": "1D with decisions",
           "items": [
-            "Min Cost Climbing Stairs",
             "Decode Ways",
             "Delete and Earn"
           ]
@@ -598,52 +982,58 @@
           "day": 3,
           "focus": "0/1 knapsack",
           "items": [
-            "Partition Equal Subset Sum",
-            "Target Sum",
-            "Last Stone Weight II"
+            {
+              "name": "Partition Equal Subset Sum",
+              "hot": true
+            },
+            "Target Sum"
           ]
         },
         {
           "day": 4,
           "focus": "Unbounded knapsack",
           "items": [
-            "Coin Change",
-            "Coin Change II",
-            "Combination Sum IV"
+            {
+              "name": "Coin Change",
+              "hot": true
+            },
+            "Coin Change II"
           ]
         },
         {
           "day": 5,
           "focus": "LIS family",
           "items": [
-            "Longest Increasing Subsequence (O(n²) and O(n log n))",
-            "Number of Longest Increasing Subsequence",
+            "Longest Increasing Subsequence (O(n²) and O(n log n), with reconstruction)",
             "Russian Doll Envelopes"
           ]
         },
         {
           "day": 6,
-          "focus": "Two-sequence DP",
+          "focus": "Contest",
           "items": [
-            "Longest Common Subsequence",
-            "Edit Distance",
-            "Distinct Subsequences"
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 7,
-          "focus": "Rest day",
+          "focus": "Rest",
           "items": [
             {
-              "name": "Full rest day (every third week). Contest optional only if you feel fresh.",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "Non-negotiable format. Before any code, write: state (dp[i] = precise English meaning), transition (formula), base (initial values), order (iteration direction). Then recursive + memo → tabulation → optimise space.",
-        "Coin Change vs Coin Change II differ only in loop order — that difference is exactly the combinations-vs-permutations distinction."
+        "DP is 15% of reported problems and the only topic classified Hard across the board. Two weeks, two problems a day, done properly.",
+        "Non-negotiable format before any code: state (dp[i] = precise English meaning) · transition · base · order. Then recursive + memo → tabulation → space optimisation. Full chain on the first problem of each new sub-pattern only.",
+        "Coin Change vs Coin Change II differ only in loop order, and that difference is combinations vs permutations.",
+        "On LIS: also write the reconstruction. Returning the subsequence rather than its length is a standard follow-up."
       ]
     },
     {
@@ -653,30 +1043,34 @@
       "days": [
         {
           "day": 1,
-          "focus": "Grid DP",
+          "focus": "Two-sequence DP (2/day)",
           "items": [
-            "Unique Paths",
-            "Unique Paths II",
-            "Minimum Path Sum"
+            {
+              "name": "Edit Distance",
+              "hot": true
+            },
+            {
+              "name": "Longest Common Subsequence",
+              "hot": true
+            }
           ]
         },
         {
           "day": 2,
-          "focus": "State machine",
+          "focus": "Grid & state machine",
           "items": [
-            "Best Time to Buy and Sell Stock II",
-            "Best Time to Buy and Sell Stock III",
-            "Best Time to Buy and Sell Stock IV"
+            "Unique Paths II",
+            "Best Time to Buy and Sell Stock III"
           ]
         },
         {
           "day": 3,
           "focus": "State machine",
           "items": [
+            "Best Time to Buy and Sell Stock IV",
             "Best Time to Buy and Sell Stock with Cooldown",
-            "Best Time to Buy and Sell Stock with Transaction Fee",
             {
-              "name": "Re-derive all six stock problems as one parameterised dp[day][transactions][holding] solution",
+              "name": "Re-derive all six stock problems as one dp[day][transactions][holding] solution",
               "type": "task"
             }
           ]
@@ -686,227 +1080,173 @@
           "focus": "Interval DP",
           "items": [
             "Longest Palindromic Subsequence",
-            "Palindrome Partitioning II",
-            "Burst Balloons"
+            {
+              "name": "Burst Balloons",
+              "hot": true
+            }
           ]
         },
         {
           "day": 5,
-          "focus": "Tree & bitmask DP",
+          "focus": "String DP",
           "items": [
-            "House Robber III (as explicit DP)",
-            "Shortest Path Visiting All Nodes (TSP)",
-            "Partition to K Equal Sum Subsets (bitmask)"
+            "Word Break",
+            {
+              "name": "Distinct Subsequences",
+              "hot": true
+            }
           ]
         },
         {
           "day": 6,
-          "focus": "String DP",
+          "focus": "Contest",
           "items": [
-            "Word Break",
-            "Regular Expression Matching",
-            "Wildcard Matching"
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 7,
-          "focus": "Contest",
+          "focus": "Rest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "Day 3's exercise — collapsing all six stock problems into one formulation — is worth more than the six problems individually.",
-        "Burst Balloons is the classic interval-DP trap: the natural framing (which balloon to burst first) doesn't decompose. Reversing it (which balloon to burst last) does."
+        "Edit Distance, LCS and Distinct Subsequences are all verified high-frequency. Burst Balloons was reported verbatim in an L4 onsite — the candidate solved it, missed an edge case, then handled three follow-ups.",
+        "Burst Balloons is the classic interval-DP trap: bursting first doesn't decompose, bursting last does. Sit with why until it clicks.",
+        "Block D this week: CSES DP section."
       ],
-      "checkpoint": "Given a DP problem you've never seen, you write state / transition / base / order correctly before coding, without an editorial. If you can't yet, repeat week 6 rather than continuing. Unseen mediums at 7/10."
+      "checkpoint": "Unseen DP problem: state / transition / base / order written correctly before coding, no editorial. If not, repeat week 6 from the buffer. Do not proceed."
     },
     {
       "week": 8,
       "phase": 1,
-      "title": "Two pointers & sliding window",
+      "title": "Strings & sliding window",
       "days": [
         {
           "day": 1,
-          "focus": "Two pointers, opposite ends",
+          "focus": "Variable window",
           "items": [
-            "Two Sum II",
-            "3Sum",
-            "Container With Most Water"
+            "Longest Repeating Character Replacement",
+            "Max Consecutive Ones III",
+            "Fruit Into Baskets"
           ]
         },
         {
           "day": 2,
-          "focus": "Two pointers, same direction",
+          "focus": "Window, hard",
           "items": [
-            "Remove Duplicates from Sorted Array II",
-            "Move Zeroes",
-            "Sort Colors"
+            {
+              "name": "Minimum Window Substring",
+              "hot": true
+            },
+            "Subarrays with K Different Integers",
+            "Find All Anagrams in a String"
           ]
         },
         {
           "day": 3,
-          "focus": "Fixed window",
+          "focus": "Anagrams & grouping",
           "items": [
-            "Maximum Average Subarray I",
-            "Find All Anagrams in a String",
-            "Permutation in String"
+            "Group Anagrams",
+            "Valid Anagram",
+            "Longest Substring Without Repeating Characters"
           ]
         },
         {
           "day": 4,
-          "focus": "Variable window",
+          "focus": "Palindromes",
           "items": [
-            "Longest Substring Without Repeating Characters",
-            "Max Consecutive Ones III",
-            "Longest Repeating Character Replacement"
+            "Longest Palindromic Substring",
+            "Palindromic Substrings",
+            "Valid Palindrome II"
           ]
         },
         {
           "day": 5,
-          "focus": "Variable window, harder",
+          "focus": "String manipulation",
           "items": [
-            "Minimum Window Substring",
-            "Fruit Into Baskets",
-            "Subarrays with K Different Integers"
+            "String to Integer (atoi)",
+            "Text Justification",
+            "Basic Calculator II",
+            {
+              "name": "Measurement set: 10 random untagged mediums — compare with week 0 and week 4",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 6,
-          "focus": "Prefix sums",
+          "focus": "Contest",
           "items": [
-            "Product of Array Except Self",
-            "Find Pivot Index",
-            "Range Sum Query – Immutable"
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 7,
-          "focus": "Contest",
+          "focus": "Rest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "The idea to extract: a variable window has exactly one shape — expand right unconditionally, shrink left while the window is invalid, record the answer at the right moment. The only thing that changes between problems is the validity predicate. Write that template into triggers.md and stop re-deriving it.",
-        "Subarrays with K Different teaches the atMost(k) − atMost(k−1) trick, which recurs constantly. Don't skip it."
+        "Strings are 12% of reported problems and were entirely missing from the earlier plan. Minimum Window Substring is verified high-frequency and was identified as the basis of a Google India OA problem.",
+        "Days 4–5 are where most people are weakest. Text Justification and atoi are pure edge-case problems — exactly the \"carefully handle boundaries\" signal Google grades.",
+        "Retention not acquisition on days 1–2: apply the 40/60 filter and substitute freely for problems you solved before this plan."
       ]
     },
     {
       "week": 9,
       "phase": 1,
-      "title": "Prefix, intervals, monotonic stack",
+      "title": "Arrays: prefix, stack, intervals, binary search on answer",
       "days": [
         {
           "day": 1,
           "focus": "Prefix + hashmap",
           "items": [
-            "Subarray Sum Equals K",
+            {
+              "name": "Subarray Sum Equals K",
+              "hot": true
+            },
             "Contiguous Array",
             "Continuous Subarray Sum"
           ]
         },
         {
           "day": 2,
-          "focus": "2D prefix & difference arrays",
-          "items": [
-            "Range Sum Query 2D – Immutable",
-            "Corporate Flight Bookings",
-            "Car Pooling"
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Index-as-hash / cyclic sort",
-          "items": [
-            "Find All Numbers Disappeared in an Array",
-            "Find the Duplicate Number",
-            "First Missing Positive"
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Intervals & sweep line",
-          "items": [
-            "Merge Intervals",
-            "Insert Interval",
-            "Non-overlapping Intervals"
-          ]
-        },
-        {
-          "day": 5,
-          "focus": "Monotonic stack",
-          "items": [
-            "Daily Temperatures",
-            "Next Greater Element II",
-            "Remove K Digits"
-          ]
-        },
-        {
-          "day": 6,
-          "focus": "Monotonic stack/deque, hard",
-          "items": [
-            "Largest Rectangle in Histogram",
-            "Maximal Rectangle",
-            "Sliding Window Maximum"
-          ]
-        },
-        {
-          "day": 7,
-          "focus": "Rest day",
+          "focus": "Monotonic stack (hard, 2)",
           "items": [
             {
-              "name": "Full rest day (every third week). Contest optional only if you feel fresh.",
-              "type": "task"
-            }
-          ]
-        }
-      ],
-      "notes": [
-        "Critical distinction to internalise this week: sliding window works when the constraint is monotonic as the window grows. Negative numbers break that, which is precisely why Subarray Sum Equals K needs prefix + hashmap and not a window.",
-        "Largest Rectangle in Histogram is worth a full hour on its own even after you've solved it. Maximal Rectangle is it applied row-by-row; if you see that connection yourself, your pattern transfer is working.",
-        "Start mock interviews this week — not in week 14. Two per week from here on, Pramp or interviewing.io. You need reps accumulated before they count."
-      ],
-      "checkpoint": "Given any subarray/substring problem, you know within 60 seconds whether it's window, prefix-sum, or monotonic stack. If not, spend two extra days here before moving on. Mediums 7/10."
-    },
-    {
-      "week": 10,
-      "phase": 1,
-      "title": "Binary search",
-      "days": [
-        {
-          "day": 1,
-          "focus": "Boundary forms",
-          "items": [
-            "Binary Search",
-            "Search Insert Position",
-            "Find First and Last Position of Element"
-          ]
-        },
-        {
-          "day": 2,
-          "focus": "Rotated arrays",
-          "items": [
-            "Search in Rotated Sorted Array",
-            "Search in Rotated Sorted Array II",
-            "Find Minimum in Rotated Sorted Array"
+              "name": "Trapping Rain Water",
+              "hot": true
+            },
+            "Largest Rectangle in Histogram"
           ]
         },
         {
           "day": 3,
-          "focus": "Non-obvious monotonicity",
+          "focus": "Deque & intervals",
           "items": [
-            "Search a 2D Matrix",
-            "Find Peak Element",
-            "Single Element in a Sorted Array"
+            {
+              "name": "Sliding Window Maximum",
+              "hot": true
+            },
+            "Merge Intervals",
+            "Non-overlapping Intervals"
           ]
         },
         {
@@ -920,200 +1260,143 @@
         },
         {
           "day": 5,
-          "focus": "Binary search on answer",
+          "focus": "Binary search on answer, hard",
           "items": [
             "Split Array Largest Sum",
-            "Find the Smallest Divisor Given a Threshold",
-            "Magnetic Force Between Two Balls"
+            "Magnetic Force Between Two Balls",
+            "Minimum Time to Complete Trips"
           ]
         },
         {
           "day": 6,
-          "focus": "Hard",
+          "focus": "Contest",
           "items": [
-            "Median of Two Sorted Arrays",
-            "Kth Smallest Element in a Sorted Matrix",
-            "Minimize Max Distance to Gas Station"
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 7,
-          "focus": "Contest",
+          "focus": "Rest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "Days 4–5 are the most valuable two days of this phase. The trigger phrase is \"minimize the maximum\" or \"maximize the minimum\", plus a feasibility function can(x) that is monotonic in x. Once you see that shape, the search itself is boilerplate.",
-        "Settle on one binary search template — the first-true form — and use it for everything. Owning three half-remembered templates is how off-by-one bugs happen under pressure."
+        "Trapping Rain Water, Sliding Window Maximum and Subarray Sum Equals K are all verified high-frequency; the first two were identified as Google India OA sources.",
+        "Days 4–5 are the highest-yield two days in Phase 1. Trigger: \"minimize the maximum\" or \"maximize the minimum\" plus a monotonic can(x).",
+        "From this week: mocks start (2/week minimum, verbal protocol on every problem) · difficulty shifts to 60/40 medium/hard · add paper or whiteboard sessions (in-person rounds are back) · start pulling scenarios from Discuss Google interview-experience compilations."
       ]
     },
     {
-      "week": 11,
+      "week": 10,
       "phase": 1,
-      "title": "Heaps, selection, sorting",
+      "title": "Heaps, linked lists, design",
       "days": [
         {
           "day": 1,
           "focus": "Top-k",
           "items": [
-            "Kth Largest Element in an Array",
-            "Top K Frequent Elements",
-            "K Closest Points to Origin"
+            {
+              "name": "Top K Frequent Elements",
+              "hot": true
+            },
+            {
+              "name": "K Closest Points to Origin",
+              "hot": true
+            },
+            "Kth Largest Element in an Array"
           ]
         },
         {
           "day": 2,
           "focus": "K-way merge",
           "items": [
-            "Merge k Sorted Lists",
+            {
+              "name": "Merge k Sorted Lists",
+              "hot": true
+            },
             "Smallest Range Covering Elements from K Lists",
             "Find K Pairs with Smallest Sums"
           ]
         },
         {
           "day": 3,
-          "focus": "Two heaps",
+          "focus": "Two heaps & greedy",
           "items": [
-            "Find Median from Data Stream",
-            "Sliding Window Median",
-            "IPO"
+            {
+              "name": "Find Median from Data Stream",
+              "hot": true
+            },
+            "IPO",
+            "Task Scheduler"
           ]
         },
         {
           "day": 4,
-          "focus": "Greedy + heap",
+          "focus": "Linked lists",
           "items": [
-            "Task Scheduler",
-            "Reorganize String",
-            "Minimum Cost to Connect Sticks"
+            "Reverse Nodes in k-Group",
+            "Linked List Cycle II",
+            "Copy List with Random Pointer"
           ]
         },
         {
           "day": 5,
-          "focus": "Quickselect & sorting",
+          "focus": "Design",
           "items": [
-            "Sort an Array (write merge sort and quicksort yourself)",
-            "Wiggle Sort II",
-            "Top K Frequent Words"
+            {
+              "name": "LRU Cache",
+              "hot": true
+            },
+            "Min Stack",
+            "Insert Delete GetRandom O(1)"
           ]
         },
         {
           "day": 6,
-          "focus": "Bucket / counting sort",
-          "items": [
-            "Sort Characters By Frequency",
-            "H-Index",
-            "Maximum Gap"
-          ]
-        },
-        {
-          "day": 7,
           "focus": "Contest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
             }
-          ]
-        }
-      ],
-      "notes": [
-        "Do Kth Largest three ways — sort, heap, quickselect — and be able to state when each wins. That trio is one of the most common \"can you optimise further?\" ladders in interviews."
-      ],
-      "checkpoint": "Binary search on answer recognised instantly. Blind primitives: binary search and quickselect under 10 min."
-    },
-    {
-      "week": 12,
-      "phase": 1,
-      "title": "Linked lists, stacks, design",
-      "days": [
-        {
-          "day": 1,
-          "focus": "Reversal",
-          "items": [
-            "Reverse Linked List",
-            "Reverse Linked List II",
-            "Reverse Nodes in k-Group"
-          ]
-        },
-        {
-          "day": 2,
-          "focus": "Fast & slow pointers",
-          "items": [
-            "Linked List Cycle II",
-            "Middle of the Linked List",
-            "Palindrome Linked List"
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Merge & sort",
-          "items": [
-            "Merge Two Sorted Lists",
-            "Sort List",
-            "Add Two Numbers"
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Pointer manipulation",
-          "items": [
-            "Copy List with Random Pointer",
-            "Remove Nth Node From End",
-            "Reorder List"
-          ]
-        },
-        {
-          "day": 5,
-          "focus": "Stack",
-          "items": [
-            "Min Stack",
-            "Evaluate Reverse Polish Notation",
-            "Basic Calculator II"
-          ]
-        },
-        {
-          "day": 6,
-          "focus": "Design",
-          "items": [
-            "LRU Cache",
-            "Insert Delete GetRandom O(1)",
-            "BST Iterator"
           ]
         },
         {
           "day": 7,
-          "focus": "Rest day",
+          "focus": "Rest",
           "items": [
             {
-              "name": "Full rest day (every third week). Contest optional only if you feel fresh.",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "Design problems are underrated for your specific weakness. They punish sloppy implementation, and part of your 3–4/10 is almost certainly \"saw the approach, couldn't code it cleanly.\"",
-        "Use the dummy head node on every linked-list problem. It eliminates an entire class of null-handling bugs for free.",
-        "Optional stretch: LFU Cache."
-      ]
+        "Day 1 is where the chat-log scenario lives — top-K with a parser, ties, and file-size follow-ups. Run that ambiguity transformation deliberately.",
+        "LRU Cache is one of the most commonly named Google problems across candidate reports — do it properly. Linked lists are 5%, hence one day; use a dummy head on every one.",
+        "Do Kth Largest three ways — sort, heap, quickselect — and state when each wins."
+      ],
+      "checkpoint": "Unseen mediums 7/10. Primitives #1–#14 all at target time. At least one clean hard solved unaided."
     },
     {
-      "week": 13,
+      "week": 11,
       "phase": 1,
-      "title": "Advanced structures",
+      "title": "Advanced tier, bits & Google-hard integration",
       "days": [
         {
           "day": 1,
           "focus": "Fenwick tree",
           "items": [
             "Implement BIT from scratch",
-            "Range Sum Query – Mutable (BIT)",
             "Count of Smaller Numbers After Self"
           ]
         },
@@ -1121,87 +1404,414 @@
           "day": 2,
           "focus": "Segment tree",
           "items": [
-            "Implement build / point-update / range-query",
-            "Range Sum Query – Mutable (segment tree)",
-            "Range Minimum Query"
+            "Implement build / point update / range query",
+            "Range Sum Query – Mutable"
           ]
         },
         {
           "day": 3,
-          "focus": "Lazy propagation",
+          "focus": "Math & bits",
           "items": [
-            "CSES: Range Update Queries",
-            "CSES: Polynomial Queries"
+            "Single Number II",
+            "Counting Bits",
+            "Pow(x, n)",
+            "Excel-style base conversion"
           ]
         },
         {
           "day": 4,
-          "focus": "String matching",
+          "focus": "Google-hard integration (2)",
           "items": [
-            "Implement strStr() with KMP",
-            "Shortest Palindrome",
-            "Repeated String Match"
+            "Google hard #1 from Discuss compilations — full verbal protocol",
+            "Google hard #2 from Discuss compilations — full verbal protocol"
           ]
         },
         {
           "day": 5,
-          "focus": "Bit manipulation",
+          "focus": "Google-hard integration (2) + variants",
           "items": [
-            "Single Number I / II / III",
-            "Counting Bits",
-            "Iterate all submasks of a mask"
+            "Google hard #3 — plus 2 variants",
+            "Google hard #4 — plus 2 variants",
+            {
+              "name": "Measurement set: 10 random untagged mediums — compare with weeks 0, 4 and 8",
+              "type": "task"
+            }
           ]
         },
         {
           "day": 6,
-          "focus": "Sparse table & review",
+          "focus": "Contest",
           "items": [
-            "CSES: Static Range Minimum Queries",
             {
-              "name": "Re-solve week 13 primitives blind",
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
             }
           ]
         },
         {
           "day": 7,
-          "focus": "Contest",
+          "focus": "Rest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "This tier rarely decides an interview. Its value is that it removes fear of the occasional hard problem and makes you visibly faster in contests. Don't over-invest beyond the week.",
-        "Start 45 min/day on LLD, OS/DBMS/networks and your project defence from here."
+        "Math/bits is 4% — one day is right. Segment and Fenwick trees rarely decide an interview; two days is the right investment.",
+        "Start Googleyness story work this week, 45 min/day: ten STAR stories (see Guide)."
+      ]
+    },
+    {
+      "week": 12,
+      "phase": 2,
+      "title": "Conversion I",
+      "days": [
+        {
+          "day": 1,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Mock interview (verbal protocol, record it)",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Code comprehension drill + blind primitives",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Mock interview (verbal protocol, record it)",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Code comprehension drill + blind primitives",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Mock interview (verbal protocol, record it)",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 6,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 7,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "No new patterns. This phase converts solving ability into offers.",
+        "Environment: blank Google Doc for remote-format practice, paper or whiteboard for in-person. Ask your recruiter which you'll face, and whether your loop includes the code-comprehension round."
+      ]
+    },
+    {
+      "week": 13,
+      "phase": 2,
+      "title": "Conversion II",
+      "days": [
+        {
+          "day": 1,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Mock interview (verbal protocol, record it)",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Code comprehension drill + blind primitives",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Mock interview (verbal protocol, record it)",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Code comprehension drill + blind primitives",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "focus": "Phase 2 daily",
+          "items": [
+            {
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
+              "type": "task"
+            },
+            {
+              "name": "B · Revision queue + every unretired failure",
+              "type": "task"
+            },
+            {
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
+              "type": "task"
+            },
+            {
+              "name": "D · Mock interview (verbal protocol, record it)",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 6,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 7,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Half of Block A posed as ambiguous scenarios: reach a correct specification in under 5 minutes of questions."
       ]
     },
     {
       "week": 14,
       "phase": 2,
-      "title": "Interview conversion I",
+      "title": "Conversion III",
       "days": [
         {
           "day": 1,
           "focus": "Phase 2 daily",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "B · Revision queue + every unretired failure",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
               "type": "task"
             },
             {
-              "name": "D: Mock interview",
+              "name": "D · Mock interview (verbal protocol, record it)",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
             }
           ]
@@ -1211,19 +1821,23 @@
           "focus": "Phase 2 daily",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "B · Revision queue + every unretired failure",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
               "type": "task"
             },
             {
-              "name": "D: Blind primitives + one hard",
+              "name": "D · Code comprehension drill + blind primitives",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
             }
           ]
@@ -1233,19 +1847,23 @@
           "focus": "Phase 2 daily",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "B · Revision queue + every unretired failure",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
               "type": "task"
             },
             {
-              "name": "D: Mock interview",
+              "name": "D · Mock interview (verbal protocol, record it)",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
             }
           ]
@@ -1255,19 +1873,23 @@
           "focus": "Phase 2 daily",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "B · Revision queue + every unretired failure",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
               "type": "task"
             },
             {
-              "name": "D: Blind primitives + one hard",
+              "name": "D · Code comprehension drill + blind primitives",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
             }
           ]
@@ -1277,372 +1899,332 @@
           "focus": "Phase 2 daily",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "A · 2 random untagged problems, 40/60 medium/hard, spoken aloud & recorded, 2 variants each, half posed as ambiguous scenarios",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "B · Revision queue + every unretired failure",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "C · Discuss interview-experience compilations (2024–2026), timed",
               "type": "task"
             },
             {
-              "name": "D: Mock interview",
+              "name": "D · Mock interview (verbal protocol, record it)",
+              "type": "task"
+            },
+            {
+              "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
             }
           ]
         },
         {
           "day": 6,
-          "focus": "Phase 2 daily",
-          "items": [
-            {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
-              "type": "task"
-            },
-            {
-              "name": "B: Revision queue + past failures",
-              "type": "task"
-            },
-            {
-              "name": "Watch back one recording and note silences",
-              "type": "task"
-            },
-            {
-              "name": "D: Blind primitives + one hard",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 7,
           "focus": "Contest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
-              "type": "task"
-            }
-          ]
-        }
-      ],
-      "notes": [
-        "No new topics. This phase converts solving ability into offers.",
-        "Plain text editor or a Google Doc. No autocomplete, no syntax highlighting, no test runner. Compile it in your head.",
-        "Record yourself and watch it back. Silence reads as being stuck even when you're thinking productively."
-      ],
-      "checkpoint": "Mediums 8/10 in ≤25 minutes, bug-free first submission. 2–3 solves per contest consistently."
-    },
-    {
-      "week": 15,
-      "phase": 2,
-      "title": "Interview conversion II",
-      "days": [
-        {
-          "day": 1,
-          "focus": "Phase 2 daily",
-          "items": [
-            {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
-              "type": "task"
-            },
-            {
-              "name": "B: Revision queue + past failures",
-              "type": "task"
-            },
-            {
-              "name": "C: Company-tagged set (last 6 months), timed",
-              "type": "task"
-            },
-            {
-              "name": "D: Mock interview",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 2,
-          "focus": "Phase 2 daily",
-          "items": [
-            {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
-              "type": "task"
-            },
-            {
-              "name": "B: Revision queue + past failures",
-              "type": "task"
-            },
-            {
-              "name": "C: Company-tagged set (last 6 months), timed",
-              "type": "task"
-            },
-            {
-              "name": "D: Blind primitives + one hard",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Phase 2 daily",
-          "items": [
-            {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
-              "type": "task"
-            },
-            {
-              "name": "B: Revision queue + past failures",
-              "type": "task"
-            },
-            {
-              "name": "C: Company-tagged set (last 6 months), timed",
-              "type": "task"
-            },
-            {
-              "name": "D: Mock interview",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Phase 2 daily",
-          "items": [
-            {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
-              "type": "task"
-            },
-            {
-              "name": "B: Revision queue + past failures",
-              "type": "task"
-            },
-            {
-              "name": "C: Company-tagged set (last 6 months), timed",
-              "type": "task"
-            },
-            {
-              "name": "D: Blind primitives + one hard",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 5,
-          "focus": "Phase 2 daily",
-          "items": [
-            {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
-              "type": "task"
-            },
-            {
-              "name": "B: Revision queue + past failures",
-              "type": "task"
-            },
-            {
-              "name": "C: Company-tagged set (last 6 months), timed",
-              "type": "task"
-            },
-            {
-              "name": "D: Mock interview",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 6,
-          "focus": "Phase 2 daily",
-          "items": [
-            {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
-              "type": "task"
-            },
-            {
-              "name": "B: Revision queue + past failures",
-              "type": "task"
-            },
-            {
-              "name": "Watch back one recording and note silences",
-              "type": "task"
-            },
-            {
-              "name": "D: Blind primitives + one hard",
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
             }
           ]
         },
         {
           "day": 7,
-          "focus": "Rest day",
+          "focus": "Rest",
           "items": [
             {
-              "name": "Full rest day (every third week). Contest optional only if you feel fresh.",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "Practise the verbal protocol until automatic (see Guide).",
-        "Two to three mocks this week. Ask for feedback on communication specifically, not just correctness."
+        "Rehearse the scenario-form Googleyness prompt: your team is about to ship a critical bug fix, but it breaks things for certain user subgroups. Reason through the trade-off out loud."
+      ],
+      "checkpoint": "Mediums 8/10 in ≤25 min, bug-free first submission. Hards in 40–45 min. 2–3 solves per contest. Ambiguous scenario → correct specification in under 5 minutes of questions. Mock feedback positive on communication and code quality."
+    },
+    {
+      "week": 15,
+      "phase": 3,
+      "title": "Buffer I",
+      "days": [
+        {
+          "day": 1,
+          "focus": "Buffer",
+          "items": [
+            {
+              "name": "Missed a checkpoint → repeat that week's material today",
+              "type": "task"
+            },
+            {
+              "name": "On track → Discuss compilation set, untagged, timed",
+              "type": "task"
+            },
+            {
+              "name": "Mock interview",
+              "type": "task"
+            },
+            {
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "focus": "Buffer",
+          "items": [
+            {
+              "name": "Missed a checkpoint → repeat that week's material today",
+              "type": "task"
+            },
+            {
+              "name": "On track → Discuss compilation set, untagged, timed",
+              "type": "task"
+            },
+            {
+              "name": "Revision queue + clear failures",
+              "type": "task"
+            },
+            {
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Buffer",
+          "items": [
+            {
+              "name": "Missed a checkpoint → repeat that week's material today",
+              "type": "task"
+            },
+            {
+              "name": "On track → Discuss compilation set, untagged, timed",
+              "type": "task"
+            },
+            {
+              "name": "Mock interview",
+              "type": "task"
+            },
+            {
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "focus": "Buffer",
+          "items": [
+            {
+              "name": "Missed a checkpoint → repeat that week's material today",
+              "type": "task"
+            },
+            {
+              "name": "On track → Discuss compilation set, untagged, timed",
+              "type": "task"
+            },
+            {
+              "name": "Revision queue + clear failures",
+              "type": "task"
+            },
+            {
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "focus": "Buffer",
+          "items": [
+            {
+              "name": "Missed a checkpoint → repeat that week's material today",
+              "type": "task"
+            },
+            {
+              "name": "On track → Discuss compilation set, untagged, timed",
+              "type": "task"
+            },
+            {
+              "name": "Mock interview",
+              "type": "task"
+            },
+            {
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 6,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 7,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Buffer weeks: repeat time if a checkpoint was missed; otherwise 3 mocks/week, both contests, Discuss compilations, clear the failure queue."
       ]
     },
     {
       "week": 16,
-      "phase": 2,
-      "title": "Interview conversion III",
+      "phase": 3,
+      "title": "Buffer II",
       "days": [
         {
           "day": 1,
-          "focus": "Phase 2 daily",
+          "focus": "Buffer",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "Missed a checkpoint → repeat that week's material today",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "On track → Discuss compilation set, untagged, timed",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "Mock interview",
               "type": "task"
             },
             {
-              "name": "D: Mock interview",
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
             }
           ]
         },
         {
           "day": 2,
-          "focus": "Phase 2 daily",
+          "focus": "Buffer",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "Missed a checkpoint → repeat that week's material today",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "On track → Discuss compilation set, untagged, timed",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "Revision queue + clear failures",
               "type": "task"
             },
             {
-              "name": "D: Blind primitives + one hard",
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
             }
           ]
         },
         {
           "day": 3,
-          "focus": "Phase 2 daily",
+          "focus": "Buffer",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "Missed a checkpoint → repeat that week's material today",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "On track → Discuss compilation set, untagged, timed",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "Mock interview",
               "type": "task"
             },
             {
-              "name": "D: Mock interview",
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
             }
           ]
         },
         {
           "day": 4,
-          "focus": "Phase 2 daily",
+          "focus": "Buffer",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "Missed a checkpoint → repeat that week's material today",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "On track → Discuss compilation set, untagged, timed",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "Revision queue + clear failures",
               "type": "task"
             },
             {
-              "name": "D: Blind primitives + one hard",
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
             }
           ]
         },
         {
           "day": 5,
-          "focus": "Phase 2 daily",
+          "focus": "Buffer",
           "items": [
             {
-              "name": "A: 2 random untagged problems, spoken aloud & recorded",
+              "name": "Missed a checkpoint → repeat that week's material today",
               "type": "task"
             },
             {
-              "name": "B: Revision queue + past failures",
+              "name": "On track → Discuss compilation set, untagged, timed",
               "type": "task"
             },
             {
-              "name": "C: Company-tagged set (last 6 months), timed",
+              "name": "Mock interview",
               "type": "task"
             },
             {
-              "name": "D: Mock interview",
+              "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
             }
           ]
         },
         {
           "day": 6,
-          "focus": "Exit criteria check",
+          "focus": "Contest",
           "items": [
             {
-              "name": "Unseen medium: pattern ≤5 min, solved ≤25, bug-free (~80%)",
-              "type": "task"
-            },
-            {
-              "name": "All 8 primitives from memory under 10 min each",
-              "type": "task"
-            },
-            {
-              "name": "Complexity stated instantly, incl. amortised",
-              "type": "task"
-            },
-            {
-              "name": "New DP: state/transition/base/order before code",
-              "type": "task"
-            },
-            {
-              "name": "3 of 4 on a LeetCode weekly, consistently",
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
             }
           ]
         },
         {
           "day": 7,
-          "focus": "Contest",
+          "focus": "Rest",
           "items": [
             {
-              "name": "LeetCode weekly/biweekly contest (90 min) + 90 min post-mortem",
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
         }
       ],
       "notes": [
-        "Track the exit criteria. \"I solved 500 problems\" is not a signal. These are."
-      ],
-      "checkpoint": "Hards in 40–45 minutes. Mock feedback consistently positive on communication, not just correctness."
+        "Exit criteria are the signal — \"I solved 500 problems\" is not. Tick them off in the Guide."
+      ]
     }
   ],
   "progress": {},
@@ -1651,5 +2233,5 @@
     "triggers": "",
     "journal": []
   },
-  "updatedAt": "2026-09-07T09:47:49.788Z"
+  "updatedAt": "2026-09-07T14:07:23.451Z"
 }

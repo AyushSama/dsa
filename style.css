@@ -223,8 +223,16 @@ canvas.chart.mini { height: 150px; }
 .week-pill.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-2); }
 .week-pill.current::after { content: ''; position: absolute; top: 5px; right: 5px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 .week-pill .bar { margin: 6px 4px 0; }
-.week-pill.p2 { color: var(--blue); }
-.week-pill.p2.active { color: var(--accent-2); }
+.week-pill.ph0 { color: var(--muted); }
+.week-pill.ph2 { color: var(--blue); }
+.week-pill.ph3 { color: var(--green); }
+.week-pill.active { color: var(--accent-2) !important; }
+.week-strip { grid-template-columns: repeat(17, 1fr); }
+.hot {
+  display: inline-block; font-size: 10px; font-weight: 700; line-height: 15px; width: 16px; text-align: center;
+  border-radius: 4px; background: var(--accent-soft); color: var(--accent-2); border: 1px solid var(--accent-border); margin-left: 6px; vertical-align: 1px;
+}
+.prim .pdesc { font-size: 12.5px; color: var(--text-2); margin-top: 4px; }
 .week-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .week-head .wh-title { display: flex; align-items: center; gap: 10px; }
 .week-head .wh-title h2 { font-size: 18px; }

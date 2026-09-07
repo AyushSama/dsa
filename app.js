@@ -30,7 +30,13 @@
 
   // ---------- roadmap helpers ----------
   function itemId(w, d, i) { return `w${w}d${d}i${i}`; }
-  function norm(item) { return typeof item === 'string' ? { name: item, type: 'problem' } : { name: item.name, type: item.type || 'problem' }; }
+  function norm(item) { return typeof item === 'string' ? { name: item, type: 'problem' } : { name: item.name, type: item.type || 'problem', hot: !!item.hot }; }
+  function weekByNum(n) { return DATA.weeks.find((w) => w.week === n) || DATA.weeks[0]; }
+  function firstWeek() { return DATA.weeks[0].week; }
+  function lastWeek() { return DATA.weeks[DATA.weeks.length - 1].week; }
+  function phaseName(p) { return (DATA.guide.phases && DATA.guide.phases[p]) || `Phase ${p}`; }
+  function phaseColor(p) { return { 0: cssVar('--muted'), 1: cssVar('--accent'), 2: cssVar('--blue'), 3: cssVar('--green') }[p] || cssVar('--accent'); }
+  function phaseBadge(p) { return { 0: '', 1: 'accent', 2: 'green', 3: 'amber' }[p] || ''; }
   function allItems() {
     const out = [];
     DATA.weeks.forEach((wk) => wk.days.forEach((day) => day.items.forEach((it, i) => {
@@ -46,10 +52,19 @@
   function currentPosition() {
     const start = DATA.settings.startDate || today();
     const n = diffDays(start, today());
-    if (n < 0) return { week: 1, day: 1, before: true, daysUntil: -n };
-    const week = Math.min(16, Math.floor(n / 7) + 1);
+    if (n < 0) {
+      // Days before the start date belong to week 0 (the GHA / diagnostic gate), counted back from day 1 of week 1.
+      const w0 = DATA.weeks[0];
+      if (w0.week === 0) {
+        const len = w0.days.length;
+        return { week: 0, day: Math.max(1, len + 1 + n), before: n < -len, daysUntil: -n };
+      }
+      return { week: w0.week, day: 1, before: true, daysUntil: -n };
+    }
+    const last = lastWeek();
+    const week = Math.min(last, Math.floor(n / 7) + 1);
     const day = (n % 7) + 1;
-    return { week, day, after: n >= 16 * 7 };
+    return { week, day, after: n >= last * 7 };
   }
 
   function weekStats(wk) {
@@ -317,8 +332,10 @@
   }
   function requeue(id) {
     const p = DATA.progress[id]; if (!p) return;
+    const failures = p.redos.filter((r) => r.label.startsWith('R')).length / (DATA.settings.redoOffsets || [3, 14]).length;
     p.redos.push(...makeRedos(today(), 'R'));
-    toast('Re-queued for +3 and +14 days from today');
+    if (failures >= 1) { p.redos.push({ label: 'R+30', due: addDays(today(), 30), done: null }); toast('Failed twice — re-queued at +3, +14 and +30 days'); }
+    else toast('Re-queued for +3 and +14 days from today');
     save(); render();
   }
   function toggleTask(id) {
@@ -335,7 +352,7 @@
   function render() {
     const pos = currentPosition();
     $('#brand-sub').textContent = pos.before ? `Starts in ${pos.daysUntil} day${pos.daysUntil === 1 ? '' : 's'} (${fmt(DATA.settings.startDate)})`
-      : pos.after ? 'Plan complete — keep revising' : `Week ${pos.week} · Day ${pos.day}\n${DATA.weeks[pos.week - 1].title}`;
+      : pos.after ? 'Plan complete — keep revising' : `Week ${pos.week} · Day ${pos.day}\n${weekByNum(pos.week).title}`;
     const due = allRedos().filter((r) => !r.done && r.due <= today()).length;
     const pill = $('#pill-due'); pill.textContent = due; pill.classList.toggle('zero', due === 0);
     document.querySelectorAll('.nav-item').forEach((t) => t.classList.toggle('active', t.dataset.view === UI.view));
@@ -365,7 +382,7 @@
     const skipped = redos.filter((r) => r.skipped).length;
     const pending = redos.filter((r) => !r.done && r.due >= today()).length;
 
-    const wk = DATA.weeks[pos.week - 1];
+    const wk = weekByNum(pos.week);
     const todayDay = wk.days.find((d) => d.day === pos.day);
     const dueList = redos.filter((r) => !r.done && r.due <= today()).sort((a, b) => a.due.localeCompare(b.due));
 
@@ -373,9 +390,10 @@
     const pct = Math.round(100 * solved / probs.length);
     const d = new Date();
     const longDate = d.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' });
-    const isDrillDay = pos.day === 1 || pos.day === 4;
-    const isContest = pos.day === 7;
-    const posLine = pos.before ? `Plan starts ${fmt(DATA.settings.startDate)}` : pos.after ? 'Plan complete' : `Week ${pos.week}, day ${pos.day} · ${esc(wk.title)}`;
+    const isContest = pos.week > 0 && pos.day === 6;
+    const isRest = pos.week > 0 && pos.day === 7;
+    const rotation = { 1: 'primitives only', 2: 'primitives + debug hunt', 3: 'primitives + code quality pass', 4: 'primitives + ambiguity drill ⭐', 5: 'primitives + code comprehension', 6: 'cold-combo (after the contest)' }[pos.day] || 'primitives';
+    const posLine = pos.before ? `Week 1 starts ${fmt(DATA.settings.startDate)} · do Week 0 now` : pos.after ? 'Plan complete' : `Week ${pos.week}, day ${pos.day} · ${esc(wk.title)}`;
 
     el.innerHTML = `
       <div class="page-head">
@@ -396,9 +414,10 @@
             <div class="focus">${esc(todayDay ? todayDay.focus : '')}</div>
             <div class="items">${todayDay ? todayDay.items.map((it, i) => renderItem(wk.week, todayDay.day, i, it)).join('') : '<div class="empty">Nothing scheduled</div>'}</div>
             <div class="blocks">
+              ${isRest ? '<span class="chip done">Rest day · no blocks</span>' : `
               <button class="chip btn ${dueList.length ? (overdue ? 'overdue' : 'due') : 'done'}" data-go-view="revision">Block B · ${dueList.length ? `${dueList.length} re-solve${dueList.length === 1 ? '' : 's'} due` : 'queue clear'}</button>
-              <span class="chip">Block C · editorials, triggers, one variant</span>
-              ${isContest ? '<span class="chip">Contest day · 90 min + post-mortem</span>' : `<button class="chip btn" data-go-view="drills">Block D · ${isDrillDay ? 'blind primitives' : 'one hard, unrushed'}</button>`}
+              ${isContest ? '<span class="chip">Contest · 90 min + 90 min post-mortem</span>' : '<span class="chip">Block C · editorials · triggers · triage 15 min · one variant</span>'}
+              <button class="chip btn" data-go-view="drills">Block D · ${rotation}</button>`}
             </div>
           </div>
           <div class="card progress-card">
@@ -472,12 +491,12 @@
 
     Charts.bars($('#c-weeks'), DATA.weeks.map((w) => {
       const s = weekStats(w);
-      return { label: 'W' + w.week, value: s.pct, color: w.phase === 2 ? cssVar('--blue') : cssVar('--accent'), highlight: w.week === pos.week ? cssVar('--green') : null };
+      return { label: 'W' + w.week, value: s.pct, color: phaseColor(w.phase), highlight: w.week === pos.week ? cssVar('--green') : null };
     }), { yMax: 100, yFormat: (v) => v + '%' });
 
     const cells = [];
     const start = DATA.settings.startDate;
-    for (let w = 0; w < 16; w++) for (let d = 0; d < 7; d++) {
+    for (let w = 0; w < lastWeek(); w++) for (let d = 0; d < 7; d++) {
       const date = addDays(start, w * 7 + d);
       const a = act[date];
       cells.push({ value: a ? a.solved + a.redos + a.tasks + a.drills : 0, rowLabel: 'W' + (w + 1), future: date > today(), today: date === today() });
@@ -513,7 +532,7 @@
     meta += `<button class="chip btn note-chip ${note ? 'has-note' : ''} ${open ? 'open' : ''}" data-note-toggle="${id}" title="${note ? 'Edit note' : 'Add a note (approach, trigger, what went wrong)'}">✎${note ? ' note' : ''}</button>`;
     return `<div class="item ${solved ? 'done' : ''}">
       <input type="checkbox" data-solve="${id}" ${solved ? 'checked' : ''} title="${solved ? 'Unmark (removes its re-do schedule)' : 'Mark solved (schedules +3 and +14 re-solves)'}">
-      <span class="name">${esc(it.name)}</span>
+      <span class="name">${esc(it.name)}${it.hot ? ' <span class="hot" title="Verified high-frequency in Google interview reports">G</span>' : ''}</span>
       <span class="meta">${meta}</span></div>
       ${open ? `<div class="note-row"><textarea class="note-input" data-note="${id}" rows="3" placeholder="Approach · trigger phrase · what went wrong · variant to try">${esc(note)}</textarea></div>` : ''}`;
   }
@@ -522,13 +541,19 @@
   function renderRoadmap() {
     const el = $('#view-roadmap');
     const pos = currentPosition();
-    const wk = DATA.weeks[UI.week - 1];
+    const wk = weekByNum(UI.week);
     const stats = weekStats(wk);
+    const idx = DATA.weeks.indexOf(wk);
+    const prev = DATA.weeks[idx - 1], next = DATA.weeks[idx + 1];
     const strip = DATA.weeks.map((w) => {
       const s = weekStats(w);
-      return `<button class="week-pill ${w.week === UI.week ? 'active' : ''} ${w.week === pos.week ? 'current' : ''} ${w.phase === 2 ? 'p2' : ''}" data-week="${w.week}" title="Week ${w.week} — ${esc(w.title)} · ${s.pct}%">
+      return `<button class="week-pill ${w.week === UI.week ? 'active' : ''} ${w.week === pos.week ? 'current' : ''} ph${w.phase}" data-week="${w.week}" title="Week ${w.week} — ${esc(w.title)} · ${s.pct}%">
         ${w.week}<div class="bar thin ${s.pct === 100 ? 'green' : ''}"><span style="width:${s.pct}%"></span></div></button>`;
     }).join('');
+    const phaseLine = Object.entries(DATA.guide.phases || {}).map(([p, name]) => {
+      const ws = DATA.weeks.filter((w) => String(w.phase) === p).map((w) => w.week);
+      return ws.length ? `${esc(name)} · week${ws.length > 1 ? 's' : ''} ${ws[0]}${ws.length > 1 ? '–' + ws[ws.length - 1] : ''}` : '';
+    }).filter(Boolean).join(' &nbsp;·&nbsp; ');
 
     const days = wk.days.map((day) => `
       <div class="card day-card ${wk.week === pos.week && day.day === pos.day ? 'today' : ''}">
@@ -538,17 +563,17 @@
 
     el.innerHTML = `
       <div class="page-head">
-        <div><h1>Roadmap</h1><div class="sub">Phase 1 · pattern consolidation, weeks 1–13 &nbsp;·&nbsp; Phase 2 · interview conversion, weeks 14–16</div></div>
+        <div><h1>Roadmap</h1><div class="sub">${phaseLine}</div></div>
         <div class="actions">
-          <button class="btn small" data-week="${Math.max(1, wk.week - 1)}" ${wk.week === 1 ? 'disabled' : ''}>← Week ${Math.max(1, wk.week - 1)}</button>
-          <button class="btn small" data-week="${Math.min(16, wk.week + 1)}" ${wk.week === 16 ? 'disabled' : ''}>Week ${Math.min(16, wk.week + 1)} →</button>
+          <button class="btn small" data-week="${prev ? prev.week : wk.week}" ${prev ? '' : 'disabled'}>${prev ? `← Week ${prev.week}` : '← Start'}</button>
+          <button class="btn small" data-week="${next ? next.week : wk.week}" ${next ? '' : 'disabled'}>${next ? `Week ${next.week} →` : 'End →'}</button>
         </div>
       </div>
       <div class="week-strip">${strip}</div>
       <div class="stack">
         <div class="card">
           <div class="week-head">
-            <div class="wh-title"><span class="badge ${wk.phase === 1 ? 'accent' : 'green'}">Phase ${wk.phase}</span><h2>Week ${wk.week} — ${esc(wk.title)}</h2>${wk.week === pos.week ? '<span class="badge">current</span>' : ''}</div>
+            <div class="wh-title"><span class="badge ${phaseBadge(wk.phase)}">${esc(phaseName(wk.phase))}</span><h2>${wk.week === 0 ? esc(wk.title) : `Week ${wk.week} — ${esc(wk.title)}`}</h2>${wk.week === pos.week ? '<span class="badge">current</span>' : ''}</div>
             <div class="muted small">${stats.total ? `${stats.done} of ${stats.total} problems` : `${stats.tasksDone} of ${stats.tasks} tasks`} · ${stats.pct}%</div>
           </div>
           <div class="bar ${stats.pct === 100 ? 'green' : ''}" style="margin-top:12px"><span style="width:${stats.pct}%"></span></div>
@@ -599,36 +624,48 @@
     const el = $('#view-drills');
     const pos = currentPosition();
     const log = DATA.drillLog || [];
+    const weekAgo = addDays(today(), -7);
     const rows = DATA.guide.primitives.map((p) => {
       const mine = log.filter((l) => l.name === p.name);
       const last = mine.length ? mine[mine.length - 1] : null;
       const best = mine.filter((l) => l.minutes).reduce((b, l) => (b === null || l.minutes < b ? l.minutes : b), null);
-      const locked = pos.week < p.from;
+      const lastMin = last && last.minutes ? last.minutes : null;
+      const locked = p.from && pos.week < p.from;
+      const stale = last && last.date < weekAgo;
       const key = esc(p.name);
+      const status = locked ? '' : lastMin !== null ? `<span class="badge ${lastMin <= p.target ? 'green' : 'amber'}">${lastMin <= p.target ? 'at target' : `${lastMin - p.target} min over`}</span>` : stale ? '<span class="badge amber">stale</span>' : '<span></span>';
       return `<div class="prim ${locked ? 'locked' : ''}">
-        <div><div class="pname">${key}</div><div class="pmeta">${locked ? `From week ${p.from}` : mine.length ? `${mine.length}× · last ${fmt(last.date)}${best !== null ? ` · best ${best} min` : ''}` : 'Not drilled yet'}</div></div>
-        ${best !== null ? `<span class="badge ${best <= 10 ? 'green' : 'amber'}">${best <= 10 ? 'under 10' : 'over 10'}</span>` : '<span></span>'}
+        <div><div class="pname">${p.n ? `<span class="muted">#${p.n}</span> ` : ''}${key}</div><div class="pmeta">Target ${p.target} min${locked ? ` · from week ${p.from}` : mine.length ? ` · ${mine.length}× · last ${fmt(last.date)}${best !== null ? ` · best ${best} min` : ''}` : ' · not drilled yet'}</div></div>
+        ${status}
         <input type="number" min="1" max="120" placeholder="min" data-minutes="${key}">
-        <button class="btn small" data-drill="${key}">Log today</button></div>`;
+        <button class="btn small" data-drill="${key}">Log</button></div>`;
+    }).join('');
+    const rotation = (DATA.guide.drills || []).map((d) => {
+      const mine = log.filter((l) => l.name === d.name);
+      const key = esc(d.name);
+      return `<div class="prim"><div><div class="pname">${key}${d.star ? ' <span class="badge accent">most Google-specific</span>' : ''}</div><div class="pmeta">${esc(d.when)}${mine.length ? ` · ${mine.length}× · last ${fmt(mine[mine.length - 1].date)}` : ''}</div><div class="pdesc">${esc(d.text)}</div></div>
+        <span></span><span></span><button class="btn small" data-drill="${key}">Log</button></div>`;
     }).join('');
     const recent = log.slice(-12).reverse();
     const perWeek = [];
-    for (let w = 0; w < 16; w++) {
+    for (let w = 0; w < lastWeek(); w++) {
       const a = addDays(DATA.settings.startDate, w * 7), b = addDays(a, 6);
       perWeek.push({ label: 'W' + (w + 1), value: log.filter((l) => l.date >= a && l.date <= b).length, highlight: w + 1 === pos.week ? cssVar('--green') : null });
     }
     el.innerHTML = `
       <div class="page-head">
-        <div><h1>Drills</h1><div class="sub">Blind primitives on Mon & Thu (45 min). ${esc(DATA.guide.primitivesGoal)}</div></div>
+        <div><h1>Drills</h1><div class="sub">${esc(DATA.guide.primitivesGoal)}</div></div>
       </div>
       <div class="stack">
       <div class="grid grid-2">
-        <div class="card"><div class="card-title"><h3>Blind primitives</h3><span class="hint">blank file, timed</span></div>${rows}</div>
+        <div class="card"><div class="card-title"><h3>Blind primitives</h3><span class="hint">daily · 20 min · pick 5</span></div>${rows}</div>
         <div class="stack">
-          <div class="card"><div class="card-title"><h3>Drills per week</h3></div><canvas id="c-drills" class="chart short"></canvas></div>
-          <div class="card"><h3>Variant generation</h3><p class="muted small" style="margin:4px 0 8px">After solving anything, ask <em>what if</em> and solve it. Highest-leverage habit in the plan.</p>
-            <ul>${DATA.guide.variantPrompts.map((v) => `<li>${esc(v)}</li>`).join('')}</ul></div>
-          <div class="card"><h3>Recent drill log</h3>${recent.length ? `<table style="margin-top:8px"><tr><th>Date</th><th>Primitive</th><th>Min</th><th></th></tr>
+          <div class="card"><div class="card-title"><h3>Drills per week</h3><span class="hint">logged attempts</span></div><canvas id="c-drills" class="chart short"></canvas></div>
+          <div class="card"><div class="card-title"><h3>Weekly rotation</h3><span class="hint">Block D</span></div>${rotation}
+            ${DATA.guide.bugLog ? `<p class="muted small" style="margin-top:12px">${esc(DATA.guide.bugLog)}</p>` : ''}</div>
+          <div class="card"><div class="card-title"><h3>Variant generation</h3><span class="hint">daily · mandatory</span></div>
+            <div class="row wrap" style="gap:6px">${DATA.guide.variantPrompts.map((v) => `<span class="chip">${esc(v)}</span>`).join('')}</div></div>
+          <div class="card"><h3>Recent drill log</h3>${recent.length ? `<table style="margin-top:8px"><tr><th>Date</th><th>Drill</th><th>Min</th><th></th></tr>
             ${recent.map((l) => `<tr><td>${fmt(l.date)}</td><td>${esc(l.name)}</td><td>${l.minutes || '—'}</td><td><button class="btn small ghost" data-del-drill="${log.indexOf(l)}">✕</button></td></tr>`).join('')}</table>` : '<div class="empty" style="margin-top:8px">No drills logged yet</div>'}</div>
         </div>
       </div></div>`;
@@ -668,27 +705,39 @@
   // ----- Guide -----
   function renderGuide() {
     const g = DATA.guide;
+    const ol = (arr) => `<ol style="margin-top:8px">${arr.map((r) => `<li>${esc(r)}</li>`).join('')}</ol>`;
+    const tbl = (rows) => `<table style="margin-top:8px"><tr><th>Block</th><th>Time</th><th>Content</th></tr>${rows.map((b) => `<tr><td><b>${esc(b.block)}</b></td><td>${esc(b.duration)}</td><td>${esc(b.content)}</td></tr>`).join('')}</table>`;
     $('#view-guide').innerHTML = `
       <div class="page-head"><div><h1>Guide</h1><div class="sub">${esc(g.intro)}</div></div></div>
       <div class="stack">
+      ${g.research ? `<div class="card"><div class="card-title"><h3>What the research says</h3><span class="hint">read before the schedule</span></div>
+        <div class="grid grid-2" style="gap:12px">${g.research.map((r) => `<div class="note"><b>${esc(r.title)}</b><div style="margin-top:4px">${esc(r.text)}</div></div>`).join('')}</div></div>` : ''}
       <div class="grid grid-2">
-        <div class="card"><h3>The four rules</h3><ol style="margin-top:8px">${g.rules.map((r) => `<li>${esc(r)}</li>`).join('')}</ol></div>
-        <div class="card"><h3>Trigger notes (triggers.md)</h3><div class="trig" style="margin-top:8px">${g.triggers.map((t) => `<span class="cue">${esc(t.cue)}</span><span>${esc(t.pattern)}</span>`).join('')}</div>
-          <p class="muted small" style="margin-top:10px">Keep exactly two files: <code>triggers.md</code> (one line per pattern) and <code>failures.md</code> (this site's revision queue). Elaborate note systems are procrastination.</p></div>
+        <div class="card"><h3>The rules</h3>${ol(g.rules)}</div>
+        ${g.topicFrequency ? `<div class="card"><div class="card-title"><h3>Topic frequency</h3><span class="hint">~600 reported Google problems, 2022–2025</span></div>
+          <table><tr><th>Topic</th><th>Share</th><th>Difficulty</th><th>Here</th></tr>${g.topicFrequency.map((t) => `<tr><td>${esc(t.topic)}</td><td><b>${esc(t.share)}</b></td><td>${esc(t.difficulty)}</td><td class="muted">${esc(t.weeks)}</td></tr>`).join('')}</table></div>`
+          : `<div class="card"><h3>Trigger notes</h3><div class="trig" style="margin-top:8px">${g.triggers.map((t) => `<span class="cue">${esc(t.cue)}</span><span>${esc(t.pattern)}</span>`).join('')}</div></div>`}
       </div>
-      <div class="card"><h3>Daily template — Phase 1 (5.5h × 6 days)</h3>
-        <table style="margin-top:8px"><tr><th>Block</th><th>Duration</th><th>Content</th></tr>${g.dailyTemplate.map((b) => `<tr><td><b>${esc(b.block)}</b></td><td>${esc(b.duration)}</td><td>${esc(b.content)}</td></tr>`).join('')}</table>
+      <div class="card"><div class="card-title"><h3>Daily template — Phase 1</h3><span class="hint">5 full days + contest half-day + rest day</span></div>${tbl(g.dailyTemplate)}
         <ul style="margin-top:10px">${g.dailyNotes.map((n) => `<li class="muted">${esc(n)}</li>`).join('')}</ul></div>
-      <div class="card"><h3>Daily template — Phase 2 (weeks 14–16)</h3>
-        <table style="margin-top:8px"><tr><th>Block</th><th>Duration</th><th>Content</th></tr>${g.phase2Template.map((b) => `<tr><td><b>${esc(b.block)}</b></td><td>${esc(b.duration)}</td><td>${esc(b.content)}</td></tr>`).join('')}</table></div>
+      <div class="card"><div class="card-title"><h3>Daily template — Phase 2</h3><span class="hint">no new patterns</span></div>${tbl(g.phase2Template)}</div>
+      ${g.drills ? `<div class="card"><div class="card-title"><h3>The drills</h3><span class="hint">details and logging in the Drills tab</span></div>
+        <div class="grid grid-2" style="gap:12px">${g.drills.map((d) => `<div class="note ${d.star ? 'checkpoint' : ''}" style="${d.star ? '' : ''}"><b>${esc(d.name)}</b> <span class="muted small">· ${esc(d.when)}</span><div style="margin-top:4px">${esc(d.text)}</div></div>`).join('')}</div></div>` : ''}
       <div class="grid grid-2">
-        <div class="card"><h3>The verbal protocol</h3><ol style="margin-top:8px">${g.verbalProtocol.map((r) => `<li>${esc(r)}</li>`).join('')}</ol></div>
-        <div class="card"><h3>Exit criteria — done when all five hold</h3><ol style="margin-top:8px">${g.exitCriteria.map((r) => `<li>${esc(r)}</li>`).join('')}</ol></div>
+        <div class="card"><h3>Trigger notes</h3><div class="trig" style="margin-top:8px">${g.triggers.map((t) => `<span class="cue">${esc(t.cue)}</span><span>${esc(t.pattern)}</span>`).join('')}</div>
+          ${g.triage ? `<p class="muted small" style="margin-top:12px"><b>Triage card</b> (90 s per problem): ${g.triage.map(esc).join(' · ')}</p>` : ''}</div>
+        <div class="card"><h3>The verbal protocol</h3><p class="muted small" style="margin-top:4px">From week 9, every problem. Record yourself and watch it back.</p>${ol(g.verbalProtocol)}</div>
       </div>
       <div class="grid grid-2">
-        <div class="card"><h3>Failure modes, ranked</h3><ol style="margin-top:8px">${g.failureModes.map((r) => `<li>${esc(r)}</li>`).join('')}</ol></div>
-        <div class="card"><h3>Resources</h3><table style="margin-top:8px"><tr><th>Resource</th><th>Use it for</th></tr>${g.resources.map((r) => `<tr><td><b>${esc(r.name)}</b></td><td>${esc(r.use)}</td></tr>`).join('')}</table></div>
+        <div class="card"><h3>Exit criteria</h3>${ol(g.exitCriteria)}</div>
+        <div class="card"><h3>Failure modes, ranked</h3>${ol(g.failureModes)}</div>
       </div>
+      ${g.googleyness ? `<div class="grid grid-2">
+        <div class="card"><div class="card-title"><h3>Googleyness — ten STAR stories</h3><span class="hint">45 min/day from week 11</span></div>${ol(g.googleyness)}</div>
+        <div class="card"><h3>Confirm with your recruiter</h3>${ol(g.recruiter || [])}${g.scope ? `<p class="muted small" style="margin-top:12px">${esc(g.scope)}</p>` : ''}</div>
+      </div>` : ''}
+      <div class="card"><h3>Resources</h3><table style="margin-top:8px"><tr><th>Resource</th><th>Use it for</th></tr>${g.resources.map((r) => `<tr><td><b>${esc(r.name)}</b></td><td>${esc(r.use)}</td></tr>`).join('')}</table>
+        ${g.excluded ? `<p class="muted small" style="margin-top:10px">${esc(g.excluded)}</p>` : ''}</div>
     </div>`;
   }
 

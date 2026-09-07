@@ -1,7 +1,9 @@
 # DSA 16-Week Tracker
 
-Plain HTML/CSS/JS site for the 16-week DSA roadmap. No framework, no backend, no database,
-no browser storage. **`data.json` in this folder is the only place anything is stored.**
+Plain HTML/CSS/JS site for the Google DSA roadmap (research-updated Sept 2026): Week 0 gate
+(GHA + diagnostic), Phase 1 Build (weeks 1–11), Phase 2 Conversion (weeks 12–14), Buffer (15–16).
+No framework, no backend, no database, no browser storage.
+**`data.json` in this folder is the only place anything is stored.**
 
 ```
 index.html   page shell
@@ -45,12 +47,16 @@ Until the file is linked the page is display-only, so the local file is always t
 
 ## Features
 
-- **Roadmap** — 16 weeks, day-by-day. Tick a problem when solved; that schedules re-solves on
-  **+3** and **+14** days (offsets configurable in Settings). **↻ redo** schedules another cycle.
+- **Roadmap** — Week 0 plus 16 weeks, day-by-day (5 working days, contest on day 6, rest on
+  day 7). Tick a problem when solved; that schedules re-solves on **+3** and **+14** days
+  (offsets configurable in Settings). **↻ redo** re-queues +3/+14; a second failure adds **+30**.
+  A small **G** marks problems verified high-frequency in Google interview reports.
 - **Revision** — due / overdue / upcoming re-solves. Mark *Re-solved* or *Skip*.
 - **Dashboard** — overall %, revision discipline (on time / late / overdue), 28-day activity,
-  per-week completion, 16-week heatmap, today's plan and due queue.
-- **Drills** — log blind-primitive drills with the time taken.
+  per-week completion, heatmap, today's blocks (B/C/D rotation by weekday) and due queue.
+- **Drills** — the 22 timed blind primitives (plus 3 optional from week 11) with target minutes,
+  and the weekly rotation (ambiguity, debug hunt, code quality, code comprehension, cold-combo).
+  Log attempts with the time taken.
 - **Notes** — the ✎ button on any problem attaches a note (approach, trigger, what went wrong);
   the Notes tab collects them, plus a free-form *Trigger notes* editor (your `triggers.md`)
   and a dated *Journal* for contest post-mortems. Everything is saved in `data.json`.
