@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA 16-Week Tracker</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3l13 13-13 13L3 16z' fill='%234f46e5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="logo">◆</span>
+        <div>
+          <div class="brand-title">DSA Mastery</div>
+          <div class="brand-sub">16-week plan</div>
+        </div>
+      </div>
+
+      <nav class="nav" id="tabs">
+        <button class="nav-item active" data-view="dashboard">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="roadmap">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          <span>Roadmap</span>
+        </button>
+        <button class="nav-item" data-view="revision">
+          <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+          <span>Revision</span><span class="pill zero" id="pill-due">0</span>
+        </button>
+        <button class="nav-item" data-view="drills">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg>
+          <span>Drills</span>
+        </button>
+        <button class="nav-item" data-view="notes">
+          <svg viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13 7l4 4"/></svg>
+          <span>Notes</span>
+        </button>
+        <button class="nav-item" data-view="guide">
+          <svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg>
+          <span>Guide</span>
+        </button>
+        <button class="nav-item" data-view="settings">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="side-foot">
+        <div class="today-chip">
+          <div class="tc-label">Today</div>
+          <div class="tc-main" id="brand-sub">Loading…</div>
+        </div>
+        <div class="save-line"><span class="save-state" id="save-state">●</span><span id="save-text" class="muted small">Not linked</span></div>
+      </div>
+    </aside>
+
+    <div class="content">
+      <div id="banner" class="banner" hidden></div>
+      <div id="gate" class="gate" hidden></div>
+      <main id="app" hidden>
+        <section id="view-dashboard" class="view active"></section>
+        <section id="view-roadmap" class="view"></section>
+        <section id="view-revision" class="view"></section>
+        <section id="view-drills" class="view"></section>
+        <section id="view-notes" class="view"></section>
+        <section id="view-guide" class="view"></section>
+        <section id="view-settings" class="view"></section>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="charts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
