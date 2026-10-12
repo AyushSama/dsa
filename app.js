@@ -30,7 +30,9 @@
 
   // ---------- roadmap helpers ----------
   function itemId(w, d, i) { return `w${w}d${d}i${i}`; }
-  function norm(item) { return typeof item === 'string' ? { name: item, type: 'problem' } : { name: item.name, type: item.type || 'problem', hot: !!item.hot }; }
+  // Item types: 'problem' (string or {name, hot}), 'task' ({name, type:'task'}) and 'sd' ({name, type:'sd', kind, ch}) — system design.
+  function norm(item) { return typeof item === 'string' ? { name: item, type: 'problem' } : { name: item.name, type: item.type || 'problem', hot: !!item.hot, kind: item.kind, ch: item.ch }; }
+  const SD_KINDS = { read: 'DDIA', card: 'chapter card', recall: 'recall', exercise: 'design exercise', mock: 'SD mock', drill: 'SD drill' };
   function weekByNum(n) { return DATA.weeks.find((w) => w.week === n) || DATA.weeks[0]; }
   function firstWeek() { return DATA.weeks[0].week; }
   function lastWeek() { return DATA.weeks[DATA.weeks.length - 1].week; }
@@ -41,11 +43,12 @@
     const out = [];
     DATA.weeks.forEach((wk) => wk.days.forEach((day) => day.items.forEach((it, i) => {
       const n = norm(it);
-      out.push({ id: itemId(wk.week, day.day, i), week: wk.week, day: day.day, idx: i, name: n.name, type: n.type, focus: day.focus, weekTitle: wk.title });
+      out.push({ id: itemId(wk.week, day.day, i), week: wk.week, day: day.day, idx: i, name: n.name, type: n.type, kind: n.kind, ch: n.ch, focus: day.focus, weekTitle: wk.title, raw: it });
     })));
     return out;
   }
   function problems() { return allItems().filter((x) => x.type === 'problem'); }
+  function sdItems() { return allItems().filter((x) => x.type === 'sd'); }
   function isSolved(id) { const p = DATA.progress[id]; return !!(p && p.solved); }
   function isTaskDone(id) { const p = DATA.progress[id]; return !!(p && p.done); }
 
@@ -339,7 +342,9 @@
     save(); render();
   }
   function toggleTask(id) {
-    if (isTaskDone(id)) delete DATA.progress[id]; else DATA.progress[id] = { done: today() };
+    const prev = DATA.progress[id] || {};
+    if (isTaskDone(id)) { if (prev.note) DATA.progress[id] = { note: prev.note }; else delete DATA.progress[id]; }
+    else DATA.progress[id] = { done: today(), note: prev.note || '' };
     save(); render();
   }
   function logDrill(name, minutes) {
@@ -361,7 +366,7 @@
       v.classList.toggle('active', active);
       if (!active) v.innerHTML = ''; // only one view lives in the DOM at a time
     });
-    ({ dashboard: renderDashboard, roadmap: renderRoadmap, revision: renderRevision, drills: renderDrills, notes: renderNotes, guide: renderGuide, settings: renderSettings })[UI.view]();
+    ({ dashboard: renderDashboard, roadmap: renderRoadmap, revision: renderRevision, drills: renderDrills, sd: renderSD, notes: renderNotes, guide: renderGuide, settings: renderSettings })[UI.view]();
   }
 
   // ----- Dashboard -----
@@ -388,6 +393,9 @@
 
     const wkStats = weekStats(wk);
     const pct = Math.round(100 * solved / probs.length);
+    const sdAll = sdItems();
+    const sdDone = sdAll.filter((x) => isTaskDone(x.id)).length;
+    const sdToday = todayDay ? sdAll.filter((x) => x.week === wk.week && x.day === todayDay.day) : [];
     const d = new Date();
     const longDate = d.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' });
     const isContest = pos.week > 0 && pos.day === 6;
@@ -417,7 +425,8 @@
               ${isRest ? '<span class="chip done">Rest day · no blocks</span>' : `
               <button class="chip btn ${dueList.length ? (overdue ? 'overdue' : 'due') : 'done'}" data-go-view="revision">Block B · ${dueList.length ? `${dueList.length} re-solve${dueList.length === 1 ? '' : 's'} due` : 'queue clear'}</button>
               ${isContest ? '<span class="chip">Contest · 90 min + 90 min post-mortem</span>' : '<span class="chip">Block C · editorials · triggers · triage 15 min · one variant</span>'}
-              <button class="chip btn" data-go-view="drills">Block D · ${rotation}</button>`}
+              <button class="chip btn" data-go-view="drills">Block D · ${rotation}</button>
+              ${DATA.systemDesign ? `<button class="chip btn sd" data-go-view="sd">Block E · ${sdToday.length ? `system design · ${sdToday.filter((x) => isTaskDone(x.id)).length}/${sdToday.length} done` : 'no system design today'}</button>` : ''}`}
             </div>
           </div>
           <div class="card progress-card">
@@ -428,6 +437,7 @@
                 <div class="pc-num"><span class="muted">New problems</span><b>${solved} / ${probs.length}</b></div>
                 <div class="pc-num"><span class="muted">Re-solves done</span><b>${redosDone} / ${redos.length}</b></div>
                 <div class="pc-num"><span class="muted">Tasks</span><b>${tasksDone} / ${tasks.length}</b></div>
+                ${sdAll.length ? `<div class="pc-num"><span class="muted">System design</span><b>${sdDone} / ${sdAll.length}</b></div>` : ''}
                 <div class="pc-num"><span class="muted">Notes written</span><b>${Object.values(DATA.progress).filter((p) => p.note && p.note.trim()).length}</b></div>
               </div>
             </div>
@@ -514,6 +524,19 @@
         <input type="checkbox" data-task="${id}" ${done ? 'checked' : ''}>
         <span class="name">${esc(it.name)}</span>
         <span class="meta"><span class="badge">task</span>${done ? `<span class="date">${fmt(DATA.progress[id].done)}</span>` : ''}</span></label>`;
+    }
+    if (it.type === 'sd') {
+      // System-design item: a tickable task with a kind badge and a note (the chapter card / post-mortem lives in the note).
+      const done = isTaskDone(id);
+      const sp = DATA.progress[id];
+      const sdNote = (sp && sp.note) || '';
+      const sdOpen = UI.openNotes.has(id);
+      return `<div class="item sd ${done ? 'done' : ''}">
+        <input type="checkbox" data-task="${id}" ${done ? 'checked' : ''} title="${done ? 'Unmark' : 'Mark done'}">
+        <span class="name">${esc(it.name)}</span>
+        <span class="meta"><span class="badge sd">${SD_KINDS[it.kind] || 'system design'}${it.ch ? ` · ch ${it.ch}` : ''}</span>${done ? `<span class="date">${fmt(sp.done)}</span>` : ''}
+          <button class="chip btn note-chip ${sdNote ? 'has-note' : ''} ${sdOpen ? 'open' : ''}" data-note-toggle="${id}" title="${sdNote ? 'Edit note' : it.kind === 'card' ? 'Write the chapter card here' : 'Add a note (what you learned, what to fix)'}">✎${sdNote ? ' note' : ''}</button></span></div>
+        ${sdOpen ? `<div class="note-row"><textarea class="note-input" data-note="${id}" rows="${it.kind === 'card' ? 10 : 3}" placeholder="${it.kind === 'card' ? 'Problem solved · mechanisms → buys → costs · failure modes · real systems · 5 questions · diagram (describe)' : 'What you learned · what you got wrong · chapter to re-read'}">${esc(sdNote)}</textarea></div>` : ''}`;
     }
     const p = DATA.progress[id];
     const solved = !!(p && p.solved);
@@ -670,6 +693,89 @@
         </div>
       </div></div>`;
     Charts.bars($('#c-drills'), perWeek, { yMax: Math.max(4, ...perWeek.map((p) => p.value)), ticks: 2 });
+  }
+
+  // ----- System design -----
+  function renderSD() {
+    const el = $('#view-sd');
+    const sd = DATA.systemDesign;
+    if (!sd) { el.innerHTML = '<div class="page-head"><div><h1>System Design</h1><div class="sub">No systemDesign section in data.json.</div></div></div>'; return; }
+    const pos = currentPosition();
+    const items = sdItems();
+    const done = (x) => isTaskDone(x.id);
+    const ol = (arr) => `<ol style="margin-top:8px">${arr.map((r) => `<li>${esc(r)}</li>`).join('')}</ol>`;
+    const ul = (arr) => `<ul style="margin-top:8px">${arr.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
+    const row = (x) => renderItem(x.week, x.day, x.idx, x.raw);
+
+    const reads = items.filter((x) => x.kind === 'read' || x.kind === 'card');
+    const practice = items.filter((x) => x.kind === 'exercise' || x.kind === 'mock' || x.kind === 'drill');
+    const recalls = items.filter((x) => x.kind === 'recall');
+    const chapters = (sd.chapters || []).map((c) => {
+      const mine = items.filter((x) => x.ch === c.ch && x.kind !== 'exercise');
+      const d = mine.filter(done).length;
+      const weeks = [...new Set(mine.map((x) => x.week))];
+      return { ...c, items: mine, done: d, pct: mine.length ? Math.round(100 * d / mine.length) : 0, current: weeks.includes(pos.week), weeksList: weeks };
+    });
+    const chaptersDone = chapters.filter((c) => c.items.length && c.done === c.items.length).length;
+    const thisWeek = items.filter((x) => x.week === pos.week);
+    const nextUp = items.find((x) => !done(x) && (x.kind === 'read' || x.kind === 'card'));
+    const weeksOf = (arr) => [...new Set(arr.map((x) => x.week))];
+
+    el.innerHTML = `
+      <div class="page-head">
+        <div><h1>System Design</h1><div class="sub">${esc(sd.intro)}</div></div>
+        <div class="actions"><button class="btn small" data-go-week="${pos.week}">Open week ${pos.week}</button></div>
+      </div>
+      <div class="stack">
+        <div class="grid grid-4">
+          <div class="card stat"><div class="label">Reading</div><div class="value">${reads.filter(done).length}<small>/ ${reads.length}</small></div><div class="sub">sections + chapter cards</div><div class="bar thin"><span style="width:${reads.length ? Math.round(100 * reads.filter(done).length / reads.length) : 0}%"></span></div></div>
+          <div class="card stat"><div class="label">Chapters complete</div><div class="value">${chaptersDone}<small>/ ${chapters.length}</small></div><div class="sub">${nextUp ? `next: W${nextUp.week} D${nextUp.day}` : 'book complete'}</div></div>
+          <div class="card stat"><div class="label">Design practice</div><div class="value">${practice.filter(done).length}<small>/ ${practice.length}</small></div><div class="sub">exercises · mocks · drills</div></div>
+          <div class="card stat"><div class="label">Recalls</div><div class="value">${recalls.filter(done).length}<small>/ ${recalls.length}</small></div><div class="sub">Monday 5-min aloud</div></div>
+        </div>
+
+        <div class="grid grid-21">
+          <div class="card">
+            <div class="card-title"><h3>This week · Week ${pos.week}</h3><span class="hint">Block E · ${esc(sd.block ? sd.block.duration : '45 min')}</span></div>
+            <div class="items">${thisWeek.length ? thisWeek.map((x) => `<div class="muted small" style="margin-top:6px">Day ${x.day}${x.week === pos.week && x.day === pos.day ? ' · today' : ''}</div>${row(x)}`).join('') : '<div class="empty">No system-design items this week</div>'}</div>
+          </div>
+          <div class="stack">
+            <div class="card"><h3>Where to start</h3><p class="muted small" style="margin-top:4px">${esc(sd.book || '')}</p><p style="font-size:13px;color:var(--text-2);margin-top:8px">${esc(sd.resume || '')}</p>${sd.editionNote ? `<p class="muted small" style="margin-top:8px">${esc(sd.editionNote)}</p>` : ''}</div>
+            <div class="card"><div class="card-title"><h3>Chapter progress</h3><span class="hint">reading + card + recall</span></div><canvas id="c-sd" class="chart short"></canvas></div>
+          </div>
+        </div>
+
+        <div class="sd-chapters">
+          ${chapters.map((c) => `<div class="card sd-ch ${c.current ? 'current' : ''} ${c.items.length && c.done === c.items.length ? 'complete' : ''}">
+            <div class="ch-head"><h3><span class="ch-num">${c.ch}</span>${esc(c.title)}</h3><span class="muted small">${esc(c.weeks)} · ${c.done}/${c.items.length}</span></div>
+            <div class="ch-use">${esc(c.use)}</div>
+            <div class="bar thin ${c.items.length && c.done === c.items.length ? 'green' : ''}"><span style="width:${c.pct}%"></span></div>
+            <div class="items">${c.items.map(row).join('') || '<div class="empty">No items scheduled</div>'}</div>
+          </div>`).join('')}
+        </div>
+
+        <div class="card sd-practice"><div class="card-title"><h3>Design exercises, mocks & drills</h3><span class="hint">Saturdays after the contest · mocks from week 12</span></div>
+          ${weeksOf(practice).map((w) => `<div class="wk">Week ${w}${w === pos.week ? ' · this week' : ''}</div><div class="items">${practice.filter((x) => x.week === w).map(row).join('')}</div>`).join('')}</div>
+
+        <div class="grid grid-2">
+          <div class="card"><h3>Reading protocol</h3>${ol(sd.readingProtocol || [])}</div>
+          <div class="card"><div class="card-title"><h3>Chapter card template</h3><span class="hint">one page, from memory</span></div>${ol(sd.chapterCard || [])}</div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card"><div class="card-title"><h3>The 45-minute framework</h3><span class="hint">every exercise and mock</span></div>${ol(sd.framework || [])}</div>
+          <div class="stack">
+            <div class="card"><div class="card-title"><h3>Saturday exercise protocol</h3><span class="hint">90 min</span></div>${ol(sd.exerciseProtocol || [])}</div>
+            <div class="card"><div class="card-title"><h3>Numbers card</h3><span class="hint">orders of magnitude</span></div>${ul(sd.numbers || [])}</div>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card"><h3>Exit criteria</h3>${ol(sd.exitCriteria || [])}</div>
+          <div class="card"><h3>Failure modes</h3>${ol(sd.failureModes || [])}</div>
+        </div>
+        ${sd.resources ? `<div class="card"><h3>Resources</h3><table style="margin-top:8px"><tr><th>Resource</th><th>Use it for</th></tr>${sd.resources.map((r) => `<tr><td><b>${esc(r.name)}</b></td><td>${esc(r.use)}</td></tr>`).join('')}</table></div>` : ''}
+      </div>`;
+
+    Charts.bars($('#c-sd'), chapters.map((c) => ({ label: 'Ch' + c.ch, value: c.pct, color: cssVar('--blue'), highlight: c.current ? cssVar('--green') : null })), { yMax: 100, yFormat: (v) => v + '%' });
   }
 
   // ----- Notes -----

@@ -166,6 +166,21 @@ canvas.chart.mini { height: 150px; }
 .badge.green { color: var(--green); border-color: var(--green-border); background: var(--green-soft); }
 .badge.amber { color: var(--amber); border-color: var(--amber-border); background: var(--amber-soft); }
 .badge.red { color: var(--red); border-color: var(--red-border); background: var(--red-soft); }
+.badge.sd { color: var(--blue); border-color: #bae6fd; background: #f0f9ff; white-space: nowrap; }
+.item.sd input[type="checkbox"] { accent-color: var(--blue); }
+.chip.sd { color: var(--blue); border-color: #bae6fd; background: #f0f9ff; }
+
+/* ---------- System design ---------- */
+.sd-chapters { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.sd-ch .ch-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.sd-ch .ch-head h3 { display: flex; align-items: center; gap: 8px; }
+.sd-ch .ch-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 8px; background: #f0f9ff; color: var(--blue); border: 1px solid #bae6fd; font-size: 12px; font-weight: 700; }
+.sd-ch .ch-use { color: var(--text-2); font-size: 13px; margin: 6px 0 8px; }
+.sd-ch .bar { margin-bottom: 6px; }
+.sd-ch.current { border-color: var(--blue); box-shadow: 0 0 0 3px #f0f9ff; }
+.sd-ch.complete .ch-num { background: var(--green-soft); color: var(--green); border-color: var(--green-border); }
+.sd-practice .wk { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 10px 0 2px; }
+.sd-practice .wk:first-child { margin-top: 0; }
 
 .chip {
   font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border);

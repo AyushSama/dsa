@@ -119,6 +119,11 @@
         "block": "D — Drill",
         "duration": "1h",
         "content": "Blind primitives — pick 5 (daily, 20 min) + rotation: Tue debug hunt · Wed code quality · Thu ambiguity drill · Fri code comprehension · Sat cold-combo."
+      },
+      {
+        "block": "E — System design",
+        "duration": "45m (+90m Sat)",
+        "content": "DDIA, one section per day, timer-boxed, pen in hand (problem solved → cost added). Monday: 5-min aloud recall of last chapter. Friday: chapter card from memory. Saturday after the contest: 90-min design exercise. Evening slot — never in Block A's time, never instead of Block B."
       }
     ],
     "dailyNotes": [
@@ -310,20 +315,17 @@
       {
         "n": 23,
         "name": "Segment tree — build / point update / range query (optional)",
-        "target": 10,
-        "from": 11
+        "target": 10
       },
       {
         "n": 24,
         "name": "Fenwick tree (optional)",
-        "target": 8,
-        "from": 11
+        "target": 8
       },
       {
         "n": 25,
         "name": "KMP prefix function (optional)",
-        "target": 8,
-        "from": 11
+        "target": 8
       }
     ],
     "primitivesGoal": "Blank file, zero reference, timed. 22 primitives; targets are fluency targets, not learning targets. Daily: pick 5 — 2 you failed most recently, 2 untouched for a week, 1 from this week's topic. #9, #18 and #21 carry path reconstruction deliberately: \"return the actual sequence, not the value\" is one of Google's most common follow-ups.",
@@ -459,7 +461,7 @@
       }
     ],
     "excluded": "Premium-locked and excluded: Alien Dictionary (269), Sliding Window Median (480), Minimize Max Distance to Gas Station (774), Walls and Gates (286), Number of Islands II (305). Substitutes in the plan cover the same patterns.",
-    "scope": "L3 has no system design round. L4 sometimes chooses three coding rounds over two coding + one design. Targeting L3/L4, the only non-DSA prep is the GHA and the Googleyness round. L5+ needs a separate system design track. Process details reflect reporting as of September 2026 — re-check before your loop."
+    "scope": "L3 has no system design round. L4 sometimes chooses three coding rounds over two coding + one design. Targeting L3/L4, the only non-DSA prep is the GHA and the Googleyness round. L5+ needs a separate system design track. Process details reflect reporting as of September 2026 — re-check before your loop. System design track added 12 Oct 2026 as Block E (45 min/day): relevant to L4 loops that include a design round, to L5+, and to every non-Google loop. It is extra load — the DSA plan is unchanged and Block B still comes first."
   },
   "weeks": [
     {
@@ -967,7 +969,13 @@
           "focus": "1D linear (2/day)",
           "items": [
             "Climbing Stairs",
-            "House Robber II"
+            "House Robber II",
+            {
+              "name": "DDIA Ch 5 · Replication — Leaders and Followers: synchronous vs asynchronous replication, setting up new followers, handling node outages (follower catch-up, leader failover), implementation of replication logs",
+              "type": "sd",
+              "kind": "read",
+              "ch": 5
+            }
           ]
         },
         {
@@ -975,7 +983,13 @@
           "focus": "1D with decisions",
           "items": [
             "Decode Ways",
-            "Delete and Earn"
+            "Delete and Earn",
+            {
+              "name": "DDIA Ch 5 · Problems with Replication Lag: reading your own writes, monotonic reads, consistent prefix reads, solutions for replication lag",
+              "type": "sd",
+              "kind": "read",
+              "ch": 5
+            }
           ]
         },
         {
@@ -986,7 +1000,13 @@
               "name": "Partition Equal Subset Sum",
               "hot": true
             },
-            "Target Sum"
+            "Target Sum",
+            {
+              "name": "DDIA Ch 5 · Multi-Leader Replication: use cases, handling write conflicts (avoidance, convergence, custom logic), replication topologies",
+              "type": "sd",
+              "kind": "read",
+              "ch": 5
+            }
           ]
         },
         {
@@ -997,7 +1017,13 @@
               "name": "Coin Change",
               "hot": true
             },
-            "Coin Change II"
+            "Coin Change II",
+            {
+              "name": "DDIA Ch 5 · Leaderless Replication: quorums, limitations of quorum consistency, sloppy quorums and hinted handoff, detecting concurrent writes, version vectors",
+              "type": "sd",
+              "kind": "read",
+              "ch": 5
+            }
           ]
         },
         {
@@ -1005,7 +1031,13 @@
           "focus": "LIS family",
           "items": [
             "Longest Increasing Subsequence (O(n²) and O(n log n), with reconstruction)",
-            "Russian Doll Envelopes"
+            "Russian Doll Envelopes",
+            {
+              "name": "DDIA Ch 5 · Summary + Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
+              "type": "sd",
+              "kind": "card",
+              "ch": 5
+            }
           ]
         },
         {
@@ -1015,6 +1047,12 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · A multi-region, read-heavy product catalogue (or URL shortener at scale): choose a replication topology, handle leader failover and lag anomalies, justify sync vs async. 45 min aloud on paper · 30 min compare with a reference · 15 min journal",
+              "type": "sd",
+              "kind": "exercise",
+              "ch": 5
             }
           ]
         },
@@ -1033,7 +1071,8 @@
         "DP is 15% of reported problems and the only topic classified Hard across the board. Two weeks, two problems a day, done properly.",
         "Non-negotiable format before any code: state (dp[i] = precise English meaning) · transition · base · order. Then recursive + memo → tabulation → space optimisation. Full chain on the first problem of each new sub-pattern only.",
         "Coin Change vs Coin Change II differ only in loop order, and that difference is combinations vs permutations.",
-        "On LIS: also write the reconstruction. Returning the subsequence rather than its length is a standard follow-up."
+        "On LIS: also write the reconstruction. Returning the subsequence rather than its length is a standard follow-up.",
+        "System design track starts this week (added 12 Oct 2026): Block E, 45 min, DDIA from Chapter 5, one section per day, evenings. Saturday after the contest: a 90-min design exercise. Details in the System Design tab."
       ]
     },
     {
@@ -1052,6 +1091,18 @@
             {
               "name": "Longest Common Subsequence",
               "hot": true
+            },
+            {
+              "name": "Recall Ch 5 Replication · 5 min aloud to an imaginary interviewer, no notes, then glance at the card",
+              "type": "sd",
+              "kind": "recall",
+              "ch": 5
+            },
+            {
+              "name": "DDIA Ch 6 · Partitioning: partitioning and replication, key-range vs hash partitioning, skewed workloads and hot spots, secondary indexes (document- vs term-partitioned)",
+              "type": "sd",
+              "kind": "read",
+              "ch": 6
             }
           ]
         },
@@ -1060,7 +1111,19 @@
           "focus": "Grid & state machine",
           "items": [
             "Unique Paths II",
-            "Best Time to Buy and Sell Stock III"
+            "Best Time to Buy and Sell Stock III",
+            {
+              "name": "DDIA Ch 6 · Rebalancing partitions (fixed number, dynamic, proportional to nodes), automatic vs manual rebalancing, request routing, parallel query execution; summary",
+              "type": "sd",
+              "kind": "read",
+              "ch": 6
+            },
+            {
+              "name": "DDIA Ch 6 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
+              "type": "sd",
+              "kind": "card",
+              "ch": 6
+            }
           ]
         },
         {
@@ -1072,6 +1135,12 @@
             {
               "name": "Re-derive all six stock problems as one dp[day][transactions][holding] solution",
               "type": "task"
+            },
+            {
+              "name": "DDIA Ch 7 · Transactions — The Slippery Concept of a Transaction: what ACID actually means, single-object vs multi-object operations, handling errors and aborts",
+              "type": "sd",
+              "kind": "read",
+              "ch": 7
             }
           ]
         },
@@ -1083,6 +1152,12 @@
             {
               "name": "Burst Balloons",
               "hot": true
+            },
+            {
+              "name": "DDIA Ch 7 · Weak Isolation Levels I: read committed (no dirty reads/writes), snapshot isolation and MVCC, visibility rules, indexes and snapshot isolation",
+              "type": "sd",
+              "kind": "read",
+              "ch": 7
             }
           ]
         },
@@ -1094,6 +1169,12 @@
             {
               "name": "Distinct Subsequences",
               "hot": true
+            },
+            {
+              "name": "DDIA Ch 7 · Weak Isolation Levels II: preventing lost updates (atomic writes, explicit locking, compare-and-set), write skew and phantoms, materialising conflicts",
+              "type": "sd",
+              "kind": "read",
+              "ch": 7
             }
           ]
         },
@@ -1104,6 +1185,12 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · A Dynamo-style key-value store: partitioning scheme, consistent hashing, rebalancing, request routing, quorum reads and writes (N, W, R), hinted handoff",
+              "type": "sd",
+              "kind": "exercise",
+              "ch": 6
             }
           ]
         },
@@ -1136,7 +1223,19 @@
           "items": [
             "Longest Repeating Character Replacement",
             "Max Consecutive Ones III",
-            "Fruit Into Baskets"
+            "Fruit Into Baskets",
+            {
+              "name": "Recall Ch 6 Partitioning · 5 min aloud, no notes",
+              "type": "sd",
+              "kind": "recall",
+              "ch": 6
+            },
+            {
+              "name": "DDIA Ch 7 · Serializability I: actual serial execution (stored procedures, partitioning), two-phase locking (2PL), predicate locks and index-range locks",
+              "type": "sd",
+              "kind": "read",
+              "ch": 7
+            }
           ]
         },
         {
@@ -1148,7 +1247,19 @@
               "hot": true
             },
             "Subarrays with K Different Integers",
-            "Find All Anagrams in a String"
+            "Find All Anagrams in a String",
+            {
+              "name": "DDIA Ch 7 · Serializability II: serializable snapshot isolation (SSI), detecting stale MVCC reads and writes that affect prior reads, performance; summary",
+              "type": "sd",
+              "kind": "read",
+              "ch": 7
+            },
+            {
+              "name": "DDIA Ch 7 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
+              "type": "sd",
+              "kind": "card",
+              "ch": 7
+            }
           ]
         },
         {
@@ -1157,7 +1268,13 @@
           "items": [
             "Group Anagrams",
             "Valid Anagram",
-            "Longest Substring Without Repeating Characters"
+            "Longest Substring Without Repeating Characters",
+            {
+              "name": "DDIA Ch 8 · The Trouble with Distributed Systems — Faults and Partial Failures; Unreliable Networks: faults in practice, detecting faults, timeouts and unbounded delays, synchronous vs asynchronous networks",
+              "type": "sd",
+              "kind": "read",
+              "ch": 8
+            }
           ]
         },
         {
@@ -1166,7 +1283,13 @@
           "items": [
             "Longest Palindromic Substring",
             "Palindromic Substrings",
-            "Valid Palindrome II"
+            "Valid Palindrome II",
+            {
+              "name": "DDIA Ch 8 · Unreliable Clocks: monotonic vs time-of-day clocks, clock synchronisation and accuracy, timestamps for ordering events, clock confidence intervals, process pauses",
+              "type": "sd",
+              "kind": "read",
+              "ch": 8
+            }
           ]
         },
         {
@@ -1179,6 +1302,18 @@
             {
               "name": "Measurement set: 10 random untagged mediums — compare with week 0 and week 4",
               "type": "task"
+            },
+            {
+              "name": "DDIA Ch 8 · Knowledge, Truth and Lies: the truth is defined by the majority, the leader and the lock, fencing tokens, Byzantine faults (skim), system models and correctness; summary",
+              "type": "sd",
+              "kind": "read",
+              "ch": 8
+            },
+            {
+              "name": "DDIA Ch 8 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
+              "type": "sd",
+              "kind": "card",
+              "ch": 8
             }
           ]
         },
@@ -1189,6 +1324,12 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · Hotel or ticket booking with inventory: pick the isolation level and defend it, prevent double-booking (write skew), idempotent payment retries, 2PC vs saga for the payment step",
+              "type": "sd",
+              "kind": "exercise",
+              "ch": 7
             }
           ]
         },
@@ -1223,7 +1364,19 @@
               "hot": true
             },
             "Contiguous Array",
-            "Continuous Subarray Sum"
+            "Continuous Subarray Sum",
+            {
+              "name": "Recall Ch 7 Transactions + Ch 8 Trouble · 3 min each aloud, no notes",
+              "type": "sd",
+              "kind": "recall",
+              "ch": 8
+            },
+            {
+              "name": "DDIA Ch 9 · Consistency and Consensus — Consistency Guarantees; Linearizability: what makes a system linearizable, relying on it (locking and leader election, uniqueness constraints, cross-channel timing)",
+              "type": "sd",
+              "kind": "read",
+              "ch": 9
+            }
           ]
         },
         {
@@ -1234,7 +1387,13 @@
               "name": "Trapping Rain Water",
               "hot": true
             },
-            "Largest Rectangle in Histogram"
+            "Largest Rectangle in Histogram",
+            {
+              "name": "DDIA Ch 9 · Implementing linearizable systems, the cost of linearizability (CAP — the unhelpful theorem), linearizability and network delays",
+              "type": "sd",
+              "kind": "read",
+              "ch": 9
+            }
           ]
         },
         {
@@ -1246,7 +1405,13 @@
               "hot": true
             },
             "Merge Intervals",
-            "Non-overlapping Intervals"
+            "Non-overlapping Intervals",
+            {
+              "name": "DDIA Ch 9 · Ordering Guarantees: ordering and causality, the causal order is not a total order, sequence number ordering, Lamport timestamps, total order broadcast",
+              "type": "sd",
+              "kind": "read",
+              "ch": 9
+            }
           ]
         },
         {
@@ -1255,7 +1420,13 @@
           "items": [
             "Koko Eating Bananas",
             "Capacity To Ship Packages Within D Days",
-            "Minimum Number of Days to Make m Bouquets"
+            "Minimum Number of Days to Make m Bouquets",
+            {
+              "name": "DDIA Ch 9 · Distributed Transactions and Consensus I: atomic commit, two-phase commit (2PC), coordinator failure, three-phase commit, XA transactions, holding locks while in doubt",
+              "type": "sd",
+              "kind": "read",
+              "ch": 9
+            }
           ]
         },
         {
@@ -1264,7 +1435,19 @@
           "items": [
             "Split Array Largest Sum",
             "Magnetic Force Between Two Balls",
-            "Minimum Time to Complete Trips"
+            "Minimum Time to Complete Trips",
+            {
+              "name": "DDIA Ch 9 · Fault-tolerant consensus: the intuition behind Paxos/Raft/Zab, epochs and quorums, limitations of consensus, membership and coordination services (ZooKeeper); summary",
+              "type": "sd",
+              "kind": "read",
+              "ch": 9
+            },
+            {
+              "name": "DDIA Ch 9 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
+              "type": "sd",
+              "kind": "card",
+              "ch": 9
+            }
           ]
         },
         {
@@ -1274,6 +1457,12 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · Distributed rate limiter + distributed lock service: where clocks lie, fencing tokens, when consensus is unavoidable and what it costs in latency and availability",
+              "type": "sd",
+              "kind": "exercise",
+              "ch": 9
             }
           ]
         },
@@ -1311,7 +1500,19 @@
               "name": "K Closest Points to Origin",
               "hot": true
             },
-            "Kth Largest Element in an Array"
+            "Kth Largest Element in an Array",
+            {
+              "name": "Recall Ch 9 Consistency & Consensus · 5 min aloud, no notes",
+              "type": "sd",
+              "kind": "recall",
+              "ch": 9
+            },
+            {
+              "name": "DDIA Ch 10 · Batch Processing — Batch processing with Unix tools; MapReduce and distributed filesystems: HDFS, MapReduce job execution, workflows",
+              "type": "sd",
+              "kind": "read",
+              "ch": 10
+            }
           ]
         },
         {
@@ -1323,7 +1524,13 @@
               "hot": true
             },
             "Smallest Range Covering Elements from K Lists",
-            "Find K Pairs with Smallest Sums"
+            "Find K Pairs with Smallest Sums",
+            {
+              "name": "DDIA Ch 10 · Reduce-side joins and grouping, handling skew, map-side joins, the output of batch workflows (search indexes, key-value stores), Hadoop vs distributed databases",
+              "type": "sd",
+              "kind": "read",
+              "ch": 10
+            }
           ]
         },
         {
@@ -1335,7 +1542,19 @@
               "hot": true
             },
             "IPO",
-            "Task Scheduler"
+            "Task Scheduler",
+            {
+              "name": "DDIA Ch 10 · Beyond MapReduce: materialisation of intermediate state, dataflow engines, fault tolerance, graphs and iterative processing, high-level APIs; summary",
+              "type": "sd",
+              "kind": "read",
+              "ch": 10
+            },
+            {
+              "name": "DDIA Ch 10 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
+              "type": "sd",
+              "kind": "card",
+              "ch": 10
+            }
           ]
         },
         {
@@ -1344,7 +1563,12 @@
           "items": [
             "Reverse Nodes in k-Group",
             "Linked List Cycle II",
-            "Copy List with Random Pointer"
+            "Copy List with Random Pointer",
+            {
+              "name": "Interview framework · write your own 45-minute system-design template (requirements → numbers → API → data model → high-level diagram → two deep dives → trade-offs), then rehearse it on 'Design Pastebin' in 20 minutes",
+              "type": "sd",
+              "kind": "drill"
+            }
           ]
         },
         {
@@ -1356,7 +1580,12 @@
               "hot": true
             },
             "Min Stack",
-            "Insert Delete GetRandom O(1)"
+            "Insert Delete GetRandom O(1)",
+            {
+              "name": "Numbers card · memorise the back-of-envelope numbers (System Design tab); from memory, estimate QPS, storage per year and cache size for Twitter, YouTube and WhatsApp",
+              "type": "sd",
+              "kind": "drill"
+            }
           ]
         },
         {
@@ -1366,6 +1595,12 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · Web crawler + daily top-K URLs pipeline: politeness and dedup, URL frontier partitioning, batch joins, idempotent and rerunnable outputs",
+              "type": "sd",
+              "kind": "exercise",
+              "ch": 10
             }
           ]
         },
@@ -1397,7 +1632,19 @@
           "focus": "Fenwick tree",
           "items": [
             "Implement BIT from scratch",
-            "Count of Smaller Numbers After Self"
+            "Count of Smaller Numbers After Self",
+            {
+              "name": "Recall Ch 10 Batch Processing · 5 min aloud, no notes",
+              "type": "sd",
+              "kind": "recall",
+              "ch": 10
+            },
+            {
+              "name": "DDIA Ch 11 · Stream Processing — Transmitting Event Streams: messaging systems, message brokers vs partitioned logs (Kafka), consumer offsets, log compaction, replaying old messages",
+              "type": "sd",
+              "kind": "read",
+              "ch": 11
+            }
           ]
         },
         {
@@ -1405,7 +1652,13 @@
           "focus": "Segment tree",
           "items": [
             "Implement build / point update / range query",
-            "Range Sum Query – Mutable"
+            "Range Sum Query – Mutable",
+            {
+              "name": "DDIA Ch 11 · Databases and Streams: keeping systems in sync, change data capture, event sourcing, state, streams and immutability",
+              "type": "sd",
+              "kind": "read",
+              "ch": 11
+            }
           ]
         },
         {
@@ -1415,7 +1668,19 @@
             "Single Number II",
             "Counting Bits",
             "Pow(x, n)",
-            "Excel-style base conversion"
+            "Excel-style base conversion",
+            {
+              "name": "DDIA Ch 11 · Processing Streams: uses of stream processing, reasoning about time (event time vs processing time, windows), stream joins, fault tolerance and exactly-once semantics; summary",
+              "type": "sd",
+              "kind": "read",
+              "ch": 11
+            },
+            {
+              "name": "DDIA Ch 11 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
+              "type": "sd",
+              "kind": "card",
+              "ch": 11
+            }
           ]
         },
         {
@@ -1423,7 +1688,12 @@
           "focus": "Google-hard integration (2)",
           "items": [
             "Google hard #1 from Discuss compilations — full verbal protocol",
-            "Google hard #2 from Discuss compilations — full verbal protocol"
+            "Google hard #2 from Discuss compilations — full verbal protocol",
+            {
+              "name": "Reference-design critique · read one published design (a news feed) and annotate every place where a DDIA concept decides the trade-off: replication, partitioning, log vs queue, consistency choice",
+              "type": "sd",
+              "kind": "drill"
+            }
           ]
         },
         {
@@ -1435,6 +1705,11 @@
             {
               "name": "Measurement set: 10 random untagged mediums — compare with weeks 0, 4 and 8",
               "type": "task"
+            },
+            {
+              "name": "Rapid recall Ch 5–11 · ten questions from your chapter cards' question lists, one minute each, aloud",
+              "type": "sd",
+              "kind": "recall"
             }
           ]
         },
@@ -1445,6 +1720,12 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · News feed with fan-out + notification system: push vs pull, the celebrity problem, partitioned logs, ordering and deduplication of notifications",
+              "type": "sd",
+              "kind": "exercise",
+              "ch": 11
             }
           ]
         },
@@ -1492,6 +1773,18 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "Recall Ch 11 Stream Processing · 5 min aloud, no notes",
+              "type": "sd",
+              "kind": "recall",
+              "ch": 11
+            },
+            {
+              "name": "DDIA Ch 12 · The Future of Data Systems — Data Integration: combining specialised tools by deriving data, batch and stream processing together, the lambda architecture",
+              "type": "sd",
+              "kind": "read",
+              "ch": 12
             }
           ]
         },
@@ -1518,6 +1811,12 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "DDIA Ch 12 · Unbundling Databases (skim); Aiming for Correctness: the end-to-end argument, idempotence and operation identifiers, uniqueness constraints, timeliness vs integrity",
+              "type": "sd",
+              "kind": "read",
+              "ch": 12
             }
           ]
         },
@@ -1544,6 +1843,18 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "DDIA Ch 12 · Doing the Right Thing (skim) + summary",
+              "type": "sd",
+              "kind": "read",
+              "ch": 12
+            },
+            {
+              "name": "DDIA Ch 12 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour — book complete",
+              "type": "sd",
+              "kind": "card",
+              "ch": 12
             }
           ]
         },
@@ -1570,6 +1881,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "SD mock #1 (45 min, recorded) · Design the Twitter / Instagram home timeline",
+              "type": "sd",
+              "kind": "mock"
             }
           ]
         },
@@ -1596,6 +1912,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "Post-mortem of mock #1 · map every weak answer to a chapter; write a one-page SD cheat sheet distilled from the eight chapter cards",
+              "type": "sd",
+              "kind": "drill"
             }
           ]
         },
@@ -1606,6 +1927,12 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · Metrics and monitoring system: time-series ingest, downsampling, retention tiers, alerting — stream and batch together",
+              "type": "sd",
+              "kind": "exercise",
+              "ch": 12
             }
           ]
         },
@@ -1653,6 +1980,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "SD mock #2 (45 min, recorded) · Design YouTube: upload pipeline, transcoding, CDN, view counts",
+              "type": "sd",
+              "kind": "mock"
             }
           ]
         },
@@ -1679,6 +2011,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "Deep dive · consistent hashing and quorum arithmetic (N, W, R) on paper, 20 min; explain why W + R > N is not enough",
+              "type": "sd",
+              "kind": "drill"
             }
           ]
         },
@@ -1705,6 +2042,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "SD mock #3 (45 min, recorded) · Design Uber ride matching: geospatial indexing, dispatch, high-frequency location updates",
+              "type": "sd",
+              "kind": "mock"
             }
           ]
         },
@@ -1731,6 +2073,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "Deep dive · decision table: relational vs document vs key-value vs wide-column vs search vs time-series — when each wins and the DDIA reason",
+              "type": "sd",
+              "kind": "drill"
             }
           ]
         },
@@ -1757,6 +2104,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "SD mock #4 (45 min, recorded) · Design Google Docs collaborative editing: ordering, OT/CRDT intuition, presence",
+              "type": "sd",
+              "kind": "mock"
             }
           ]
         },
@@ -1767,6 +2119,11 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · Search autocomplete / typeahead: trie vs prefix table, ranking, the offline update pipeline, caching",
+              "type": "sd",
+              "kind": "exercise"
             }
           ]
         },
@@ -1813,6 +2170,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "SD mock #5 (45 min, recorded) · Design Google Drive / Dropbox: chunking, sync, conflict handling, metadata store",
+              "type": "sd",
+              "kind": "mock"
             }
           ]
         },
@@ -1839,6 +2201,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "Deep dive · message queues vs logs, delivery guarantees, exactly-once in practice, the transactional outbox pattern",
+              "type": "sd",
+              "kind": "drill"
             }
           ]
         },
@@ -1865,6 +2232,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "SD mock #6 (45 min, recorded) · Design a distributed cache (Redis/Memcached cluster): eviction, hot keys, consistency with the database, thundering herd",
+              "type": "sd",
+              "kind": "mock"
             }
           ]
         },
@@ -1891,6 +2263,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "Deep dive · caching layers and CDN, cache invalidation strategies, sharding a relational database and what breaks (joins, transactions, IDs)",
+              "type": "sd",
+              "kind": "drill"
             }
           ]
         },
@@ -1917,6 +2294,11 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
+            },
+            {
+              "name": "SD mock #7 (45 min, recorded) · Design ad-click aggregation: stream processing, exactly-once counts, late events",
+              "type": "sd",
+              "kind": "mock"
             }
           ]
         },
@@ -1927,6 +2309,11 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · Chat system (WhatsApp): connection management, message ordering, delivery receipts, group fan-out, offline storage",
+              "type": "sd",
+              "kind": "exercise"
             }
           ]
         },
@@ -1970,6 +2357,11 @@
             {
               "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
+            },
+            {
+              "name": "Rapid recall · all chapter cards 5–12, two minutes each aloud; re-read the weakest chapter's summary",
+              "type": "sd",
+              "kind": "recall"
             }
           ]
         },
@@ -2014,6 +2406,11 @@
             {
               "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
+            },
+            {
+              "name": "SD mock (45 min, recorded) · unseen prompt from a peer or a list, e.g. Design a payment system, Design a notification service",
+              "type": "sd",
+              "kind": "mock"
             }
           ]
         },
@@ -2068,6 +2465,11 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · Stock exchange / order-matching engine: low latency, sequencing, durability, fairness",
+              "type": "sd",
+              "kind": "exercise"
             }
           ]
         },
@@ -2110,6 +2512,11 @@
             {
               "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
+            },
+            {
+              "name": "Rapid recall · weak chapters only, then re-do one old exercise cold and compare with your week-6 journal entry",
+              "type": "sd",
+              "kind": "recall"
             }
           ]
         },
@@ -2154,6 +2561,11 @@
             {
               "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
+            },
+            {
+              "name": "SD mock (45 min, recorded) · unseen prompt; score yourself against the SD exit criteria",
+              "type": "sd",
+              "kind": "mock"
             }
           ]
         },
@@ -2208,6 +2620,11 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
+            },
+            {
+              "name": "Design exercise (90 min) · The week-8 booking system at 10× scale: what changes in partitioning, isolation, and the payment flow",
+              "type": "sd",
+              "kind": "exercise"
             }
           ]
         },
@@ -2227,11 +2644,1613 @@
       ]
     }
   ],
-  "progress": {},
-  "drillLog": [],
+  "progress": {
+    "w1d1i0": {
+      "solved": "2026-09-07",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-10",
+          "done": "2026-09-10"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-21",
+          "done": "2026-09-21"
+        },
+        {
+          "label": "R+3",
+          "due": "2026-09-14",
+          "done": "2026-09-14"
+        },
+        {
+          "label": "R+14",
+          "due": "2026-09-25",
+          "done": "2026-09-25"
+        }
+      ],
+      "note": "Do Morris and Stack Version both\n"
+    },
+    "w1d1i1": {
+      "solved": "2026-09-07",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-10",
+          "done": "2026-09-10"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-21",
+          "done": "2026-09-21"
+        }
+      ],
+      "note": ""
+    },
+    "w1d1i2": {
+      "solved": "2026-09-07",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-10",
+          "done": "2026-09-10"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-21",
+          "done": "2026-09-21"
+        },
+        {
+          "label": "R+3",
+          "due": "2026-09-14",
+          "done": "2026-09-14"
+        },
+        {
+          "label": "R+14",
+          "due": "2026-09-25",
+          "done": "2026-09-25"
+        }
+      ],
+      "note": ""
+    },
+    "w1d2i0": {
+      "solved": "2026-09-08",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-11",
+          "done": "2026-09-08",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-22",
+          "done": "2026-09-08",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w1d2i1": {
+      "solved": "2026-09-08",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-11",
+          "done": "2026-09-08",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-22",
+          "done": "2026-09-08",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w1d2i2": {
+      "solved": "2026-09-08",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-11",
+          "done": "2026-09-11"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-22",
+          "done": "2026-09-22"
+        }
+      ],
+      "note": ""
+    },
+    "w1d3i0": {
+      "solved": "2026-09-09",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-12",
+          "done": "2026-09-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-23",
+          "done": "2026-09-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w1d3i1": {
+      "solved": "2026-09-09",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-12",
+          "done": "2026-09-12"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-23",
+          "done": "2026-09-23"
+        }
+      ],
+      "note": ""
+    },
+    "w1d3i2": {
+      "solved": "2026-09-09",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-12",
+          "done": "2026-09-12"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-23",
+          "done": "2026-09-23"
+        },
+        {
+          "label": "R+3",
+          "due": "2026-09-15",
+          "done": "2026-09-15"
+        },
+        {
+          "label": "R+14",
+          "due": "2026-09-26",
+          "done": "2026-09-28"
+        }
+      ],
+      "note": ""
+    },
+    "w1d4i0": {
+      "solved": "2026-09-10",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-13",
+          "done": "2026-09-10",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-24",
+          "done": "2026-09-10",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w1d4i1": {
+      "solved": "2026-09-10",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-13",
+          "done": "2026-09-10",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-24",
+          "done": "2026-09-10",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w1d4i2": {
+      "solved": "2026-09-10",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-13",
+          "done": "2026-09-10",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-24",
+          "done": "2026-09-10",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w1d5i0": {
+      "solved": "2026-09-11",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-14",
+          "done": "2026-09-14"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-25",
+          "done": "2026-09-25"
+        }
+      ],
+      "note": ""
+    },
+    "w1d5i2": {
+      "solved": "2026-09-11",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-14",
+          "done": "2026-09-14"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-25",
+          "done": "2026-09-25"
+        }
+      ],
+      "note": ""
+    },
+    "w1d5i1": {
+      "solved": "2026-09-11",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-14",
+          "done": "2026-09-14"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-25",
+          "done": "2026-09-25"
+        }
+      ],
+      "note": ""
+    },
+    "w1d7i0": {
+      "done": "2026-09-11"
+    },
+    "w1d6i0": {
+      "done": "2026-09-13"
+    },
+    "w2d1i0": {
+      "solved": "2026-09-14",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-17",
+          "done": "2026-09-17"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-28",
+          "done": "2026-09-28"
+        }
+      ],
+      "note": ""
+    },
+    "w2d1i1": {
+      "solved": "2026-09-14",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-17",
+          "done": "2026-09-17"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-28",
+          "done": "2026-09-28"
+        }
+      ],
+      "note": ""
+    },
+    "w2d1i2": {
+      "solved": "2026-09-14",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-17",
+          "done": "2026-09-17"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-28",
+          "done": "2026-09-28"
+        }
+      ],
+      "note": ""
+    },
+    "w2d2i2": {
+      "solved": "2026-09-15",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-18",
+          "done": "2026-09-18"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-29",
+          "done": "2026-09-29"
+        }
+      ],
+      "note": ""
+    },
+    "w2d2i0": {
+      "solved": "2026-09-15",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-18",
+          "done": "2026-09-18"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-29",
+          "done": "2026-09-29"
+        }
+      ],
+      "note": ""
+    },
+    "w2d2i1": {
+      "solved": "2026-09-15",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-18",
+          "done": "2026-09-18"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-29",
+          "done": "2026-09-29"
+        }
+      ],
+      "note": ""
+    },
+    "w2d3i2": {
+      "solved": "2026-09-16",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-19",
+          "done": "2026-09-19"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-30",
+          "done": "2026-09-30"
+        }
+      ],
+      "note": ""
+    },
+    "w2d3i1": {
+      "solved": "2026-09-16",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-19",
+          "done": "2026-09-19"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-30",
+          "done": "2026-09-30"
+        }
+      ],
+      "note": ""
+    },
+    "w2d3i0": {
+      "solved": "2026-09-16",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-19",
+          "done": "2026-09-19"
+        },
+        {
+          "label": "+14",
+          "due": "2026-09-30",
+          "done": "2026-09-30"
+        }
+      ],
+      "note": ""
+    },
+    "w2d4i1": {
+      "solved": "2026-09-17",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-20",
+          "done": "2026-09-20"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-01",
+          "done": "2026-10-05",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w2d4i0": {
+      "solved": "2026-09-17",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-20",
+          "done": "2026-09-20"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-01",
+          "done": "2026-10-05",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w2d5i0": {
+      "solved": "2026-09-18",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-21",
+          "done": "2026-09-21"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-02",
+          "done": "2026-10-05",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w2d5i2": {
+      "solved": "2026-09-18",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-21",
+          "done": "2026-09-21"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-02",
+          "done": "2026-10-05",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w2d5i1": {
+      "solved": "2026-09-18",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-21",
+          "done": "2026-09-21"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-02",
+          "done": "2026-10-05",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d1i0": {
+      "solved": "2026-09-21",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-24",
+          "done": "2026-09-24"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-05",
+          "done": "2026-10-05",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d1i1": {
+      "solved": "2026-09-21",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-24",
+          "done": "2026-09-24"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-05",
+          "done": "2026-10-05",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d1i2": {
+      "solved": "2026-09-21",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-24",
+          "done": "2026-09-24"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-05",
+          "done": "2026-10-05",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d2i0": {
+      "solved": "2026-09-22",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-25",
+          "done": "2026-09-25"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-06",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d2i1": {
+      "solved": "2026-09-22",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-25",
+          "done": "2026-09-25"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-06",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d2i2": {
+      "solved": "2026-09-22",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-25",
+          "done": "2026-09-25"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-06",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d3i0": {
+      "solved": "2026-09-23",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-26",
+          "done": "2026-09-28"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-07",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d3i1": {
+      "solved": "2026-09-23",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-26",
+          "done": "2026-09-28"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-07",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d3i2": {
+      "solved": "2026-09-23",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-26",
+          "done": "2026-09-28"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-07",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d4i0": {
+      "solved": "2026-09-24",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-27",
+          "done": "2026-09-28"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d4i1": {
+      "solved": "2026-09-24",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-27",
+          "done": "2026-09-28"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d4i2": {
+      "solved": "2026-09-24",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-27",
+          "done": "2026-09-28"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d5i0": {
+      "solved": "2026-09-25",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-28",
+          "done": "2026-09-28"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-09",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d5i1": {
+      "solved": "2026-09-25",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-28",
+          "done": "2026-09-28"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-09",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w3d5i2": {
+      "solved": "2026-09-25",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-09-28",
+          "done": "2026-09-28"
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-09",
+          "done": "2026-10-09",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w4d1i0": {
+      "solved": "2026-09-28",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-01",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-12",
+          "done": "2026-10-12",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w4d1i1": {
+      "solved": "2026-09-28",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-01",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-12",
+          "done": "2026-10-12",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w4d1i2": {
+      "solved": "2026-09-28",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-01",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-12",
+          "done": "2026-10-12",
+          "skipped": true
+        }
+      ],
+      "note": ""
+    },
+    "w4d2i2": {
+      "solved": "2026-09-29",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-02",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-13",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d2i1": {
+      "solved": "2026-09-29",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-02",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-13",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d2i0": {
+      "solved": "2026-09-29",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-02",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-13",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d3i2": {
+      "solved": "2026-09-30",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-03",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-14",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d3i1": {
+      "solved": "2026-09-30",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-03",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-14",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d3i0": {
+      "solved": "2026-09-30",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-03",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-14",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d4i0": {
+      "solved": "2026-10-01",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-04",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-15",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d4i2": {
+      "solved": "2026-10-01",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-04",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-15",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d4i1": {
+      "solved": "2026-10-01",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-04",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-15",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d5i0": {
+      "solved": "2026-10-02",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-05",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-16",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d5i1": {
+      "solved": "2026-10-02",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-05",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-16",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d5i2": {
+      "solved": "2026-10-02",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-05",
+          "done": "2026-10-05",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-16",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w4d5i3": {
+      "done": "2026-10-02"
+    },
+    "w5d1i0": {
+      "solved": "2026-10-05",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-19",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d1i2": {
+      "solved": "2026-10-05",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-19",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d1i1": {
+      "solved": "2026-10-05",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-19",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d2i0": {
+      "solved": "2026-10-05",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-19",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d2i1": {
+      "solved": "2026-10-05",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-19",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d2i2": {
+      "solved": "2026-10-05",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-19",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d3i0": {
+      "solved": "2026-10-05",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-19",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d3i1": {
+      "solved": "2026-10-05",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-19",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d3i2": {
+      "solved": "2026-10-05",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-08",
+          "done": "2026-10-09",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-19",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d4i2": {
+      "solved": "2026-10-07",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-10",
+          "done": "2026-10-12",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-21",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d5i0": {
+      "solved": "2026-10-07",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-10",
+          "done": "2026-10-12",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-21",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d5i1": {
+      "solved": "2026-10-07",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-10",
+          "done": "2026-10-12",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-21",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d4i1": {
+      "solved": "2026-10-07",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-10",
+          "done": "2026-10-12",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-21",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w5d4i0": {
+      "solved": "2026-10-07",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-10",
+          "done": "2026-10-12",
+          "skipped": true
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-21",
+          "done": null
+        }
+      ],
+      "note": ""
+    }
+  },
+  "drillLog": [
+    {
+      "name": "Binary search, first-true form (one template — derive last-true from it)",
+      "date": "2026-09-07",
+      "minutes": null
+    },
+    {
+      "name": "Iterative inorder traversal with explicit stack",
+      "date": "2026-09-07",
+      "minutes": null
+    },
+    {
+      "name": "Kahn's topological sort",
+      "date": "2026-09-07",
+      "minutes": null
+    },
+    {
+      "name": "Dijkstra with priority queue — and the path, not just the distance",
+      "date": "2026-09-07",
+      "minutes": null
+    },
+    {
+      "name": "Spaced re-solve",
+      "date": "2026-09-07",
+      "minutes": null
+    },
+    {
+      "name": "Binary search on answer — lo/hi + can(x) shell",
+      "date": "2026-09-08",
+      "minutes": 4
+    },
+    {
+      "name": "Variable sliding window — expand right, shrink while invalid",
+      "date": "2026-09-08",
+      "minutes": 3
+    },
+    {
+      "name": "atMost(k) − atMost(k−1) counting shell",
+      "date": "2026-09-09",
+      "minutes": 5
+    },
+    {
+      "name": "Prefix sum + hashmap of counts",
+      "date": "2026-09-09",
+      "minutes": 2
+    },
+    {
+      "name": "BFS by level — size = len(queue) loop",
+      "date": "2026-09-09",
+      "minutes": 3
+    },
+    {
+      "name": "Monotonic stack — next greater / prev smaller, with index bookkeeping",
+      "date": "2026-09-10",
+      "minutes": null
+    },
+    {
+      "name": "Iterative inorder traversal with explicit stack",
+      "date": "2026-09-10",
+      "minutes": null
+    },
+    {
+      "name": "Union-Find — path compression + union by rank",
+      "date": "2026-09-10",
+      "minutes": null
+    },
+    {
+      "name": "Monotonic deque — sliding window maximum",
+      "date": "2026-09-11",
+      "minutes": 5
+    },
+    {
+      "name": "Trie — insert / search / startsWith",
+      "date": "2026-09-15",
+      "minutes": 10
+    },
+    {
+      "name": "Quickselect — write partition once, reuse it",
+      "date": "2026-09-16",
+      "minutes": 15
+    },
+    {
+      "name": "LIS in O(n log n) — and reconstruct the subsequence",
+      "date": "2026-09-16",
+      "minutes": 4
+    },
+    {
+      "name": "Binary search, first-true form (one template — derive last-true from it)",
+      "date": "2026-09-18",
+      "minutes": 5
+    },
+    {
+      "name": "Binary search on answer — lo/hi + can(x) shell",
+      "date": "2026-09-18",
+      "minutes": 5
+    },
+    {
+      "name": "Variable sliding window — expand right, shrink while invalid",
+      "date": "2026-09-18",
+      "minutes": 3
+    },
+    {
+      "name": "atMost(k) − atMost(k−1) counting shell",
+      "date": "2026-09-18",
+      "minutes": 5
+    },
+    {
+      "name": "Prefix sum + hashmap of counts",
+      "date": "2026-09-18",
+      "minutes": 2
+    },
+    {
+      "name": "Monotonic stack — next greater / prev smaller, with index bookkeeping",
+      "date": "2026-09-19",
+      "minutes": 4
+    },
+    {
+      "name": "Monotonic deque — sliding window maximum",
+      "date": "2026-09-19",
+      "minutes": 30
+    },
+    {
+      "name": "BFS by level — size = len(queue) loop",
+      "date": "2026-09-19",
+      "minutes": 3
+    },
+    {
+      "name": "BFS with parent map → reconstruct and return the path",
+      "date": "2026-09-19",
+      "minutes": 25
+    },
+    {
+      "name": "Grid DFS with visited handling",
+      "date": "2026-09-19",
+      "minutes": 5
+    },
+    {
+      "name": "Post-order tree shell — tuple up, combine, update global",
+      "date": "2026-09-19",
+      "minutes": 4
+    },
+    {
+      "name": "Iterative inorder traversal with explicit stack",
+      "date": "2026-09-19",
+      "minutes": 2
+    },
+    {
+      "name": "Iterative inorder traversal with explicit stack",
+      "date": "2026-09-19",
+      "minutes": 6
+    },
+    {
+      "name": "Trie — insert / search / startsWith",
+      "date": "2026-09-19",
+      "minutes": 2
+    },
+    {
+      "name": "Backtracking shell — choose → explore → un-choose, with duplicate skip",
+      "date": "2026-09-19",
+      "minutes": 9
+    },
+    {
+      "name": "Union-Find — path compression + union by rank",
+      "date": "2026-09-19",
+      "minutes": 5
+    },
+    {
+      "name": "Kahn's topological sort",
+      "date": "2026-09-19",
+      "minutes": 6
+    },
+    {
+      "name": "DFS three-colour topological sort / cycle detection",
+      "date": "2026-09-19",
+      "minutes": 10
+    },
+    {
+      "name": "Dijkstra with priority queue — and the path, not just the distance",
+      "date": "2026-09-19",
+      "minutes": 11
+    },
+    {
+      "name": "Binary search, first-true form (one template — derive last-true from it)",
+      "date": "2026-10-05",
+      "minutes": 3
+    }
+  ],
   "notes": {
     "triggers": "",
     "journal": []
   },
-  "updatedAt": "2026-09-07T14:07:23.451Z"
+  "updatedAt": "2026-10-12T02:28:07.570Z",
+  "systemDesign": {
+    "intro": "System design track built around Designing Data-Intensive Applications (Kleppmann). Chapters 1–4 are already read, so the track starts at Part II — Chapter 5, Replication — and runs to the end of the book over weeks 6–12, one section per day. From week 10 it adds the interview framework and numbers; from week 12, recorded mocks. Nothing is re-read.",
+    "book": "Designing Data-Intensive Applications — Martin Kleppmann",
+    "resume": "Resume at Chapter 5 (Replication). Order: 5 Replication · 6 Partitioning · 7 Transactions · 8 The Trouble with Distributed Systems · 9 Consistency and Consensus · 10 Batch Processing · 11 Stream Processing · 12 The Future of Data Systems.",
+    "editionNote": "Items name sections, not page numbers, so either edition works. 2nd edition numbering is shifted by one (Replication is chapter 6, Sharding 7, Transactions 8, Trouble 9, Consistency & Consensus 10, Batch 11, Stream 12) — follow the titles.",
+    "block": {
+      "block": "E — System design",
+      "duration": "45 min · Sat 90 min",
+      "content": "One DDIA section per day. Monday recall, Friday chapter card, Saturday design exercise."
+    },
+    "readingProtocol": [
+      "45-minute timer. One section per day as scheduled. When the timer ends, stop mid-section, tick the item, continue tomorrow. The schedule is in sections; the budget is in minutes — the budget wins.",
+      "Read with a pen. For every mechanism write one line: the problem it solves → the cost it adds. That line is the shape of every system-design answer.",
+      "No highlighting. After closing the book, write three bullets from memory. If you can't, you weren't reading — you were looking.",
+      "Chapter-card day: one page from memory using the template below, then open the chapter summary and fix what you missed in a different colour. The corrections are the card's most valuable part.",
+      "Monday recall: five minutes aloud explaining last week's chapter to an imaginary interviewer, no notes, then glance at the card. Failed? Re-read the card and recall again on Wednesday.",
+      "Evening slot. Reading is low-intensity next to solving; put it after dinner or on a commute. It never takes Block A's time and never replaces Block B.",
+      "Attach the chapter card as the note (✎) on the chapter-card item, so it lives in data.json with everything else."
+    ],
+    "chapterCard": [
+      "The problem this chapter solves — two lines.",
+      "The 3–5 mechanisms, one line each: mechanism → what it buys → what it costs.",
+      "Failure modes an interviewer will probe (what goes wrong when a node is slow, a clock drifts, a leader dies).",
+      "Where it shows up in real systems — name two products and which mechanism they chose.",
+      "Five questions I'd be asked, with one-line answers.",
+      "One diagram, from memory."
+    ],
+    "exerciseProtocol": [
+      "45 min timed, aloud, on paper or whiteboard (in-person loops) or a blank doc (remote). Same medium as the real round.",
+      "Time boxes: requirements 5 · numbers 5 · API and data model 5 · high-level diagram 10 · two deep dives 15 · trade-offs and 10× question 5.",
+      "30 min: compare with a reference design (Hello Interview, Alex Xu, or an engineering blog). List every DDIA concept you failed to bring in and every number you hand-waved.",
+      "15 min: journal entry tagged SD — what you'd say differently, which chapter to re-read."
+    ],
+    "framework": [
+      "Functional requirements: pick the three core features, say explicitly what is out of scope.",
+      "Non-functional: scale (DAU, read/write QPS, data size, growth), latency targets, consistency vs availability needs, durability.",
+      "Back-of-envelope: QPS average and peak, storage per year, bandwidth, cache size (80/20 rule). Say the numbers out loud.",
+      "API: 3–5 endpoints with inputs and outputs.",
+      "Data model: entities, which store for which data and why (Ch 2–3 reasons: access pattern, index type, write vs read amplification).",
+      "High-level diagram: client → load balancer → stateless services → cache → database → queue → workers. Draw it before refining it.",
+      "Deep dives on the two hardest problems: hot keys, fan-out, consistency, idempotency, ordering, failover.",
+      "Scaling: replication (Ch 5), partitioning (Ch 6), caching and CDN; failure handling (Ch 8); consensus only where unavoidable (Ch 9).",
+      "Trade-offs: state what you gave up and why. What breaks at 10× load, and the first thing you'd change."
+    ],
+    "numbers": [
+      "L1 cache 1 ns · main memory 100 ns · SSD random read 100 µs · HDD seek 10 ms",
+      "Round trip: same datacentre 0.5 ms · cross-continent 150 ms",
+      "Read 1 MB sequentially: memory 10 µs · SSD 1 ms · 1 Gbps network 10 ms · HDD 20 ms",
+      "1 day ≈ 86 400 s ≈ 10⁵ s · 1 M requests/day ≈ 12 QPS · 100 M DAU × 10 requests ≈ 12 k QPS average, plan for 2–3× peak",
+      "Sizes: char 1 B · UUID 16 B · tweet-like row 1 KB · photo 1 MB · 1 M × 1 KB = 1 GB · 1 B × 1 KB = 1 TB",
+      "Availability: 99.9% ≈ 8.7 h down/year · 99.99% ≈ 52 min/year · 99.999% ≈ 5 min/year",
+      "One relational node: a few thousand writes/s, ~10 k simple reads/s · Redis ~100 k ops/s · one Kafka partition tens of MB/s. Order of magnitude is what matters."
+    ],
+    "chapters": [
+      {
+        "ch": 5,
+        "title": "Replication",
+        "weeks": "Week 6",
+        "use": "Every 'how do you scale reads / survive a region outage' question: leader–follower, sync vs async, failover, lag anomalies, multi-leader conflicts, quorums."
+      },
+      {
+        "ch": 6,
+        "title": "Partitioning",
+        "weeks": "Week 7",
+        "use": "Every 'how do you shard X': hash vs range, consistent hashing and rebalancing, local vs global secondary indexes, hot keys, routing."
+      },
+      {
+        "ch": 7,
+        "title": "Transactions",
+        "weeks": "Weeks 7–8",
+        "use": "Bookings, inventory, payments: what ACID buys, isolation levels, lost updates, write skew, 2PL vs SSI."
+      },
+      {
+        "ch": 8,
+        "title": "The Trouble with Distributed Systems",
+        "weeks": "Week 8",
+        "use": "'What if a node is slow but not dead': partial failure, timeouts, unreliable clocks, fencing tokens."
+      },
+      {
+        "ch": 9,
+        "title": "Consistency and Consensus",
+        "weeks": "Week 9",
+        "use": "Distributed locks, leader election, uniqueness: linearizability vs causality, Lamport timestamps, total order broadcast, 2PC, Raft/ZooKeeper, CAP said honestly."
+      },
+      {
+        "ch": 10,
+        "title": "Batch Processing",
+        "weeks": "Week 10",
+        "use": "Analytics pipelines, offline ranking, index builds: MapReduce, joins, dataflow engines, rerunnable outputs."
+      },
+      {
+        "ch": 11,
+        "title": "Stream Processing",
+        "weeks": "Week 11",
+        "use": "Notifications, feeds, real-time metrics: logs vs queues, CDC, event sourcing, windows, exactly-once."
+      },
+      {
+        "ch": 12,
+        "title": "The Future of Data Systems",
+        "weeks": "Week 12 (skim)",
+        "use": "'How do you keep cache, search and DB consistent': derived data, unbundling, end-to-end correctness, idempotency keys."
+      }
+    ],
+    "resources": [
+      {
+        "name": "DDIA (Kleppmann)",
+        "use": "The foundation. This schedule, chapters 5–12."
+      },
+      {
+        "name": "Hello Interview — System Design in a Hurry (free)",
+        "use": "The interview framework and reference designs for Saturday comparisons."
+      },
+      {
+        "name": "Alex Xu — System Design Interview, vol. 1",
+        "use": "Optional. Chapters 1–2 for estimation and the four-step framework; the rest only as Saturday references."
+      },
+      {
+        "name": "Jeff Dean — Numbers Everyone Should Know",
+        "use": "The numbers card. Memorise the orders of magnitude."
+      },
+      {
+        "name": "Engineering blogs (Discord, Uber, Netflix, Cloudflare)",
+        "use": "One post a week from week 10, read with DDIA vocabulary: which chapter decided each trade-off?"
+      },
+      {
+        "name": "Mocks — a peer or interviewing.io",
+        "use": "From week 12, alternating with coding mocks. Record every one."
+      }
+    ],
+    "exitCriteria": [
+      "All eight chapter cards (5–12) written from memory; Monday recall passes first time.",
+      "Unseen 45-minute prompt: requirements and numbers in ≤8 min, high-level diagram by minute 20, two deep dives with explicit DDIA trade-offs.",
+      "Explain unprompted: replication-lag anomalies, hash vs range partitioning, write skew, fencing tokens, linearizability vs causality, 2PC vs consensus, log vs queue, exactly-once.",
+      "QPS, storage and latency estimates for any familiar product in under a minute.",
+      "Three recorded mocks watched back; each weak answer mapped to a chapter and fixed."
+    ],
+    "failureModes": [
+      "Reading without writing. No chapter card means no retention — the same lesson as Block B.",
+      "Letting Block E eat Block B. Revision stays first; system design is the first thing cut on a bad day.",
+      "Finishing the book before designing anything. The Saturday exercise starts in week 6, not week 12.",
+      "Memorising reference designs instead of trade-offs. The interviewer probes the why; DDIA gives you the why.",
+      "Skipping the numbers. Hand-wavy estimation is the fastest fail signal in a design round."
+    ]
+  }
 }

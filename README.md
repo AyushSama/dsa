@@ -2,6 +2,8 @@
 
 Plain HTML/CSS/JS site for the Google DSA roadmap (research-updated Sept 2026): Week 0 gate
 (GHA + diagnostic), Phase 1 Build (weeks 1–11), Phase 2 Conversion (weeks 12–14), Buffer (15–16).
+From week 6 a **system design track** (DDIA chapters 5–12, Saturday design exercises, mocks from
+week 12) runs alongside as Block E; it has its own tab and shows up inside each day.
 No framework, no backend, no database, no browser storage.
 **`data.json` in this folder is the only place anything is stored.**
 
@@ -57,6 +59,10 @@ Until the file is linked the page is display-only, so the local file is always t
 - **Drills** — the 22 timed blind primitives (plus 3 optional from week 11) with target minutes,
   and the weekly rotation (ambiguity, debug hunt, code quality, code comprehension, cold-combo).
   Log attempts with the time taken.
+- **System Design** — the DDIA track (chapters 5–12, one section per day from week 6), chapter
+  progress, Saturday design exercises, mocks and drills, plus the reading protocol, chapter-card
+  template, 45-minute framework, numbers card and exit criteria. Items also appear in each day on
+  the Roadmap and Dashboard with a blue badge; the ✎ note on a chapter-card item holds the card.
 - **Notes** — the ✎ button on any problem attaches a note (approach, trigger, what went wrong);
   the Notes tab collects them, plus a free-form *Trigger notes* editor (your `triggers.md`)
   and a dated *Journal* for contest post-mortems. Everything is saved in `data.json`.
@@ -77,5 +83,7 @@ notes      { triggers: "text", journal: [ { date, text } ] }
 updatedAt  ISO timestamp of the last save
 ```
 
-Item ids are `w<week>d<day>i<index>`. Items are strings (problems) or `{ name, type: "task" }`.
+Item ids are `w<week>d<day>i<index>`. Items are strings (problems), `{ name, type: "task" }`, or
+`{ name, type: "sd", kind, ch }` for system design (`kind`: read · card · recall · exercise · mock ·
+drill; `ch`: DDIA chapter). `systemDesign` holds the track's guide text and chapter list.
 Edit `weeks` freely to change the plan.
