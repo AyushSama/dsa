@@ -2,8 +2,8 @@
 
 Plain HTML/CSS/JS site for the Google DSA roadmap (research-updated Sept 2026): Week 0 gate
 (GHA + diagnostic), Phase 1 Build (weeks 1–11), Phase 2 Conversion (weeks 12–14), Buffer (15–16).
-From week 6 a **system design track** (DDIA chapters 5–12, Saturday design exercises, mocks from
-week 12) runs alongside as Block E; it has its own tab and shows up inside each day.
+A separate **system design track** (33 concepts, 28 design questions, 9 recorded mocks, 1 hour a day
+over 11 weeks) lives under its own navigation group with its own dashboard, schedule and progress.
 No framework, no backend, no database, no browser storage.
 **`data.json` in this folder is the only place anything is stored.**
 
@@ -59,10 +59,12 @@ Until the file is linked the page is display-only, so the local file is always t
 - **Drills** — the 22 timed blind primitives (plus 3 optional from week 11) with target minutes,
   and the weekly rotation (ambiguity, debug hunt, code quality, code comprehension, cold-combo).
   Log attempts with the time taken.
-- **System Design** — the DDIA track (chapters 5–12, one section per day from week 6), chapter
-  progress, Saturday design exercises, mocks and drills, plus the reading protocol, chapter-card
-  template, 45-minute framework, numbers card and exit criteria. Items also appear in each day on
-  the Roadmap and Dashboard with a blue badge; the ✎ note on a chapter-card item holds the card.
+- **System Design** (own nav group) — **SD Dashboard**: SD week/day, today's one-hour session with
+  its shape, week strip and per-week completion, stats. **Concepts**: 33 concepts in six groups, each
+  with what to master, three interviewer probes, where to learn it, and your card (saved as a note).
+  **Questions**: 28 design questions in three tiers with focus, linked concepts, reference and a
+  post-mortem note, plus spare prompts. **SD Guide**: session shapes, 45-minute framework, card
+  template, numbers card, scoring rubric, Google-round notes, exit criteria, failure modes, resources.
 - **Notes** — the ✎ button on any problem attaches a note (approach, trigger, what went wrong);
   the Notes tab collects them, plus a free-form *Trigger notes* editor (your `triggers.md`)
   and a dated *Journal* for contest post-mortems. Everything is saved in `data.json`.
@@ -83,7 +85,17 @@ notes      { triggers: "text", journal: [ { date, text } ] }
 updatedAt  ISO timestamp of the last save
 ```
 
-Item ids are `w<week>d<day>i<index>`. Items are strings (problems), `{ name, type: "task" }`, or
-`{ name, type: "sd", kind, ch }` for system design (`kind`: read · card · recall · exercise · mock ·
-drill; `ch`: DDIA chapter). `systemDesign` holds the track's guide text and chapter list.
+Item ids are `w<week>d<day>i<index>`. Items are strings (problems) or `{ name, type: "task" }`.
 Edit `weeks` freely to change the plan.
+
+```
+systemDesign  { startDate, budget, intro, phases, sessionShapes, cardTemplate, framework, rubric,
+                googleRound, numbers, exitCriteria, failureModes, resources,
+                concepts[] { id, group, name, master[], probes[], read },
+                questions[] { id, tier, name, focus, concepts[], reference }, spareQuestions[],
+                weeks[] { week, title, phase, days[ { day, items[ { id, kind, ref, name, minutes } ] } ], notes[] } }
+sdProgress    { items: { "s1d1i0": { done } }, notes: { "c01": "your card", "q01": "post-mortem" } }
+```
+
+System design item ids are `s<week>d<day>i<index>`; `kind` is concept · design · mock · recall and
+`ref` points at a concept (`cNN`) or question (`qNN`). SD progress is kept apart from DSA progress.

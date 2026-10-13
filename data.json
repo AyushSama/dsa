@@ -119,11 +119,6 @@
         "block": "D — Drill",
         "duration": "1h",
         "content": "Blind primitives — pick 5 (daily, 20 min) + rotation: Tue debug hunt · Wed code quality · Thu ambiguity drill · Fri code comprehension · Sat cold-combo."
-      },
-      {
-        "block": "E — System design",
-        "duration": "45m (+90m Sat)",
-        "content": "DDIA, one section per day, timer-boxed, pen in hand (problem solved → cost added). Monday: 5-min aloud recall of last chapter. Friday: chapter card from memory. Saturday after the contest: 90-min design exercise. Evening slot — never in Block A's time, never instead of Block B."
       }
     ],
     "dailyNotes": [
@@ -461,7 +456,7 @@
       }
     ],
     "excluded": "Premium-locked and excluded: Alien Dictionary (269), Sliding Window Median (480), Minimize Max Distance to Gas Station (774), Walls and Gates (286), Number of Islands II (305). Substitutes in the plan cover the same patterns.",
-    "scope": "L3 has no system design round. L4 sometimes chooses three coding rounds over two coding + one design. Targeting L3/L4, the only non-DSA prep is the GHA and the Googleyness round. L5+ needs a separate system design track. Process details reflect reporting as of September 2026 — re-check before your loop. System design track added 12 Oct 2026 as Block E (45 min/day): relevant to L4 loops that include a design round, to L5+, and to every non-Google loop. It is extra load — the DSA plan is unchanged and Block B still comes first."
+    "scope": "L3 has no system design round. L4 sometimes chooses three coding rounds over two coding + one design. Targeting L3/L4, the only non-DSA prep is the GHA and the Googleyness round. L5+ needs a separate system design track. Process details reflect reporting as of September 2026 — re-check before your loop."
   },
   "weeks": [
     {
@@ -969,13 +964,7 @@
           "focus": "1D linear (2/day)",
           "items": [
             "Climbing Stairs",
-            "House Robber II",
-            {
-              "name": "DDIA Ch 5 · Replication — Leaders and Followers: synchronous vs asynchronous replication, setting up new followers, handling node outages (follower catch-up, leader failover), implementation of replication logs",
-              "type": "sd",
-              "kind": "read",
-              "ch": 5
-            }
+            "House Robber II"
           ]
         },
         {
@@ -983,13 +972,7 @@
           "focus": "1D with decisions",
           "items": [
             "Decode Ways",
-            "Delete and Earn",
-            {
-              "name": "DDIA Ch 5 · Problems with Replication Lag: reading your own writes, monotonic reads, consistent prefix reads, solutions for replication lag",
-              "type": "sd",
-              "kind": "read",
-              "ch": 5
-            }
+            "Delete and Earn"
           ]
         },
         {
@@ -1000,13 +983,7 @@
               "name": "Partition Equal Subset Sum",
               "hot": true
             },
-            "Target Sum",
-            {
-              "name": "DDIA Ch 5 · Multi-Leader Replication: use cases, handling write conflicts (avoidance, convergence, custom logic), replication topologies",
-              "type": "sd",
-              "kind": "read",
-              "ch": 5
-            }
+            "Target Sum"
           ]
         },
         {
@@ -1017,13 +994,7 @@
               "name": "Coin Change",
               "hot": true
             },
-            "Coin Change II",
-            {
-              "name": "DDIA Ch 5 · Leaderless Replication: quorums, limitations of quorum consistency, sloppy quorums and hinted handoff, detecting concurrent writes, version vectors",
-              "type": "sd",
-              "kind": "read",
-              "ch": 5
-            }
+            "Coin Change II"
           ]
         },
         {
@@ -1031,13 +1002,7 @@
           "focus": "LIS family",
           "items": [
             "Longest Increasing Subsequence (O(n²) and O(n log n), with reconstruction)",
-            "Russian Doll Envelopes",
-            {
-              "name": "DDIA Ch 5 · Summary + Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
-              "type": "sd",
-              "kind": "card",
-              "ch": 5
-            }
+            "Russian Doll Envelopes"
           ]
         },
         {
@@ -1047,12 +1012,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · A multi-region, read-heavy product catalogue (or URL shortener at scale): choose a replication topology, handle leader failover and lag anomalies, justify sync vs async. 45 min aloud on paper · 30 min compare with a reference · 15 min journal",
-              "type": "sd",
-              "kind": "exercise",
-              "ch": 5
             }
           ]
         },
@@ -1071,8 +1030,7 @@
         "DP is 15% of reported problems and the only topic classified Hard across the board. Two weeks, two problems a day, done properly.",
         "Non-negotiable format before any code: state (dp[i] = precise English meaning) · transition · base · order. Then recursive + memo → tabulation → space optimisation. Full chain on the first problem of each new sub-pattern only.",
         "Coin Change vs Coin Change II differ only in loop order, and that difference is combinations vs permutations.",
-        "On LIS: also write the reconstruction. Returning the subsequence rather than its length is a standard follow-up.",
-        "System design track starts this week (added 12 Oct 2026): Block E, 45 min, DDIA from Chapter 5, one section per day, evenings. Saturday after the contest: a 90-min design exercise. Details in the System Design tab."
+        "On LIS: also write the reconstruction. Returning the subsequence rather than its length is a standard follow-up."
       ]
     },
     {
@@ -1091,18 +1049,6 @@
             {
               "name": "Longest Common Subsequence",
               "hot": true
-            },
-            {
-              "name": "Recall Ch 5 Replication · 5 min aloud to an imaginary interviewer, no notes, then glance at the card",
-              "type": "sd",
-              "kind": "recall",
-              "ch": 5
-            },
-            {
-              "name": "DDIA Ch 6 · Partitioning: partitioning and replication, key-range vs hash partitioning, skewed workloads and hot spots, secondary indexes (document- vs term-partitioned)",
-              "type": "sd",
-              "kind": "read",
-              "ch": 6
             }
           ]
         },
@@ -1111,19 +1057,7 @@
           "focus": "Grid & state machine",
           "items": [
             "Unique Paths II",
-            "Best Time to Buy and Sell Stock III",
-            {
-              "name": "DDIA Ch 6 · Rebalancing partitions (fixed number, dynamic, proportional to nodes), automatic vs manual rebalancing, request routing, parallel query execution; summary",
-              "type": "sd",
-              "kind": "read",
-              "ch": 6
-            },
-            {
-              "name": "DDIA Ch 6 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
-              "type": "sd",
-              "kind": "card",
-              "ch": 6
-            }
+            "Best Time to Buy and Sell Stock III"
           ]
         },
         {
@@ -1135,12 +1069,6 @@
             {
               "name": "Re-derive all six stock problems as one dp[day][transactions][holding] solution",
               "type": "task"
-            },
-            {
-              "name": "DDIA Ch 7 · Transactions — The Slippery Concept of a Transaction: what ACID actually means, single-object vs multi-object operations, handling errors and aborts",
-              "type": "sd",
-              "kind": "read",
-              "ch": 7
             }
           ]
         },
@@ -1152,12 +1080,6 @@
             {
               "name": "Burst Balloons",
               "hot": true
-            },
-            {
-              "name": "DDIA Ch 7 · Weak Isolation Levels I: read committed (no dirty reads/writes), snapshot isolation and MVCC, visibility rules, indexes and snapshot isolation",
-              "type": "sd",
-              "kind": "read",
-              "ch": 7
             }
           ]
         },
@@ -1169,12 +1091,6 @@
             {
               "name": "Distinct Subsequences",
               "hot": true
-            },
-            {
-              "name": "DDIA Ch 7 · Weak Isolation Levels II: preventing lost updates (atomic writes, explicit locking, compare-and-set), write skew and phantoms, materialising conflicts",
-              "type": "sd",
-              "kind": "read",
-              "ch": 7
             }
           ]
         },
@@ -1185,12 +1101,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · A Dynamo-style key-value store: partitioning scheme, consistent hashing, rebalancing, request routing, quorum reads and writes (N, W, R), hinted handoff",
-              "type": "sd",
-              "kind": "exercise",
-              "ch": 6
             }
           ]
         },
@@ -1223,19 +1133,7 @@
           "items": [
             "Longest Repeating Character Replacement",
             "Max Consecutive Ones III",
-            "Fruit Into Baskets",
-            {
-              "name": "Recall Ch 6 Partitioning · 5 min aloud, no notes",
-              "type": "sd",
-              "kind": "recall",
-              "ch": 6
-            },
-            {
-              "name": "DDIA Ch 7 · Serializability I: actual serial execution (stored procedures, partitioning), two-phase locking (2PL), predicate locks and index-range locks",
-              "type": "sd",
-              "kind": "read",
-              "ch": 7
-            }
+            "Fruit Into Baskets"
           ]
         },
         {
@@ -1247,19 +1145,7 @@
               "hot": true
             },
             "Subarrays with K Different Integers",
-            "Find All Anagrams in a String",
-            {
-              "name": "DDIA Ch 7 · Serializability II: serializable snapshot isolation (SSI), detecting stale MVCC reads and writes that affect prior reads, performance; summary",
-              "type": "sd",
-              "kind": "read",
-              "ch": 7
-            },
-            {
-              "name": "DDIA Ch 7 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
-              "type": "sd",
-              "kind": "card",
-              "ch": 7
-            }
+            "Find All Anagrams in a String"
           ]
         },
         {
@@ -1268,13 +1154,7 @@
           "items": [
             "Group Anagrams",
             "Valid Anagram",
-            "Longest Substring Without Repeating Characters",
-            {
-              "name": "DDIA Ch 8 · The Trouble with Distributed Systems — Faults and Partial Failures; Unreliable Networks: faults in practice, detecting faults, timeouts and unbounded delays, synchronous vs asynchronous networks",
-              "type": "sd",
-              "kind": "read",
-              "ch": 8
-            }
+            "Longest Substring Without Repeating Characters"
           ]
         },
         {
@@ -1283,13 +1163,7 @@
           "items": [
             "Longest Palindromic Substring",
             "Palindromic Substrings",
-            "Valid Palindrome II",
-            {
-              "name": "DDIA Ch 8 · Unreliable Clocks: monotonic vs time-of-day clocks, clock synchronisation and accuracy, timestamps for ordering events, clock confidence intervals, process pauses",
-              "type": "sd",
-              "kind": "read",
-              "ch": 8
-            }
+            "Valid Palindrome II"
           ]
         },
         {
@@ -1302,18 +1176,6 @@
             {
               "name": "Measurement set: 10 random untagged mediums — compare with week 0 and week 4",
               "type": "task"
-            },
-            {
-              "name": "DDIA Ch 8 · Knowledge, Truth and Lies: the truth is defined by the majority, the leader and the lock, fencing tokens, Byzantine faults (skim), system models and correctness; summary",
-              "type": "sd",
-              "kind": "read",
-              "ch": 8
-            },
-            {
-              "name": "DDIA Ch 8 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
-              "type": "sd",
-              "kind": "card",
-              "ch": 8
             }
           ]
         },
@@ -1324,12 +1186,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · Hotel or ticket booking with inventory: pick the isolation level and defend it, prevent double-booking (write skew), idempotent payment retries, 2PC vs saga for the payment step",
-              "type": "sd",
-              "kind": "exercise",
-              "ch": 7
             }
           ]
         },
@@ -1364,19 +1220,7 @@
               "hot": true
             },
             "Contiguous Array",
-            "Continuous Subarray Sum",
-            {
-              "name": "Recall Ch 7 Transactions + Ch 8 Trouble · 3 min each aloud, no notes",
-              "type": "sd",
-              "kind": "recall",
-              "ch": 8
-            },
-            {
-              "name": "DDIA Ch 9 · Consistency and Consensus — Consistency Guarantees; Linearizability: what makes a system linearizable, relying on it (locking and leader election, uniqueness constraints, cross-channel timing)",
-              "type": "sd",
-              "kind": "read",
-              "ch": 9
-            }
+            "Continuous Subarray Sum"
           ]
         },
         {
@@ -1387,13 +1231,7 @@
               "name": "Trapping Rain Water",
               "hot": true
             },
-            "Largest Rectangle in Histogram",
-            {
-              "name": "DDIA Ch 9 · Implementing linearizable systems, the cost of linearizability (CAP — the unhelpful theorem), linearizability and network delays",
-              "type": "sd",
-              "kind": "read",
-              "ch": 9
-            }
+            "Largest Rectangle in Histogram"
           ]
         },
         {
@@ -1405,13 +1243,7 @@
               "hot": true
             },
             "Merge Intervals",
-            "Non-overlapping Intervals",
-            {
-              "name": "DDIA Ch 9 · Ordering Guarantees: ordering and causality, the causal order is not a total order, sequence number ordering, Lamport timestamps, total order broadcast",
-              "type": "sd",
-              "kind": "read",
-              "ch": 9
-            }
+            "Non-overlapping Intervals"
           ]
         },
         {
@@ -1420,13 +1252,7 @@
           "items": [
             "Koko Eating Bananas",
             "Capacity To Ship Packages Within D Days",
-            "Minimum Number of Days to Make m Bouquets",
-            {
-              "name": "DDIA Ch 9 · Distributed Transactions and Consensus I: atomic commit, two-phase commit (2PC), coordinator failure, three-phase commit, XA transactions, holding locks while in doubt",
-              "type": "sd",
-              "kind": "read",
-              "ch": 9
-            }
+            "Minimum Number of Days to Make m Bouquets"
           ]
         },
         {
@@ -1435,19 +1261,7 @@
           "items": [
             "Split Array Largest Sum",
             "Magnetic Force Between Two Balls",
-            "Minimum Time to Complete Trips",
-            {
-              "name": "DDIA Ch 9 · Fault-tolerant consensus: the intuition behind Paxos/Raft/Zab, epochs and quorums, limitations of consensus, membership and coordination services (ZooKeeper); summary",
-              "type": "sd",
-              "kind": "read",
-              "ch": 9
-            },
-            {
-              "name": "DDIA Ch 9 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
-              "type": "sd",
-              "kind": "card",
-              "ch": 9
-            }
+            "Minimum Time to Complete Trips"
           ]
         },
         {
@@ -1457,12 +1271,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · Distributed rate limiter + distributed lock service: where clocks lie, fencing tokens, when consensus is unavoidable and what it costs in latency and availability",
-              "type": "sd",
-              "kind": "exercise",
-              "ch": 9
             }
           ]
         },
@@ -1500,19 +1308,7 @@
               "name": "K Closest Points to Origin",
               "hot": true
             },
-            "Kth Largest Element in an Array",
-            {
-              "name": "Recall Ch 9 Consistency & Consensus · 5 min aloud, no notes",
-              "type": "sd",
-              "kind": "recall",
-              "ch": 9
-            },
-            {
-              "name": "DDIA Ch 10 · Batch Processing — Batch processing with Unix tools; MapReduce and distributed filesystems: HDFS, MapReduce job execution, workflows",
-              "type": "sd",
-              "kind": "read",
-              "ch": 10
-            }
+            "Kth Largest Element in an Array"
           ]
         },
         {
@@ -1524,13 +1320,7 @@
               "hot": true
             },
             "Smallest Range Covering Elements from K Lists",
-            "Find K Pairs with Smallest Sums",
-            {
-              "name": "DDIA Ch 10 · Reduce-side joins and grouping, handling skew, map-side joins, the output of batch workflows (search indexes, key-value stores), Hadoop vs distributed databases",
-              "type": "sd",
-              "kind": "read",
-              "ch": 10
-            }
+            "Find K Pairs with Smallest Sums"
           ]
         },
         {
@@ -1542,19 +1332,7 @@
               "hot": true
             },
             "IPO",
-            "Task Scheduler",
-            {
-              "name": "DDIA Ch 10 · Beyond MapReduce: materialisation of intermediate state, dataflow engines, fault tolerance, graphs and iterative processing, high-level APIs; summary",
-              "type": "sd",
-              "kind": "read",
-              "ch": 10
-            },
-            {
-              "name": "DDIA Ch 10 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
-              "type": "sd",
-              "kind": "card",
-              "ch": 10
-            }
+            "Task Scheduler"
           ]
         },
         {
@@ -1563,12 +1341,7 @@
           "items": [
             "Reverse Nodes in k-Group",
             "Linked List Cycle II",
-            "Copy List with Random Pointer",
-            {
-              "name": "Interview framework · write your own 45-minute system-design template (requirements → numbers → API → data model → high-level diagram → two deep dives → trade-offs), then rehearse it on 'Design Pastebin' in 20 minutes",
-              "type": "sd",
-              "kind": "drill"
-            }
+            "Copy List with Random Pointer"
           ]
         },
         {
@@ -1580,12 +1353,7 @@
               "hot": true
             },
             "Min Stack",
-            "Insert Delete GetRandom O(1)",
-            {
-              "name": "Numbers card · memorise the back-of-envelope numbers (System Design tab); from memory, estimate QPS, storage per year and cache size for Twitter, YouTube and WhatsApp",
-              "type": "sd",
-              "kind": "drill"
-            }
+            "Insert Delete GetRandom O(1)"
           ]
         },
         {
@@ -1595,12 +1363,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · Web crawler + daily top-K URLs pipeline: politeness and dedup, URL frontier partitioning, batch joins, idempotent and rerunnable outputs",
-              "type": "sd",
-              "kind": "exercise",
-              "ch": 10
             }
           ]
         },
@@ -1632,19 +1394,7 @@
           "focus": "Fenwick tree",
           "items": [
             "Implement BIT from scratch",
-            "Count of Smaller Numbers After Self",
-            {
-              "name": "Recall Ch 10 Batch Processing · 5 min aloud, no notes",
-              "type": "sd",
-              "kind": "recall",
-              "ch": 10
-            },
-            {
-              "name": "DDIA Ch 11 · Stream Processing — Transmitting Event Streams: messaging systems, message brokers vs partitioned logs (Kafka), consumer offsets, log compaction, replaying old messages",
-              "type": "sd",
-              "kind": "read",
-              "ch": 11
-            }
+            "Count of Smaller Numbers After Self"
           ]
         },
         {
@@ -1652,13 +1402,7 @@
           "focus": "Segment tree",
           "items": [
             "Implement build / point update / range query",
-            "Range Sum Query – Mutable",
-            {
-              "name": "DDIA Ch 11 · Databases and Streams: keeping systems in sync, change data capture, event sourcing, state, streams and immutability",
-              "type": "sd",
-              "kind": "read",
-              "ch": 11
-            }
+            "Range Sum Query – Mutable"
           ]
         },
         {
@@ -1668,19 +1412,7 @@
             "Single Number II",
             "Counting Bits",
             "Pow(x, n)",
-            "Excel-style base conversion",
-            {
-              "name": "DDIA Ch 11 · Processing Streams: uses of stream processing, reasoning about time (event time vs processing time, windows), stream joins, fault tolerance and exactly-once semantics; summary",
-              "type": "sd",
-              "kind": "read",
-              "ch": 11
-            },
-            {
-              "name": "DDIA Ch 11 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour",
-              "type": "sd",
-              "kind": "card",
-              "ch": 11
-            }
+            "Excel-style base conversion"
           ]
         },
         {
@@ -1688,12 +1420,7 @@
           "focus": "Google-hard integration (2)",
           "items": [
             "Google hard #1 from Discuss compilations — full verbal protocol",
-            "Google hard #2 from Discuss compilations — full verbal protocol",
-            {
-              "name": "Reference-design critique · read one published design (a news feed) and annotate every place where a DDIA concept decides the trade-off: replication, partitioning, log vs queue, consistency choice",
-              "type": "sd",
-              "kind": "drill"
-            }
+            "Google hard #2 from Discuss compilations — full verbal protocol"
           ]
         },
         {
@@ -1705,11 +1432,6 @@
             {
               "name": "Measurement set: 10 random untagged mediums — compare with weeks 0, 4 and 8",
               "type": "task"
-            },
-            {
-              "name": "Rapid recall Ch 5–11 · ten questions from your chapter cards' question lists, one minute each, aloud",
-              "type": "sd",
-              "kind": "recall"
             }
           ]
         },
@@ -1720,12 +1442,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · News feed with fan-out + notification system: push vs pull, the celebrity problem, partitioned logs, ordering and deduplication of notifications",
-              "type": "sd",
-              "kind": "exercise",
-              "ch": 11
             }
           ]
         },
@@ -1773,18 +1489,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "Recall Ch 11 Stream Processing · 5 min aloud, no notes",
-              "type": "sd",
-              "kind": "recall",
-              "ch": 11
-            },
-            {
-              "name": "DDIA Ch 12 · The Future of Data Systems — Data Integration: combining specialised tools by deriving data, batch and stream processing together, the lambda architecture",
-              "type": "sd",
-              "kind": "read",
-              "ch": 12
             }
           ]
         },
@@ -1811,12 +1515,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "DDIA Ch 12 · Unbundling Databases (skim); Aiming for Correctness: the end-to-end argument, idempotence and operation identifiers, uniqueness constraints, timeliness vs integrity",
-              "type": "sd",
-              "kind": "read",
-              "ch": 12
             }
           ]
         },
@@ -1843,18 +1541,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "DDIA Ch 12 · Doing the Right Thing (skim) + summary",
-              "type": "sd",
-              "kind": "read",
-              "ch": 12
-            },
-            {
-              "name": "DDIA Ch 12 · Chapter card from memory, one page (template in the System Design tab), then fix the gaps against the chapter summary in another colour — book complete",
-              "type": "sd",
-              "kind": "card",
-              "ch": 12
             }
           ]
         },
@@ -1881,11 +1567,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "SD mock #1 (45 min, recorded) · Design the Twitter / Instagram home timeline",
-              "type": "sd",
-              "kind": "mock"
             }
           ]
         },
@@ -1912,11 +1593,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "Post-mortem of mock #1 · map every weak answer to a chapter; write a one-page SD cheat sheet distilled from the eight chapter cards",
-              "type": "sd",
-              "kind": "drill"
             }
           ]
         },
@@ -1927,12 +1603,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · Metrics and monitoring system: time-series ingest, downsampling, retention tiers, alerting — stream and batch together",
-              "type": "sd",
-              "kind": "exercise",
-              "ch": 12
             }
           ]
         },
@@ -1980,11 +1650,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "SD mock #2 (45 min, recorded) · Design YouTube: upload pipeline, transcoding, CDN, view counts",
-              "type": "sd",
-              "kind": "mock"
             }
           ]
         },
@@ -2011,11 +1676,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "Deep dive · consistent hashing and quorum arithmetic (N, W, R) on paper, 20 min; explain why W + R > N is not enough",
-              "type": "sd",
-              "kind": "drill"
             }
           ]
         },
@@ -2042,11 +1702,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "SD mock #3 (45 min, recorded) · Design Uber ride matching: geospatial indexing, dispatch, high-frequency location updates",
-              "type": "sd",
-              "kind": "mock"
             }
           ]
         },
@@ -2073,11 +1728,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "Deep dive · decision table: relational vs document vs key-value vs wide-column vs search vs time-series — when each wins and the DDIA reason",
-              "type": "sd",
-              "kind": "drill"
             }
           ]
         },
@@ -2104,11 +1754,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "SD mock #4 (45 min, recorded) · Design Google Docs collaborative editing: ordering, OT/CRDT intuition, presence",
-              "type": "sd",
-              "kind": "mock"
             }
           ]
         },
@@ -2119,11 +1764,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · Search autocomplete / typeahead: trie vs prefix table, ranking, the offline update pipeline, caching",
-              "type": "sd",
-              "kind": "exercise"
             }
           ]
         },
@@ -2170,11 +1810,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "SD mock #5 (45 min, recorded) · Design Google Drive / Dropbox: chunking, sync, conflict handling, metadata store",
-              "type": "sd",
-              "kind": "mock"
             }
           ]
         },
@@ -2201,11 +1836,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "Deep dive · message queues vs logs, delivery guarantees, exactly-once in practice, the transactional outbox pattern",
-              "type": "sd",
-              "kind": "drill"
             }
           ]
         },
@@ -2232,11 +1862,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "SD mock #6 (45 min, recorded) · Design a distributed cache (Redis/Memcached cluster): eviction, hot keys, consistency with the database, thundering herd",
-              "type": "sd",
-              "kind": "mock"
             }
           ]
         },
@@ -2263,11 +1888,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "Deep dive · caching layers and CDN, cache invalidation strategies, sharding a relational database and what breaks (joins, transactions, IDs)",
-              "type": "sd",
-              "kind": "drill"
             }
           ]
         },
@@ -2294,11 +1914,6 @@
             {
               "name": "Googleyness · 45 min on STAR stories",
               "type": "task"
-            },
-            {
-              "name": "SD mock #7 (45 min, recorded) · Design ad-click aggregation: stream processing, exactly-once counts, late events",
-              "type": "sd",
-              "kind": "mock"
             }
           ]
         },
@@ -2309,11 +1924,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · Chat system (WhatsApp): connection management, message ordering, delivery receipts, group fan-out, offline storage",
-              "type": "sd",
-              "kind": "exercise"
             }
           ]
         },
@@ -2357,11 +1967,6 @@
             {
               "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
-            },
-            {
-              "name": "Rapid recall · all chapter cards 5–12, two minutes each aloud; re-read the weakest chapter's summary",
-              "type": "sd",
-              "kind": "recall"
             }
           ]
         },
@@ -2406,11 +2011,6 @@
             {
               "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
-            },
-            {
-              "name": "SD mock (45 min, recorded) · unseen prompt from a peer or a list, e.g. Design a payment system, Design a notification service",
-              "type": "sd",
-              "kind": "mock"
             }
           ]
         },
@@ -2465,11 +2065,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · Stock exchange / order-matching engine: low latency, sequencing, durability, fairness",
-              "type": "sd",
-              "kind": "exercise"
             }
           ]
         },
@@ -2512,11 +2107,6 @@
             {
               "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
-            },
-            {
-              "name": "Rapid recall · weak chapters only, then re-do one old exercise cold and compare with your week-6 journal entry",
-              "type": "sd",
-              "kind": "recall"
             }
           ]
         },
@@ -2561,11 +2151,6 @@
             {
               "name": "Interviews started → same-day post-mortem: every question, every stall, drill exactly that",
               "type": "task"
-            },
-            {
-              "name": "SD mock (45 min, recorded) · unseen prompt; score yourself against the SD exit criteria",
-              "type": "sd",
-              "kind": "mock"
             }
           ]
         },
@@ -2620,11 +2205,6 @@
             {
               "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
               "type": "task"
-            },
-            {
-              "name": "Design exercise (90 min) · The week-8 booking system at 10× scale: what changes in partitioning, isolation, and the payment flow",
-              "type": "sd",
-              "kind": "exercise"
             }
           ]
         },
@@ -3915,6 +3495,38 @@
         }
       ],
       "note": ""
+    },
+    "w6d1i0": {
+      "solved": "2026-10-12",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-15",
+          "done": null
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-26",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w6d1i1": {
+      "solved": "2026-10-12",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-10-15",
+          "done": null
+        },
+        {
+          "label": "+14",
+          "due": "2026-10-26",
+          "done": null
+        }
+      ],
+      "note": ""
     }
   },
   "drillLog": [
@@ -4108,50 +3720,67 @@
     "triggers": "",
     "journal": []
   },
-  "updatedAt": "2026-10-12T02:28:07.570Z",
+  "updatedAt": "2026-10-12T14:42:20.517Z",
   "systemDesign": {
-    "intro": "System design track built around Designing Data-Intensive Applications (Kleppmann). Chapters 1–4 are already read, so the track starts at Part II — Chapter 5, Replication — and runs to the end of the book over weeks 6–12, one section per day. From week 10 it adds the interview framework and numbers; from week 12, recorded mocks. Nothing is re-read.",
-    "book": "Designing Data-Intensive Applications — Martin Kleppmann",
-    "resume": "Resume at Chapter 5 (Replication). Order: 5 Replication · 6 Partitioning · 7 Transactions · 8 The Trouble with Distributed Systems · 9 Consistency and Consensus · 10 Batch Processing · 11 Stream Processing · 12 The Future of Data Systems.",
-    "editionNote": "Items name sections, not page numbers, so either edition works. 2nd edition numbering is shifted by one (Replication is chapter 6, Sharding 7, Transactions 8, Trouble 9, Consistency & Consensus 10, Batch 11, Stream 12) — follow the titles.",
-    "block": {
-      "block": "E — System design",
-      "duration": "45 min · Sat 90 min",
-      "content": "One DDIA section per day. Monday recall, Friday chapter card, Saturday design exercise."
+    "startDate": "2026-10-12",
+    "budget": "1 hour a day, Monday to Saturday. Sunday is the rest day, as in the DSA plan.",
+    "intro": "Concept-first system design: 33 concepts to master in eight weeks, one per day, each learned, written up as a card and tested with three interviewer probes; two design questions a week from week 1; then three weeks of recorded mocks scored with a rubric. Separate from the DSA plan — own schedule, own progress.",
+    "phases": {
+      "1": "Phase 1 — Concepts + designs",
+      "2": "Phase 2 — Mocks"
     },
-    "readingProtocol": [
-      "45-minute timer. One section per day as scheduled. When the timer ends, stop mid-section, tick the item, continue tomorrow. The schedule is in sections; the budget is in minutes — the budget wins.",
-      "Read with a pen. For every mechanism write one line: the problem it solves → the cost it adds. That line is the shape of every system-design answer.",
-      "No highlighting. After closing the book, write three bullets from memory. If you can't, you weren't reading — you were looking.",
-      "Chapter-card day: one page from memory using the template below, then open the chapter summary and fix what you missed in a different colour. The corrections are the card's most valuable part.",
-      "Monday recall: five minutes aloud explaining last week's chapter to an imaginary interviewer, no notes, then glance at the card. Failed? Re-read the card and recall again on Wednesday.",
-      "Evening slot. Reading is low-intensity next to solving; put it after dinner or on a commute. It never takes Block A's time and never replaces Block B.",
-      "Attach the chapter card as the note (✎) on the chapter-card item, so it lives in data.json with everything else."
+    "sessionShapes": [
+      {
+        "kind": "Concept day (60 min)",
+        "shape": "10 min recall yesterday's card aloud with its probes · 35 min learn from the listed source, pen in hand (mechanism → what it buys → what it costs) · 15 min write the card from memory and answer the three probes aloud, then save the card in the concept's note."
+      },
+      {
+        "kind": "Design day (60 min)",
+        "shape": "5 min requirements and scope · 5 min numbers · 30 min design aloud on paper or a blank doc: API, data model, diagram, one deep dive · 15 min compare with the reference, list every missed concept and hand-waved number · 5 min post-mortem in the question's note."
+      },
+      {
+        "kind": "Mock day (60 min)",
+        "shape": "45 min full interview format, aloud, recorded, interviewer-style follow-ups from the question's focus list · 15 min watch back and score with the rubric; write the score and the one fix in the note."
+      },
+      {
+        "kind": "Recall day (60 min)",
+        "shape": "Cards only, no sources. Probes aloud, 60–90 s each. Anything not instant is rewritten from memory."
+      }
     ],
-    "chapterCard": [
-      "The problem this chapter solves — two lines.",
-      "The 3–5 mechanisms, one line each: mechanism → what it buys → what it costs.",
-      "Failure modes an interviewer will probe (what goes wrong when a node is slow, a clock drifts, a leader dies).",
-      "Where it shows up in real systems — name two products and which mechanism they chose.",
-      "Five questions I'd be asked, with one-line answers.",
-      "One diagram, from memory."
-    ],
-    "exerciseProtocol": [
-      "45 min timed, aloud, on paper or whiteboard (in-person loops) or a blank doc (remote). Same medium as the real round.",
-      "Time boxes: requirements 5 · numbers 5 · API and data model 5 · high-level diagram 10 · two deep dives 15 · trade-offs and 10× question 5.",
-      "30 min: compare with a reference design (Hello Interview, Alex Xu, or an engineering blog). List every DDIA concept you failed to bring in and every number you hand-waved.",
-      "15 min: journal entry tagged SD — what you'd say differently, which chapter to re-read."
+    "cardTemplate": [
+      "What it is — two lines, as if explaining to a strong junior.",
+      "When to use it and when not to — one line each.",
+      "Mechanism → what it buys → what it costs — one line per mechanism.",
+      "Two failure modes an interviewer will probe, with the fix for each.",
+      "One real system that uses it and the choice it made.",
+      "The three probes, answered in one line each."
     ],
     "framework": [
-      "Functional requirements: pick the three core features, say explicitly what is out of scope.",
-      "Non-functional: scale (DAU, read/write QPS, data size, growth), latency targets, consistency vs availability needs, durability.",
-      "Back-of-envelope: QPS average and peak, storage per year, bandwidth, cache size (80/20 rule). Say the numbers out loud.",
-      "API: 3–5 endpoints with inputs and outputs.",
-      "Data model: entities, which store for which data and why (Ch 2–3 reasons: access pattern, index type, write vs read amplification).",
-      "High-level diagram: client → load balancer → stateless services → cache → database → queue → workers. Draw it before refining it.",
-      "Deep dives on the two hardest problems: hot keys, fan-out, consistency, idempotency, ordering, failover.",
-      "Scaling: replication (Ch 5), partitioning (Ch 6), caching and CDN; failure handling (Ch 8); consensus only where unavoidable (Ch 9).",
-      "Trade-offs: state what you gave up and why. What breaks at 10× load, and the first thing you'd change."
+      "Functional requirements (3 min): the three core features, explicit out-of-scope, confirm with the interviewer.",
+      "Non-functional requirements (3 min): scale (DAU, read/write QPS, data size, growth), latency per path, consistency vs availability per feature, durability, cost.",
+      "Back-of-envelope (4 min): QPS average and peak, storage per year, bandwidth, cache size. Say the numbers out loud and use them later to justify choices.",
+      "API (3 min): 3–5 endpoints with inputs, outputs, idempotency and pagination where relevant.",
+      "Data model (4 min): entities and access patterns, which store for which data and why, the partition key.",
+      "High-level diagram (8 min): client → DNS/CDN → load balancer → stateless services → cache → database → queue/log → workers. Draw it, then walk one read and one write through it.",
+      "Deep dives (15 min): the two hardest problems — hot keys, fan-out, consistency, idempotency, ordering, failover. Choose them yourself before being asked.",
+      "Scaling and failure (3 min): replication, partitioning, caching; what happens when each box dies; coordination only where unavoidable.",
+      "Trade-offs and wrap-up (2 min): what you gave up and why, what breaks at 10×, the first thing you'd change, what you'd monitor."
+    ],
+    "rubric": [
+      "Problem navigation (1–4): clarified scope, chose the right three features, derived numbers and used them. 4 = drove the agenda without prompting.",
+      "Design (1–4): coherent high-level design, correct data model and store choices with reasons, clean API. 4 = every box justified by a requirement.",
+      "Depth (1–4): deep dives on the genuinely hard parts with concrete mechanisms, not 'add a cache'. 4 = named the failure modes and the fix for each.",
+      "Scaling and trade-offs (1–4): bottlenecks found, replication/partitioning/caching applied correctly, consistency choices explicit. 4 = explained what was given up.",
+      "Communication (1–4): structured, aloud, legible diagram, checked in, handled pushback by reasoning. 4 = the interviewer could present the design back.",
+      "Score every mock; a 4 everywhere on an unseen prompt is the goal. Any axis at 2 names the next recall drill."
+    ],
+    "googleRound": [
+      "45 minutes, open-ended, often vaguely phrased: a Google-scale product or data problem. Clarifying is scored — start there.",
+      "Interviewers drive deep dives on whatever you claim; every box you draw is a question you invited. Draw only what you can defend, then defend it with a number.",
+      "Reported prompts are data-heavy: timelines, autocomplete, view counts, photo storage, maps, metrics, logs, ad counting. Concepts 10–12, 20–23 and 30–31 are the vocabulary.",
+      "Level signal: L4 can be guided to a good design; L5 chooses the deep dives, states trade-offs unprompted and knows what to monitor. Practise the L5 behaviour regardless of target level.",
+      "Expect follow-ups on failure: what if this node dies, this region goes, this queue backs up, two users write at once. Answer with a mechanism and its cost, never 'it would be fine'.",
+      "Ask your recruiter whether your loop has a design round and whether it is whiteboard or shared doc; practise in that medium from week 9."
     ],
     "numbers": [
       "L1 cache 1 ns · main memory 100 ns · SSD random read 100 µs · HDD seek 10 ms",
@@ -4160,97 +3789,1878 @@
       "1 day ≈ 86 400 s ≈ 10⁵ s · 1 M requests/day ≈ 12 QPS · 100 M DAU × 10 requests ≈ 12 k QPS average, plan for 2–3× peak",
       "Sizes: char 1 B · UUID 16 B · tweet-like row 1 KB · photo 1 MB · 1 M × 1 KB = 1 GB · 1 B × 1 KB = 1 TB",
       "Availability: 99.9% ≈ 8.7 h down/year · 99.99% ≈ 52 min/year · 99.999% ≈ 5 min/year",
-      "One relational node: a few thousand writes/s, ~10 k simple reads/s · Redis ~100 k ops/s · one Kafka partition tens of MB/s. Order of magnitude is what matters."
+      "One relational node: a few thousand writes/s, ~10 k simple reads/s · Redis ~100 k ops/s · one Kafka partition tens of MB/s · ~10 k open WebSockets per server. Order of magnitude is what matters."
     ],
-    "chapters": [
-      {
-        "ch": 5,
-        "title": "Replication",
-        "weeks": "Week 6",
-        "use": "Every 'how do you scale reads / survive a region outage' question: leader–follower, sync vs async, failover, lag anomalies, multi-leader conflicts, quorums."
-      },
-      {
-        "ch": 6,
-        "title": "Partitioning",
-        "weeks": "Week 7",
-        "use": "Every 'how do you shard X': hash vs range, consistent hashing and rebalancing, local vs global secondary indexes, hot keys, routing."
-      },
-      {
-        "ch": 7,
-        "title": "Transactions",
-        "weeks": "Weeks 7–8",
-        "use": "Bookings, inventory, payments: what ACID buys, isolation levels, lost updates, write skew, 2PL vs SSI."
-      },
-      {
-        "ch": 8,
-        "title": "The Trouble with Distributed Systems",
-        "weeks": "Week 8",
-        "use": "'What if a node is slow but not dead': partial failure, timeouts, unreliable clocks, fencing tokens."
-      },
-      {
-        "ch": 9,
-        "title": "Consistency and Consensus",
-        "weeks": "Week 9",
-        "use": "Distributed locks, leader election, uniqueness: linearizability vs causality, Lamport timestamps, total order broadcast, 2PC, Raft/ZooKeeper, CAP said honestly."
-      },
-      {
-        "ch": 10,
-        "title": "Batch Processing",
-        "weeks": "Week 10",
-        "use": "Analytics pipelines, offline ranking, index builds: MapReduce, joins, dataflow engines, rerunnable outputs."
-      },
-      {
-        "ch": 11,
-        "title": "Stream Processing",
-        "weeks": "Week 11",
-        "use": "Notifications, feeds, real-time metrics: logs vs queues, CDC, event sourcing, windows, exactly-once."
-      },
-      {
-        "ch": 12,
-        "title": "The Future of Data Systems",
-        "weeks": "Week 12 (skim)",
-        "use": "'How do you keep cache, search and DB consistent': derived data, unbundling, end-to-end correctness, idempotency keys."
-      }
+    "exitCriteria": [
+      "All 33 concept cards written from memory; any card's three probes answered instantly, aloud.",
+      "Unseen 45-minute prompt: requirements and numbers in ≤8 min, diagram by minute 20, two self-chosen deep dives with explicit trade-offs; rubric 4 on every axis in two consecutive mocks.",
+      "Explain unprompted: replication-lag anomalies, hash vs range partitioning, write skew, fencing tokens, linearizable vs eventual, 2PC vs sagas, log vs queue, exactly-once, LSM vs B-tree, cache stampede, consistent hashing, CDC.",
+      "QPS, storage and latency estimates for any familiar product in under a minute; every box in a design has a number next to it.",
+      "Nine recorded mocks watched back; each weak axis mapped to a concept and fixed; one external mock with positive feedback on driving the session."
+    ],
+    "failureModes": [
+      "Learning without writing. No card = no retention. The card is the deliverable of a concept day, not the reading.",
+      "Reading reference designs instead of designing. Design first, compare second, every time.",
+      "Skipping the numbers. Hand-wavy estimation is the fastest fail signal in a design round.",
+      "Designing silently. Every design is spoken; the round is a conversation, not a drawing.",
+      "Never being pushed back on. From week 9 get at least one external mock a week; self-mocks cannot surprise you.",
+      "Letting this hour eat the DSA revision block. If a day is short, drop a concept day and do its card on the next recall day."
     ],
     "resources": [
       {
-        "name": "DDIA (Kleppmann)",
-        "use": "The foundation. This schedule, chapters 5–12."
-      },
-      {
         "name": "Hello Interview — System Design in a Hurry (free)",
-        "use": "The interview framework and reference designs for Saturday comparisons."
+        "use": "Primary source for most concept days (core concepts, key technologies, patterns) and reference designs."
       },
       {
-        "name": "Alex Xu — System Design Interview, vol. 1",
-        "use": "Optional. Chapters 1–2 for estimation and the four-step framework; the rest only as Saturday references."
+        "name": "Alex Xu — System Design Interview, vol. 1 and 2",
+        "use": "Reference designs for the question bank. Open a chapter only after designing that system yourself."
       },
       {
         "name": "Jeff Dean — Numbers Everyone Should Know",
         "use": "The numbers card. Memorise the orders of magnitude."
       },
       {
-        "name": "Engineering blogs (Discord, Uber, Netflix, Cloudflare)",
-        "use": "One post a week from week 10, read with DDIA vocabulary: which chapter decided each trade-off?"
+        "name": "Engineering blogs (Discord, Uber, Netflix, Cloudflare, Meta)",
+        "use": "One post a week from week 5, read for the trade-off behind each choice."
+      },
+      {
+        "name": "Designing Data-Intensive Applications (Kleppmann)",
+        "use": "Optional depth only, not scheduled: chapters 5–9 if a card in weeks 3–4 or 7 stays weak."
       },
       {
         "name": "Mocks — a peer or interviewing.io",
-        "use": "From week 12, alternating with coding mocks. Record every one."
+        "use": "At least one external mock per week from week 9. Record every one."
       }
     ],
-    "exitCriteria": [
-      "All eight chapter cards (5–12) written from memory; Monday recall passes first time.",
-      "Unseen 45-minute prompt: requirements and numbers in ≤8 min, high-level diagram by minute 20, two deep dives with explicit DDIA trade-offs.",
-      "Explain unprompted: replication-lag anomalies, hash vs range partitioning, write skew, fencing tokens, linearizability vs causality, 2PC vs consensus, log vs queue, exactly-once.",
-      "QPS, storage and latency estimates for any familiar product in under a minute.",
-      "Three recorded mocks watched back; each weak answer mapped to a chapter and fixed."
+    "concepts": [
+      {
+        "id": "c01",
+        "group": "Fundamentals",
+        "name": "Requirements, scoping and the 45-minute framework",
+        "master": [
+          "Turn a vague prompt into three core features and an explicit out-of-scope list in under 4 minutes",
+          "Non-functional requirements as numbers: scale, latency per path, consistency vs availability per feature, durability, cost",
+          "The order of a round: requirements → numbers → API → data model → high-level diagram → deep dives → trade-offs, with time boxes",
+          "Pick the two deep dives yourself before the interviewer does; name the hardest problem in the design out loud",
+          "How to take pushback: restate the concern, give the mechanism and its cost, change the design if the concern is right"
+        ],
+        "probes": [
+          "Which of these features would you drop if you had half the time, and why?",
+          "What is the hardest part of this design?",
+          "What did you give up to get that?"
+        ],
+        "read": "Hello Interview — 'System Design in a Hurry': Delivery framework + How to approach. Then write your own one-page template."
+      },
+      {
+        "id": "c02",
+        "group": "Fundamentals",
+        "name": "Back-of-envelope estimation and the numbers card",
+        "master": [
+          "Latency numbers: memory, SSD, disk, same-DC and cross-region round trips; read 1 MB from each",
+          "Traffic: DAU × actions → QPS average and 2–3× peak; 1 M/day ≈ 12 QPS; read:write ratio",
+          "Storage: row sizes, per-year growth, replication factor, retention; bandwidth in and out",
+          "Capacity: what one DB node, one Redis, one Kafka partition, one server of WebSockets handles, by order of magnitude",
+          "Cache sizing from the 80/20 rule; when the estimate changes the design (fits in memory? one shard? one region?)"
+        ],
+        "probes": [
+          "How many QPS is that at peak, and how many machines?",
+          "How much storage after five years, with replication?",
+          "Does the hot set fit in one Redis?"
+        ],
+        "read": "Jeff Dean's 'Numbers everyone should know' + Hello Interview core concepts: estimation. Then estimate Twitter, YouTube and WhatsApp from memory."
+      },
+      {
+        "id": "c03",
+        "group": "Fundamentals",
+        "name": "Networking: DNS, TCP/UDP, HTTP, TLS, WebSockets, SSE, long polling",
+        "master": [
+          "DNS resolution and TTL, how DNS is used for load balancing and failover",
+          "TCP vs UDP; HTTP/1.1 vs HTTP/2 (multiplexing) vs HTTP/3 (QUIC); where TLS costs latency",
+          "WebSockets vs SSE vs long polling: direction, scale limits, proxies, reconnection; when each wins",
+          "Latency vs throughput vs bandwidth; head-of-line blocking; keep-alive and connection pooling"
+        ],
+        "probes": [
+          "Why WebSockets and not SSE for this feature?",
+          "What happens to open connections when a server dies?",
+          "Where does TLS terminate and why there?"
+        ],
+        "read": "Hello Interview key technologies: networking essentials + realtime updates."
+      },
+      {
+        "id": "c04",
+        "group": "Fundamentals",
+        "name": "Load balancing, reverse proxies and API gateways",
+        "master": [
+          "L4 vs L7 load balancers; round-robin, least connections, consistent-hash and weighted routing",
+          "Health checks, draining, sticky sessions and why to avoid them; global load balancing and anycast",
+          "API gateway responsibilities: TLS termination, auth, rate limiting, routing, transformation; the gateway as a bottleneck or single point of failure",
+          "Where the load balancer sits in a diagram and what is behind it must be stateless"
+        ],
+        "probes": [
+          "How does the load balancer know a server is unhealthy?",
+          "What breaks if you use sticky sessions?",
+          "How would you load-balance WebSockets?"
+        ],
+        "read": "Hello Interview key technologies: load balancers + API gateway."
+      },
+      {
+        "id": "c05",
+        "group": "Fundamentals",
+        "name": "Scaling patterns and stateless services",
+        "master": [
+          "Vertical vs horizontal scaling and where vertical runs out; scale each tier independently",
+          "Stateless services: session state in a store, not in memory; idempotent handlers",
+          "The first three bottlenecks every design hits: the database, the hot key, the single coordinator",
+          "Capacity planning per component from the numbers; the 10× question and what changes first"
+        ],
+        "probes": [
+          "What is the first thing to fall over at 10× traffic?",
+          "Why must this service be stateless?",
+          "How many instances, and how do you know?"
+        ],
+        "read": "Hello Interview core concepts: scaling. Alex Xu vol. 1, ch. 1 (scale from zero to millions)."
+      },
+      {
+        "id": "c06",
+        "group": "Fundamentals",
+        "name": "API design: REST, gRPC, GraphQL, pagination, idempotency, versioning",
+        "master": [
+          "REST resources and verbs; when gRPC (internal, streaming, typed) or GraphQL (client-shaped reads) wins",
+          "Pagination: offset vs cursor, and why cursors for feeds; filtering and sorting contracts",
+          "Idempotency keys for retried writes; long-running operations (202 + status endpoint)",
+          "Versioning and backward compatibility; rate-limit headers; error contracts"
+        ],
+        "probes": [
+          "How do you make this POST safe to retry?",
+          "Why cursor pagination here?",
+          "How would clients stay compatible when you change this API?"
+        ],
+        "read": "Hello Interview core concepts: API design. Alex Xu vol. 1 ch. 3 (framework) API section."
+      },
+      {
+        "id": "c07",
+        "group": "Storage & data",
+        "name": "Relational databases: indexes, ACID, isolation levels, locking",
+        "master": [
+          "B-tree indexes: composite order, covering indexes, selectivity, index cost on writes",
+          "ACID in plain words; isolation levels (read committed, snapshot/repeatable read, serializable) and the anomalies each allows (dirty read, lost update, write skew, phantom)",
+          "Optimistic locking (version column, compare-and-set) vs pessimistic (SELECT … FOR UPDATE); when to use each",
+          "Where a single relational node tops out and the first scaling moves: read replicas, caching, partitioning"
+        ],
+        "probes": [
+          "Which isolation level prevents double-booking here, and what does it cost?",
+          "Show me the index for this query.",
+          "Optimistic or pessimistic locking for this write, and why?"
+        ],
+        "read": "Hello Interview key technologies: databases (SQL). Use the Postgres docs page on transaction isolation for the anomaly table."
+      },
+      {
+        "id": "c08",
+        "group": "Storage & data",
+        "name": "NoSQL families and the store decision table",
+        "master": [
+          "Key-value (Redis, DynamoDB), document (MongoDB), wide-column (Cassandra), graph (Neo4j), search (Elasticsearch), time-series: what each buys and costs",
+          "Choose by access pattern, join needs, schema change rate, write volume, consistency need — never by fashion",
+          "Partition key and sort key thinking in DynamoDB/Cassandra; single-table design",
+          "When to say 'Postgres is fine' and when it genuinely is not"
+        ],
+        "probes": [
+          "Why not just Postgres?",
+          "What is the partition key and why?",
+          "What query becomes impossible with this store?"
+        ],
+        "read": "Hello Interview key technologies: databases (NoSQL) + DynamoDB/Cassandra pages. Build a one-page decision table."
+      },
+      {
+        "id": "c09",
+        "group": "Storage & data",
+        "name": "Storage engines and object storage",
+        "master": [
+          "LSM-trees (memtable, SSTables, compaction, bloom filters) vs B-trees: write vs read amplification, which workload each suits",
+          "Write-ahead logs and durability; why Cassandra/RocksDB are write-optimised",
+          "Object storage (S3): metadata vs bytes, presigned URLs, multipart and resumable upload, lifecycle tiers, serving via CDN",
+          "Blob handling rule: never through your API servers"
+        ],
+        "probes": [
+          "Why is this store good at writes?",
+          "How does a 5 GB upload work end to end?",
+          "Where do the bytes live and where does the metadata live?"
+        ],
+        "read": "Hello Interview key technologies: blob storage. A short LSM vs B-tree explainer (e.g. the RocksDB or ScyllaDB blog)."
+      },
+      {
+        "id": "c10",
+        "group": "Storage & data",
+        "name": "Replication",
+        "master": [
+          "Leader–follower, synchronous vs asynchronous, semi-sync; what each loses on leader failure",
+          "Failover: detection, promotion, split-brain, lost writes; RPO and RTO",
+          "Replication-lag anomalies and fixes: read-your-writes (route to leader / version check), monotonic reads, consistent prefix",
+          "Multi-leader for multi-region or offline clients and the conflict problem; leaderless quorums (N, W, R), hinted handoff"
+        ],
+        "probes": [
+          "A user posts and does not see their post — why, and how do you fix it?",
+          "What happens in the first 30 seconds after the leader dies?",
+          "W + R > N: what does that guarantee and what does it not?"
+        ],
+        "read": "Hello Interview core concepts: replication/consistency. Alex Xu vol. 1 ch. 6 (key-value store) replication + quorum sections."
+      },
+      {
+        "id": "c11",
+        "group": "Storage & data",
+        "name": "Partitioning, sharding and consistent hashing",
+        "master": [
+          "Hash vs range partitioning; hot spots and skew; shard-key choice is the design",
+          "Consistent hashing: ring, virtual nodes, bounded loads; rebalancing without moving everything",
+          "Secondary indexes under partitioning: local (scatter-gather) vs global (write cost)",
+          "Cross-shard queries and transactions: why to avoid them and what to do when you cannot; resharding live"
+        ],
+        "probes": [
+          "What is your shard key and what query does it make expensive?",
+          "A celebrity's shard is hot — what do you do?",
+          "How do you add a node without a thundering migration?"
+        ],
+        "read": "Hello Interview core concepts: sharding + consistent hashing. Alex Xu vol. 1 ch. 5 (consistent hashing)."
+      },
+      {
+        "id": "c12",
+        "group": "Storage & data",
+        "name": "Consistency models, CAP/PACELC and conflict resolution",
+        "master": [
+          "Linearizable vs causal vs eventual consistency, in one example each; what the user sees",
+          "CAP honestly: partition tolerance is not optional; PACELC adds the latency trade-off; which features need which",
+          "Conflict resolution: last-write-wins and its data loss, version vectors, merge functions, CRDTs and OT for collaboration",
+          "Where strong consistency is actually required: uniqueness, money, inventory, locks"
+        ],
+        "probes": [
+          "Which parts of this system need strong consistency?",
+          "Two users edit at once — what does each see?",
+          "What does last-write-wins lose here?"
+        ],
+        "read": "Hello Interview core concepts: consistency + CAP. The Jepsen 'consistency models' map for the vocabulary."
+      },
+      {
+        "id": "c13",
+        "group": "Storage & data",
+        "name": "Distributed transactions: 2PC, sagas, outbox, idempotency",
+        "master": [
+          "Two-phase commit: how it works, coordinator failure, why it is avoided at scale",
+          "Sagas (choreography vs orchestration) with compensating actions; where partial state is visible",
+          "The transactional outbox: write the event with the row, publish from the log; exactly-once effects via idempotent consumers",
+          "Idempotency keys and dedup tables; retries that are safe by design"
+        ],
+        "probes": [
+          "Payment succeeded but the order write failed — what now?",
+          "How do you guarantee the event is published if the DB write commits?",
+          "What makes this consumer safe under redelivery?"
+        ],
+        "read": "Hello Interview patterns: dealing with contention / sagas. Microservices.io outbox + saga pages."
+      },
+      {
+        "id": "c14",
+        "group": "Storage & data",
+        "name": "Data modelling for scale",
+        "master": [
+          "Access-pattern-first modelling: list the queries, then the tables and keys",
+          "Denormalisation and when to pay for it; keeping duplicates consistent (events, CDC)",
+          "Wide rows, time-bucketed keys, avoiding unbounded partitions; precomputed views for read-heavy paths",
+          "Hot-partition avoidance: salting, write sharding, key design for time-series"
+        ],
+        "probes": [
+          "Show me the schema and the query for the feed.",
+          "Why is this partition going to grow without bound?",
+          "Which duplicate goes stale first, and how do you fix it?"
+        ],
+        "read": "DynamoDB 'single-table design' guide (Alex DeBrie) + Cassandra data-modelling basics."
+      },
+      {
+        "id": "c15",
+        "group": "Caching & delivery",
+        "name": "Caching strategies",
+        "master": [
+          "Cache-aside, read-through, write-through, write-back, write-around: data flow, consistency, failure of each",
+          "TTLs, eviction (LRU, LFU), local vs distributed cache, multi-level caches",
+          "What to cache (hot, read-heavy, tolerant of staleness) and what never to (money, inventory counts you act on)",
+          "Sizing from the numbers; cache hit rate as a design target"
+        ],
+        "probes": [
+          "What happens on a cache miss storm?",
+          "How stale can this value be?",
+          "Why write-through here and not cache-aside?"
+        ],
+        "read": "Hello Interview key technologies: Redis + caching patterns. Alex Xu vol. 1 ch. 1 cache section."
+      },
+      {
+        "id": "c16",
+        "group": "Caching & delivery",
+        "name": "Cache problems: invalidation, stampede, hot keys, consistency",
+        "master": [
+          "Invalidation strategies: TTL, event-driven purge, versioned keys; the write-then-invalidate race",
+          "Cache stampede / thundering herd: locks, request coalescing, early refresh, jittered TTLs",
+          "Hot keys: local caches, key replication, splitting the key; cache cluster resize and consistent hashing",
+          "Keeping cache, search index and DB consistent from one change stream"
+        ],
+        "probes": [
+          "A key expires and 50 k requests hit the DB — what do you do?",
+          "How does a write reach the cache?",
+          "One key gets 30% of traffic — now what?"
+        ],
+        "read": "Hello Interview patterns: caching deep dives. Facebook's 'Scaling Memcache' paper, sections 3–4 (optional)."
+      },
+      {
+        "id": "c17",
+        "group": "Caching & delivery",
+        "name": "CDN and edge delivery",
+        "master": [
+          "Push vs pull CDNs, cache keys, TTLs, invalidation, versioned URLs, origin shielding",
+          "What belongs on a CDN (static, media segments, public API responses) and what does not",
+          "Edge compute and geo-routing; signed URLs for private content",
+          "Cost and cache-hit ratio as first-class design numbers"
+        ],
+        "probes": [
+          "How do you invalidate a changed image?",
+          "What is your CDN hit ratio target and what drives it?",
+          "Private video on a CDN — how?"
+        ],
+        "read": "Hello Interview key technologies: CDN. Cloudflare learning centre: what is a CDN."
+      },
+      {
+        "id": "c18",
+        "group": "Caching & delivery",
+        "name": "Real-time delivery and presence",
+        "master": [
+          "Connection servers, routing a message to the right socket (user → server map in Redis / pub/sub)",
+          "Presence and heartbeats; last-seen; fan-out of presence changes",
+          "Reconnection, backfill since last message id, at-least-once delivery with client dedup",
+          "Mobile push (APNs/FCM) as the fallback path; ordering per conversation"
+        ],
+        "probes": [
+          "User A is on server 3, user B on server 7 — how does the message get there?",
+          "The client reconnects after 10 minutes — what does it receive?",
+          "How many connections per server and how many servers?"
+        ],
+        "read": "Hello Interview key technologies: realtime updates (WebSockets, pub/sub). Alex Xu vol. 1 ch. 12 (chat system)."
+      },
+      {
+        "id": "c19",
+        "group": "Async & streams",
+        "name": "Message queues",
+        "master": [
+          "At-most-once vs at-least-once vs exactly-once effects; acknowledgements and visibility timeouts",
+          "Dead-letter queues, retries with backoff, poison messages; FIFO queues and ordering limits",
+          "Delayed and scheduled delivery; priority; consumer scaling and backlog as a signal",
+          "Queue vs log vs database table as a queue: when each is right"
+        ],
+        "probes": [
+          "What happens if the consumer crashes mid-message?",
+          "How do you keep order for one user while scaling consumers?",
+          "How deep is the backlog allowed to get?"
+        ],
+        "read": "Hello Interview key technologies: queues (SQS/RabbitMQ). AWS SQS concepts page on visibility timeout and DLQs."
+      },
+      {
+        "id": "c20",
+        "group": "Async & streams",
+        "name": "Logs: Kafka, partitions, consumer groups, exactly-once",
+        "master": [
+          "Topics, partitions, partition keys and ordering, replication and ISR",
+          "Consumer groups, offsets, rebalancing, consumer lag; retention and compaction",
+          "Replaying the log; the log as the source of truth for derived systems",
+          "Exactly-once: idempotent producer + transactions, and why idempotent consumers are still needed"
+        ],
+        "probes": [
+          "How do you guarantee ordering per user?",
+          "A consumer is slow — what happens to the others?",
+          "Why Kafka here instead of SQS?"
+        ],
+        "read": "Hello Interview key technologies: Kafka. Confluent 'Kafka in 10 minutes' + the exactly-once blog post."
+      },
+      {
+        "id": "c21",
+        "group": "Async & streams",
+        "name": "Fan-out patterns",
+        "master": [
+          "Fan-out on write (precomputed inboxes) vs fan-out on read (merge at query time); the celebrity problem and the hybrid",
+          "Push vs pull delivery, backlog handling, dedup and ordering of notifications",
+          "Rate control and batching; user preferences and quiet hours",
+          "Cost model: writes multiplied by followers vs reads multiplied by followees"
+        ],
+        "probes": [
+          "A user with 50 M followers posts — what happens?",
+          "Why precompute the feed and when not to?",
+          "How do you avoid sending the same notification twice?"
+        ],
+        "read": "Alex Xu vol. 1 ch. 11 (news feed) + ch. 10 (notification system)."
+      },
+      {
+        "id": "c22",
+        "group": "Async & streams",
+        "name": "Stream processing and change data capture",
+        "master": [
+          "Windows (tumbling, sliding, session), event time vs processing time, watermarks and late data",
+          "Stateful processing, checkpoints, exactly-once semantics in Flink/Kafka Streams",
+          "CDC: capture DB changes into a log; keep cache, search and warehouse in sync; event sourcing and CQRS in one paragraph",
+          "When stream beats batch and when a nightly job is enough"
+        ],
+        "probes": [
+          "An event arrives 10 minutes late — which window gets it?",
+          "How does the search index learn about a DB update?",
+          "What state does this job keep and what happens when it dies?"
+        ],
+        "read": "Hello Interview key technologies: Flink. Debezium 'what is CDC' page."
+      },
+      {
+        "id": "c23",
+        "group": "Async & streams",
+        "name": "Batch processing and data pipelines",
+        "master": [
+          "MapReduce / Spark: map, shuffle, reduce; joins and skew; DAG scheduling",
+          "Data lake vs warehouse, columnar formats, partitioned tables; idempotent, rerunnable outputs",
+          "Lambda vs kappa: batch for correction, stream for freshness; reconciliation jobs",
+          "Typical pipelines in interviews: top-K, analytics rollups, index builds, recommendations"
+        ],
+        "probes": [
+          "How do you recompute yesterday if the job had a bug?",
+          "Why both a stream and a batch path?",
+          "Where is the skew in this join?"
+        ],
+        "read": "Hello Interview patterns: batch and top-K. Alex Xu vol. 2 ch. (ad click aggregation) batch section."
+      },
+      {
+        "id": "c24",
+        "group": "Distributed systems",
+        "name": "Failure in distributed systems: partial failure, timeouts, clocks, fencing",
+        "master": [
+          "Partial failure and the three states of a request: succeeded, failed, unknown",
+          "Timeouts and unbounded delays; failure detection vs slow nodes; retries make the unknown worse",
+          "Clocks lie: time-of-day vs monotonic, skew, why timestamps cannot order writes; leases and process pauses",
+          "Fencing tokens: why holding a lock does not prove you still hold it"
+        ],
+        "probes": [
+          "The request timed out — did it happen?",
+          "Two nodes both think they are leader — how, and what protects the data?",
+          "Why not order events by timestamp?"
+        ],
+        "read": "Martin Kleppmann's blog post 'How to do distributed locking' (the fencing-token argument). Hello Interview: fault tolerance."
+      },
+      {
+        "id": "c25",
+        "group": "Distributed systems",
+        "name": "Consensus, coordination, locks and leader election",
+        "master": [
+          "Why consensus exists: leader election, uniqueness, atomic commit; Raft intuition (terms, majority, log replication) in five sentences",
+          "ZooKeeper / etcd / Consul: leader election, configuration, service discovery, locks with leases, watches",
+          "Distributed locks done right: lease + fencing token; Redlock and its critique",
+          "Cost of consensus: latency, availability under partition; keep it off the hot path"
+        ],
+        "probes": [
+          "How does this system pick a leader and what if it is partitioned?",
+          "Where is consensus actually required here?",
+          "Why is a Redis lock not enough?"
+        ],
+        "read": "Raft website visualisation (thesecretlivesofdata.com) + etcd 'why etcd' page."
+      },
+      {
+        "id": "c26",
+        "group": "Distributed systems",
+        "name": "Resilience patterns and rate limiting",
+        "master": [
+          "Timeouts, retries with exponential backoff and jitter, retry budgets; idempotency as the precondition",
+          "Circuit breakers, bulkheads, load shedding, backpressure, graceful degradation",
+          "Rate limiting algorithms: token bucket, leaky bucket, fixed/sliding window; distributed limiter with Redis; where it sits; fail-open vs fail-closed",
+          "Cascading failures and how retries cause them"
+        ],
+        "probes": [
+          "Downstream is slow — what does your service do?",
+          "Token bucket or sliding window here, and why?",
+          "What happens when the rate limiter itself is down?"
+        ],
+        "read": "Hello Interview patterns: rate limiting + resilience. Google SRE book ch. 22 (cascading failures) summary."
+      },
+      {
+        "id": "c27",
+        "group": "Distributed systems",
+        "name": "Unique IDs, ordering and time",
+        "master": [
+          "UUID v4/v7, Snowflake (timestamp + machine + sequence), ticket servers, DB sequences; sortable IDs and why storage likes them",
+          "Clock skew and ID collisions; Lamport timestamps and vector clocks for causality",
+          "Ordering guarantees you can and cannot promise across partitions",
+          "Sequence numbers per conversation / per stream as the practical answer"
+        ],
+        "probes": [
+          "How do you generate 100 k unique, roughly sortable IDs per second?",
+          "Two datacentres, same millisecond — collision?",
+          "How does the client know message order?"
+        ],
+        "read": "Alex Xu vol. 1 ch. 7 (unique ID generator). Twitter Snowflake README."
+      },
+      {
+        "id": "c28",
+        "group": "Distributed systems",
+        "name": "Multi-region and disaster recovery",
+        "master": [
+          "Active-passive vs active-active; data residency; latency-based routing",
+          "Replication across regions and conflict handling; global databases (Spanner, DynamoDB global tables)",
+          "Failover drills, RPO/RTO, DNS and traffic shifting; what is not replicated",
+          "Cost: replication factor, cross-region bandwidth, operational complexity"
+        ],
+        "probes": [
+          "A region goes dark — what do users in it experience?",
+          "Where can two regions accept writes for the same key?",
+          "What is your RPO and how do you know?"
+        ],
+        "read": "Hello Interview patterns: multi-region. AWS 'disaster recovery strategies' whitepaper summary."
+      },
+      {
+        "id": "c29",
+        "group": "Distributed systems",
+        "name": "Observability, SLOs and operations",
+        "master": [
+          "Logs, metrics, traces; propagate a trace id through queues; what to alert on (symptoms, not causes)",
+          "SLIs, SLOs, error budgets; p99 over averages",
+          "Capacity planning and autoscaling signals; deploys, rollbacks, feature flags",
+          "For every design: what would you monitor, and what is the first alert?"
+        ],
+        "probes": [
+          "What is the first dashboard you build for this system?",
+          "What is the SLO and what happens when you burn the budget?",
+          "How do you debug a slow request across six services?"
+        ],
+        "read": "Google SRE book ch. 4 (SLOs) + ch. 6 (monitoring) summaries."
+      },
+      {
+        "id": "c30",
+        "group": "Specialised",
+        "name": "Search, inverted indexes and autocomplete",
+        "master": [
+          "Inverted index, tokenisation, analysers; Elasticsearch shards/replicas, near-real-time refresh",
+          "Ranking: TF-IDF/BM25, boosting, personalisation hooks; fuzzy and prefix queries",
+          "Autocomplete: trie vs precomputed prefix table, top-K per prefix, offline aggregation pipeline, caching by prefix",
+          "Keeping the index in sync with the source of truth (CDC)"
+        ],
+        "probes": [
+          "How does a new document become searchable and how fast?",
+          "Trie or prefix table for typeahead at this scale?",
+          "How are results ranked and where does personalisation plug in?"
+        ],
+        "read": "Hello Interview key technologies: Elasticsearch. Alex Xu vol. 1 ch. 13 (search autocomplete)."
+      },
+      {
+        "id": "c31",
+        "group": "Specialised",
+        "name": "Geospatial and probabilistic structures",
+        "master": [
+          "Geohash, quadtree, S2/H3 cells; nearby queries and precision vs cell size; PostGIS and Redis GEO",
+          "Update-heavy location streams (drivers, friends): write path vs read path separation",
+          "Bloom filters, count-min sketch, HyperLogLog, top-K heavy hitters: when an approximate answer is the right design",
+          "Trade-offs: accuracy, memory, mergeability across shards"
+        ],
+        "probes": [
+          "How do you find drivers within 2 km with 1 M location updates per second?",
+          "Why a bloom filter here and what is the false-positive cost?",
+          "Count unique viewers for a billion events — exactly or approximately?"
+        ],
+        "read": "Alex Xu vol. 2 ch. 1–2 (proximity service, nearby friends). Hello Interview key technologies: geospatial + probabilistic structures."
+      },
+      {
+        "id": "c32",
+        "group": "Specialised",
+        "name": "Media pipelines and payments / ledgers",
+        "master": [
+          "Media: resumable chunked upload, dedup, transcoding DAG, adaptive bitrate (HLS/DASH), thumbnails, CDN, storage tiers",
+          "Payments: double-entry ledger, idempotency keys, PSP timeouts and retries, reconciliation, exactly-once money movement, PCI boundary",
+          "Both: async pipelines with state machines and retries; what is visible to the user while work is pending",
+          "Correctness over speed where money is involved; speed over correctness where pixels are"
+        ],
+        "probes": [
+          "The PSP timed out — did we charge the customer?",
+          "Walk me through a 2 GB video from upload to playback.",
+          "How do you prove the books balance?"
+        ],
+        "read": "Alex Xu vol. 1 ch. 14 (YouTube) + vol. 2 ch. (payment system)."
+      },
+      {
+        "id": "c33",
+        "group": "Specialised",
+        "name": "Security, scheduling and service boundaries",
+        "master": [
+          "AuthN/AuthZ: OAuth2/OIDC, JWT vs sessions, API keys, encryption in transit and at rest, secrets, DDoS protection",
+          "Distributed cron and job queues: leases, exactly-once execution, priority, retries, DAG orchestrators",
+          "Microservices vs monolith: boundaries by data ownership, sync vs async coupling, API gateway and service mesh, the distributed-monolith trap",
+          "What to say about security in a design round: boundaries and trust zones, not product names"
+        ],
+        "probes": [
+          "How does service A know the request from B is allowed?",
+          "A job runs on two workers at once — how, and how do you stop it?",
+          "Why is this a separate service?"
+        ],
+        "read": "Hello Interview core concepts: security. Temporal 'what is a workflow' page. Sam Newman on service boundaries (any summary)."
+      }
     ],
-    "failureModes": [
-      "Reading without writing. No chapter card means no retention — the same lesson as Block B.",
-      "Letting Block E eat Block B. Revision stays first; system design is the first thing cut on a bad day.",
-      "Finishing the book before designing anything. The Saturday exercise starts in week 6, not week 12.",
-      "Memorising reference designs instead of trade-offs. The interviewer probes the why; DDIA gives you the why.",
-      "Skipping the numbers. Hand-wavy estimation is the fastest fail signal in a design round."
+    "questions": [
+      {
+        "id": "q01",
+        "tier": 1,
+        "name": "URL shortener (TinyURL)",
+        "focus": "Key generation (hash vs counter vs pre-generated), 301 vs 302, read-heavy caching, analytics, 100 M URLs/day numbers",
+        "concepts": [
+          "c02",
+          "c06",
+          "c15",
+          "c27"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 8"
+      },
+      {
+        "id": "q02",
+        "tier": 1,
+        "name": "Pastebin",
+        "focus": "Large text blobs in object storage vs DB, expiry, read-heavy caching, abuse limits",
+        "concepts": [
+          "c09",
+          "c15",
+          "c17"
+        ],
+        "reference": "Hello Interview / classic"
+      },
+      {
+        "id": "q03",
+        "tier": 1,
+        "name": "Rate limiter as a service",
+        "focus": "Token bucket vs sliding window, distributed counters in Redis with Lua, placement (gateway vs service), race conditions, fail-open vs fail-closed",
+        "concepts": [
+          "c26",
+          "c04",
+          "c15"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 4"
+      },
+      {
+        "id": "q04",
+        "tier": 1,
+        "name": "Unique ID generator",
+        "focus": "UUID vs Snowflake vs ticket server, sortability, clock skew, throughput per node",
+        "concepts": [
+          "c27",
+          "c24"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 7"
+      },
+      {
+        "id": "q05",
+        "tier": 1,
+        "name": "Key-value store (Dynamo-style)",
+        "focus": "Partitioning with consistent hashing, replication and quorums, hinted handoff, versioning and conflicts, failure detection",
+        "concepts": [
+          "c10",
+          "c11",
+          "c12",
+          "c09"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 6"
+      },
+      {
+        "id": "q06",
+        "tier": 1,
+        "name": "Distributed cache (Redis/Memcached cluster)",
+        "focus": "Consistent hashing, replication, eviction, hot keys, consistency with the DB, stampede, resize",
+        "concepts": [
+          "c15",
+          "c16",
+          "c11"
+        ],
+        "reference": "Hello Interview"
+      },
+      {
+        "id": "q07",
+        "tier": 1,
+        "name": "Hotel reservation / Ticketmaster",
+        "focus": "Inventory model, preventing double-booking (isolation level or locking), holds and expiry, idempotent payment, queueing for hot events",
+        "concepts": [
+          "c07",
+          "c13",
+          "c12",
+          "c26"
+        ],
+        "reference": "Alex Xu vol. 2 (hotel reservation)"
+      },
+      {
+        "id": "q08",
+        "tier": 1,
+        "name": "Real-time gaming leaderboard",
+        "focus": "Sorted sets, sharding by game, top-N and rank queries, monthly resets, write volume",
+        "concepts": [
+          "c08",
+          "c14",
+          "c15"
+        ],
+        "reference": "Alex Xu vol. 2 (leaderboard)"
+      },
+      {
+        "id": "q09",
+        "tier": 1,
+        "name": "Notification system (push, SMS, email)",
+        "focus": "Fan-out, dedup, rate control, retries, third-party gateway failure, user settings, analytics",
+        "concepts": [
+          "c19",
+          "c21",
+          "c26"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 10"
+      },
+      {
+        "id": "q10",
+        "tier": 1,
+        "name": "Chat system (WhatsApp / Messenger)",
+        "focus": "Connection servers, message storage and ordering, delivery receipts, group fan-out, offline queueing, presence",
+        "concepts": [
+          "c18",
+          "c27",
+          "c14",
+          "c19"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 12"
+      },
+      {
+        "id": "q11",
+        "tier": 1,
+        "name": "News feed",
+        "focus": "Fan-out on write vs read, celebrity hybrid, feed cache, ranking hook, media",
+        "concepts": [
+          "c21",
+          "c15",
+          "c14"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 11"
+      },
+      {
+        "id": "q12",
+        "tier": 1,
+        "name": "Web crawler + daily top-K URLs",
+        "focus": "URL frontier and politeness, dedup (bloom filter), DNS caching, storage, batch join for ranking, rerunnable outputs",
+        "concepts": [
+          "c23",
+          "c31",
+          "c19"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 9"
+      },
+      {
+        "id": "q13",
+        "tier": 2,
+        "name": "Distributed message queue (Kafka-like)",
+        "focus": "Partitions, replication and ISR, consumer groups, retention, exactly-once, rebalancing",
+        "concepts": [
+          "c20",
+          "c10",
+          "c11"
+        ],
+        "reference": "Alex Xu vol. 2 (message queue)"
+      },
+      {
+        "id": "q14",
+        "tier": 2,
+        "name": "Distributed job scheduler",
+        "focus": "Cron at scale, worker leases, exactly-once execution, priority, retries, visibility",
+        "concepts": [
+          "c33",
+          "c25",
+          "c19"
+        ],
+        "reference": "Hello Interview"
+      },
+      {
+        "id": "q15",
+        "tier": 2,
+        "name": "Search autocomplete / typeahead",
+        "focus": "Trie vs prefix table, offline aggregation, ranking, update frequency, per-prefix caching",
+        "concepts": [
+          "c30",
+          "c23",
+          "c15"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 13"
+      },
+      {
+        "id": "q16",
+        "tier": 2,
+        "name": "Proximity service (Yelp) / nearby friends",
+        "focus": "Geospatial index choice, read-heavy search vs live location updates, caching by cell, privacy",
+        "concepts": [
+          "c31",
+          "c18",
+          "c14"
+        ],
+        "reference": "Alex Xu vol. 2 ch. 1–2"
+      },
+      {
+        "id": "q17",
+        "tier": 2,
+        "name": "Metrics monitoring and alerting",
+        "focus": "Ingestion at millions of points/s, time-series storage, downsampling, query service, alert evaluation",
+        "concepts": [
+          "c22",
+          "c23",
+          "c29"
+        ],
+        "reference": "Alex Xu vol. 2 (metrics)"
+      },
+      {
+        "id": "q18",
+        "tier": 2,
+        "name": "Payment system",
+        "focus": "Ledger, idempotency, PSP integration, retries and reconciliation, balance consistency across shards, audit",
+        "concepts": [
+          "c32",
+          "c13",
+          "c07"
+        ],
+        "reference": "Alex Xu vol. 2 (payment system)"
+      },
+      {
+        "id": "q19",
+        "tier": 2,
+        "name": "Google Docs collaborative editing",
+        "focus": "OT vs CRDT, ordering, presence, offline edits, document storage and versioning",
+        "concepts": [
+          "c12",
+          "c18",
+          "c27"
+        ],
+        "reference": "Hello Interview"
+      },
+      {
+        "id": "q20",
+        "tier": 3,
+        "name": "Twitter / X home timeline",
+        "focus": "Fan-out hybrid, timeline cache, ranking, media, search hook — Google-style open prompt",
+        "concepts": [
+          "c21",
+          "c15",
+          "c14"
+        ],
+        "reference": "Hello Interview"
+      },
+      {
+        "id": "q21",
+        "tier": 3,
+        "name": "YouTube / Netflix",
+        "focus": "Upload and transcoding pipeline, adaptive streaming, CDN strategy, metadata and view counts at scale, recommendations hook",
+        "concepts": [
+          "c32",
+          "c17",
+          "c22"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 14"
+      },
+      {
+        "id": "q22",
+        "tier": 3,
+        "name": "Google Drive / Dropbox",
+        "focus": "Chunking and dedup, sync protocol and conflicts, metadata store, change notifications, sharing",
+        "concepts": [
+          "c09",
+          "c12",
+          "c18"
+        ],
+        "reference": "Alex Xu vol. 1 ch. 15"
+      },
+      {
+        "id": "q23",
+        "tier": 3,
+        "name": "Uber ride matching",
+        "focus": "Driver location ingestion, geospatial index, dispatch, trip state machine, surge",
+        "concepts": [
+          "c31",
+          "c18",
+          "c13"
+        ],
+        "reference": "Hello Interview"
+      },
+      {
+        "id": "q24",
+        "tier": 3,
+        "name": "Google Maps",
+        "focus": "Map tiles, routing (graph + precomputation), ETA, live traffic ingestion, location privacy",
+        "concepts": [
+          "c31",
+          "c17",
+          "c22"
+        ],
+        "reference": "Alex Xu vol. 2 (Google Maps)"
+      },
+      {
+        "id": "q25",
+        "tier": 3,
+        "name": "Ad-click aggregation",
+        "focus": "Event stream, exactly-once counts, late events, hourly/daily rollups, reconciliation with batch",
+        "concepts": [
+          "c22",
+          "c23",
+          "c20"
+        ],
+        "reference": "Alex Xu vol. 2 (ad click)"
+      },
+      {
+        "id": "q26",
+        "tier": 3,
+        "name": "S3-like object storage",
+        "focus": "Metadata vs data path, chunking, erasure coding vs replication, durability math, listing, versioning",
+        "concepts": [
+          "c09",
+          "c10",
+          "c11"
+        ],
+        "reference": "Alex Xu vol. 2 (S3)"
+      },
+      {
+        "id": "q27",
+        "tier": 3,
+        "name": "Instagram / Google Photos",
+        "focus": "Photo upload and storage tiers, feed, dedup, search by metadata, privacy",
+        "concepts": [
+          "c32",
+          "c21",
+          "c17"
+        ],
+        "reference": "Hello Interview"
+      },
+      {
+        "id": "q28",
+        "tier": 3,
+        "name": "Stock exchange / order matching",
+        "focus": "Sequencing and determinism, in-memory matching engine, durability and replay, market data fan-out, low latency",
+        "concepts": [
+          "c27",
+          "c20",
+          "c24"
+        ],
+        "reference": "Alex Xu vol. 2 (stock exchange)"
+      }
+    ],
+    "spareQuestions": [
+      "Email service (Gmail)",
+      "Zoom / video conferencing",
+      "Spotify",
+      "Airbnb search and booking",
+      "Online judge (LeetCode)",
+      "Log aggregation",
+      "Slack",
+      "Food delivery dispatch",
+      "Digital wallet",
+      "Tinder matching",
+      "DNS",
+      "CDN design",
+      "Flash-sale checkout",
+      "Fraud detection pipeline",
+      "Feature-flag service",
+      "A/B testing platform",
+      "Google search (crawl → index → serve)"
+    ],
+    "weeks": [
+      {
+        "week": 1,
+        "title": "Fundamentals",
+        "phase": 1,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c01",
+                "name": "Requirements, scoping and the 45-minute framework",
+                "minutes": 60,
+                "id": "s1d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c02",
+                "name": "Back-of-envelope estimation and the numbers card",
+                "minutes": 60,
+                "id": "s1d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c03",
+                "name": "Networking: DNS, TCP/UDP, HTTP, TLS, WebSockets, SSE, long polling",
+                "minutes": 60,
+                "id": "s1d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c04",
+                "name": "Load balancing, reverse proxies and API gateways",
+                "minutes": 60,
+                "id": "s1d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q01",
+                "name": "URL shortener (TinyURL)",
+                "minutes": 60,
+                "id": "s1d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q02",
+                "name": "Pastebin",
+                "minutes": 60,
+                "id": "s1d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Day 1 is the template: write your one-page 45-minute framework and use it on every design from day 5.",
+          "Numbers first. Every design this week must start with QPS, storage and cache size said out loud."
+        ]
+      },
+      {
+        "week": 2,
+        "title": "Scaling, APIs and databases",
+        "phase": 1,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c05",
+                "name": "Scaling patterns and stateless services",
+                "minutes": 60,
+                "id": "s2d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c06",
+                "name": "API design: REST, gRPC, GraphQL, pagination, idempotency, versioning",
+                "minutes": 60,
+                "id": "s2d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c07",
+                "name": "Relational databases: indexes, ACID, isolation levels, locking",
+                "minutes": 60,
+                "id": "s2d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c08",
+                "name": "NoSQL families and the store decision table",
+                "minutes": 60,
+                "id": "s2d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q03",
+                "name": "Rate limiter as a service",
+                "minutes": 60,
+                "id": "s2d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q04",
+                "name": "Unique ID generator",
+                "minutes": 60,
+                "id": "s2d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Build the store decision table on day 4 and keep it — you will point at it in every later design."
+        ]
+      },
+      {
+        "week": 3,
+        "title": "Replication, partitioning, consistency",
+        "phase": 1,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c09",
+                "name": "Storage engines and object storage",
+                "minutes": 60,
+                "id": "s3d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c10",
+                "name": "Replication",
+                "minutes": 60,
+                "id": "s3d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c11",
+                "name": "Partitioning, sharding and consistent hashing",
+                "minutes": 60,
+                "id": "s3d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c12",
+                "name": "Consistency models, CAP/PACELC and conflict resolution",
+                "minutes": 60,
+                "id": "s3d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q05",
+                "name": "Key-value store (Dynamo-style)",
+                "minutes": 60,
+                "id": "s3d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q06",
+                "name": "Distributed cache (Redis/Memcached cluster)",
+                "minutes": 60,
+                "id": "s3d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "The core of distributed data. If any card here is weak, repeat it on Sunday evening instead of resting — this is the only week where that trade is worth it."
+        ]
+      },
+      {
+        "week": 4,
+        "title": "Transactions, modelling, caching",
+        "phase": 1,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c13",
+                "name": "Distributed transactions: 2PC, sagas, outbox, idempotency",
+                "minutes": 60,
+                "id": "s4d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c14",
+                "name": "Data modelling for scale",
+                "minutes": 60,
+                "id": "s4d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c15",
+                "name": "Caching strategies",
+                "minutes": 60,
+                "id": "s4d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c16",
+                "name": "Cache problems: invalidation, stampede, hot keys, consistency",
+                "minutes": 60,
+                "id": "s4d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q07",
+                "name": "Hotel reservation / Ticketmaster",
+                "minutes": 60,
+                "id": "s4d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q08",
+                "name": "Real-time gaming leaderboard",
+                "minutes": 60,
+                "id": "s4d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Hotel reservation on day 5 is the classic correctness interview: pick the isolation level and defend it."
+        ]
+      },
+      {
+        "week": 5,
+        "title": "Delivery, real-time, queues, logs",
+        "phase": 1,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c17",
+                "name": "CDN and edge delivery",
+                "minutes": 60,
+                "id": "s5d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c18",
+                "name": "Real-time delivery and presence",
+                "minutes": 60,
+                "id": "s5d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c19",
+                "name": "Message queues",
+                "minutes": 60,
+                "id": "s5d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c20",
+                "name": "Logs: Kafka, partitions, consumer groups, exactly-once",
+                "minutes": 60,
+                "id": "s5d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q09",
+                "name": "Notification system (push, SMS, email)",
+                "minutes": 60,
+                "id": "s5d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q10",
+                "name": "Chat system (WhatsApp / Messenger)",
+                "minutes": 60,
+                "id": "s5d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Chat on day 6 ties together real-time delivery, ordering and storage — expect it or a cousin in a real loop."
+        ]
+      },
+      {
+        "week": 6,
+        "title": "Fan-out, streams, batch, failure",
+        "phase": 1,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c21",
+                "name": "Fan-out patterns",
+                "minutes": 60,
+                "id": "s6d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c22",
+                "name": "Stream processing and change data capture",
+                "minutes": 60,
+                "id": "s6d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c23",
+                "name": "Batch processing and data pipelines",
+                "minutes": 60,
+                "id": "s6d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c24",
+                "name": "Failure in distributed systems: partial failure, timeouts, clocks, fencing",
+                "minutes": 60,
+                "id": "s6d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q11",
+                "name": "News feed",
+                "minutes": 60,
+                "id": "s6d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q12",
+                "name": "Web crawler + daily top-K URLs",
+                "minutes": 60,
+                "id": "s6d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "From this week, every design must include one explicit failure walk-through: 'this box dies, then…'."
+        ]
+      },
+      {
+        "week": 7,
+        "title": "Coordination, resilience, IDs, regions",
+        "phase": 1,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c25",
+                "name": "Consensus, coordination, locks and leader election",
+                "minutes": 60,
+                "id": "s7d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c26",
+                "name": "Resilience patterns and rate limiting",
+                "minutes": 60,
+                "id": "s7d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c27",
+                "name": "Unique IDs, ordering and time",
+                "minutes": 60,
+                "id": "s7d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c28",
+                "name": "Multi-region and disaster recovery",
+                "minutes": 60,
+                "id": "s7d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q13",
+                "name": "Distributed message queue (Kafka-like)",
+                "minutes": 60,
+                "id": "s7d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q14",
+                "name": "Distributed job scheduler",
+                "minutes": 60,
+                "id": "s7d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Consensus is a tool you keep off the hot path. Say where it is required and where it is not."
+        ]
+      },
+      {
+        "week": 8,
+        "title": "Operations and specialised topics",
+        "phase": 1,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c29",
+                "name": "Observability, SLOs and operations",
+                "minutes": 60,
+                "id": "s8d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c30",
+                "name": "Search, inverted indexes and autocomplete",
+                "minutes": 60,
+                "id": "s8d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c31",
+                "name": "Geospatial and probabilistic structures",
+                "minutes": 60,
+                "id": "s8d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c32",
+                "name": "Media pipelines and payments / ledgers",
+                "minutes": 60,
+                "id": "s8d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q15",
+                "name": "Search autocomplete / typeahead",
+                "minutes": 60,
+                "id": "s8d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q16",
+                "name": "Proximity service (Yelp) / nearby friends",
+                "minutes": 60,
+                "id": "s8d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Concept phase ends. Days 5–6 are read-heavy geo and search designs — cache by cell or prefix, precompute offline."
+        ]
+      },
+      {
+        "week": 9,
+        "title": "Conversion I — mocks",
+        "phase": 2,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "mock",
+                "ref": "q20",
+                "name": "Twitter / X home timeline",
+                "minutes": 60,
+                "id": "s9d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "concept",
+                "ref": "c33",
+                "name": "Security, scheduling and service boundaries",
+                "minutes": 60,
+                "id": "s9d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "mock",
+                "ref": "q21",
+                "name": "YouTube / Netflix",
+                "minutes": 60,
+                "id": "s9d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "recall",
+                "name": "Recall drill · 12 concept cards picked at random, answer all three probes of each aloud in one minute; mark the weak ones",
+                "minutes": 60,
+                "id": "s9d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "mock",
+                "ref": "q22",
+                "name": "Google Drive / Dropbox",
+                "minutes": 60,
+                "id": "s9d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q17",
+                "name": "Metrics monitoring and alerting",
+                "minutes": 60,
+                "id": "s9d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Mocks are the real format: 45 min aloud and recorded, then 15 min scoring with the rubric. Any axis at 2 names the next recall drill.",
+          "Ask a peer or interviewing.io for at least one external mock per week from here on."
+        ]
+      },
+      {
+        "week": 10,
+        "title": "Conversion II — mocks",
+        "phase": 2,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "mock",
+                "ref": "q23",
+                "name": "Uber ride matching",
+                "minutes": 60,
+                "id": "s10d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "recall",
+                "name": "Re-design the week-1 URL shortener cold in 30 min, then compare with your week-1 notes; 30 min on the weakest three concept cards",
+                "minutes": 60,
+                "id": "s10d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "mock",
+                "ref": "q24",
+                "name": "Google Maps",
+                "minutes": 60,
+                "id": "s10d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "recall",
+                "name": "Recall drill · the 10 lowest-confidence cards, probes aloud; rewrite two cards from memory",
+                "minutes": 60,
+                "id": "s10d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "mock",
+                "ref": "q25",
+                "name": "Ad-click aggregation",
+                "minutes": 60,
+                "id": "s10d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q18",
+                "name": "Payment system",
+                "minutes": 60,
+                "id": "s10d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Payment system on day 6 is the correctness capstone: ledger, idempotency, reconciliation."
+        ]
+      },
+      {
+        "week": 11,
+        "title": "Conversion III — mocks and final sheet",
+        "phase": 2,
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "kind": "mock",
+                "ref": "q26",
+                "name": "S3-like object storage",
+                "minutes": 60,
+                "id": "s11d1i0"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "kind": "recall",
+                "name": "Final cheat sheet · one page: numbers, store decision table, pattern one-liners for all 33 concepts, the rubric",
+                "minutes": 60,
+                "id": "s11d2i0"
+              }
+            ]
+          },
+          {
+            "day": 3,
+            "items": [
+              {
+                "kind": "mock",
+                "ref": "q27",
+                "name": "Instagram / Google Photos",
+                "minutes": 60,
+                "id": "s11d3i0"
+              }
+            ]
+          },
+          {
+            "day": 4,
+            "items": [
+              {
+                "kind": "recall",
+                "name": "Rapid recall · all 33 cards, one probe each, 90 seconds per card; everything below 'instant' goes on the Sunday-evening list",
+                "minutes": 60,
+                "id": "s11d4i0"
+              }
+            ]
+          },
+          {
+            "day": 5,
+            "items": [
+              {
+                "kind": "mock",
+                "ref": "q28",
+                "name": "Stock exchange / order matching",
+                "minutes": 60,
+                "id": "s11d5i0"
+              }
+            ]
+          },
+          {
+            "day": 6,
+            "items": [
+              {
+                "kind": "design",
+                "ref": "q19",
+                "name": "Google Docs collaborative editing",
+                "minutes": 60,
+                "id": "s11d6i0"
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "Exit criteria are the signal. Score the last three mocks honestly; anything under 4 on an axis is next week's work."
+        ]
+      }
     ]
+  },
+  "sdProgress": {
+    "items": {},
+    "notes": {}
   }
 }

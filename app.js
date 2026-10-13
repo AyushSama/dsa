@@ -7,7 +7,7 @@
   let DATA = null;
   let fileHandle = null;           // FileSystemFileHandle for data.json
   const FS_OK = 'showOpenFilePicker' in window;
-  const UI = { view: 'dashboard', week: 1, openNotes: new Set() };
+  const UI = { view: 'dashboard', week: 1, openNotes: new Set(), sdWeek: null, sdOpen: new Set() };
 
   // ---------- date helpers ----------
   const pad = (n) => String(n).padStart(2, '0');
@@ -30,9 +30,7 @@
 
   // ---------- roadmap helpers ----------
   function itemId(w, d, i) { return `w${w}d${d}i${i}`; }
-  // Item types: 'problem' (string or {name, hot}), 'task' ({name, type:'task'}) and 'sd' ({name, type:'sd', kind, ch}) — system design.
-  function norm(item) { return typeof item === 'string' ? { name: item, type: 'problem' } : { name: item.name, type: item.type || 'problem', hot: !!item.hot, kind: item.kind, ch: item.ch }; }
-  const SD_KINDS = { read: 'DDIA', card: 'chapter card', recall: 'recall', exercise: 'design exercise', mock: 'SD mock', drill: 'SD drill' };
+  function norm(item) { return typeof item === 'string' ? { name: item, type: 'problem' } : { name: item.name, type: item.type || 'problem', hot: !!item.hot }; }
   function weekByNum(n) { return DATA.weeks.find((w) => w.week === n) || DATA.weeks[0]; }
   function firstWeek() { return DATA.weeks[0].week; }
   function lastWeek() { return DATA.weeks[DATA.weeks.length - 1].week; }
@@ -43,12 +41,11 @@
     const out = [];
     DATA.weeks.forEach((wk) => wk.days.forEach((day) => day.items.forEach((it, i) => {
       const n = norm(it);
-      out.push({ id: itemId(wk.week, day.day, i), week: wk.week, day: day.day, idx: i, name: n.name, type: n.type, kind: n.kind, ch: n.ch, focus: day.focus, weekTitle: wk.title, raw: it });
+      out.push({ id: itemId(wk.week, day.day, i), week: wk.week, day: day.day, idx: i, name: n.name, type: n.type, focus: day.focus, weekTitle: wk.title });
     })));
     return out;
   }
   function problems() { return allItems().filter((x) => x.type === 'problem'); }
-  function sdItems() { return allItems().filter((x) => x.type === 'sd'); }
   function isSolved(id) { const p = DATA.progress[id]; return !!(p && p.solved); }
   function isTaskDone(id) { const p = DATA.progress[id]; return !!(p && p.done); }
 
@@ -140,6 +137,7 @@
     json.drillLog = json.drillLog || [];
     json.notes = Object.assign({ triggers: '', journal: [] }, json.notes || {});
     json.settings = Object.assign({ startDate: today(), redoOffsets: [3, 14] }, json.settings || {});
+    json.sdProgress = Object.assign({ items: {}, notes: {} }, json.sdProgress || {});
     return json;
   }
 
@@ -366,7 +364,8 @@
       v.classList.toggle('active', active);
       if (!active) v.innerHTML = ''; // only one view lives in the DOM at a time
     });
-    ({ dashboard: renderDashboard, roadmap: renderRoadmap, revision: renderRevision, drills: renderDrills, sd: renderSD, notes: renderNotes, guide: renderGuide, settings: renderSettings })[UI.view]();
+    ({ dashboard: renderDashboard, roadmap: renderRoadmap, revision: renderRevision, drills: renderDrills, notes: renderNotes, guide: renderGuide, settings: renderSettings,
+       sd: renderSDDash, 'sd-concepts': renderSDConcepts, 'sd-questions': renderSDQuestions, 'sd-guide': renderSDGuide })[UI.view]();
   }
 
   // ----- Dashboard -----
@@ -393,9 +392,6 @@
 
     const wkStats = weekStats(wk);
     const pct = Math.round(100 * solved / probs.length);
-    const sdAll = sdItems();
-    const sdDone = sdAll.filter((x) => isTaskDone(x.id)).length;
-    const sdToday = todayDay ? sdAll.filter((x) => x.week === wk.week && x.day === todayDay.day) : [];
     const d = new Date();
     const longDate = d.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' });
     const isContest = pos.week > 0 && pos.day === 6;
@@ -425,8 +421,7 @@
               ${isRest ? '<span class="chip done">Rest day · no blocks</span>' : `
               <button class="chip btn ${dueList.length ? (overdue ? 'overdue' : 'due') : 'done'}" data-go-view="revision">Block B · ${dueList.length ? `${dueList.length} re-solve${dueList.length === 1 ? '' : 's'} due` : 'queue clear'}</button>
               ${isContest ? '<span class="chip">Contest · 90 min + 90 min post-mortem</span>' : '<span class="chip">Block C · editorials · triggers · triage 15 min · one variant</span>'}
-              <button class="chip btn" data-go-view="drills">Block D · ${rotation}</button>
-              ${DATA.systemDesign ? `<button class="chip btn sd" data-go-view="sd">Block E · ${sdToday.length ? `system design · ${sdToday.filter((x) => isTaskDone(x.id)).length}/${sdToday.length} done` : 'no system design today'}</button>` : ''}`}
+              <button class="chip btn" data-go-view="drills">Block D · ${rotation}</button>`}
             </div>
           </div>
           <div class="card progress-card">
@@ -437,7 +432,6 @@
                 <div class="pc-num"><span class="muted">New problems</span><b>${solved} / ${probs.length}</b></div>
                 <div class="pc-num"><span class="muted">Re-solves done</span><b>${redosDone} / ${redos.length}</b></div>
                 <div class="pc-num"><span class="muted">Tasks</span><b>${tasksDone} / ${tasks.length}</b></div>
-                ${sdAll.length ? `<div class="pc-num"><span class="muted">System design</span><b>${sdDone} / ${sdAll.length}</b></div>` : ''}
                 <div class="pc-num"><span class="muted">Notes written</span><b>${Object.values(DATA.progress).filter((p) => p.note && p.note.trim()).length}</b></div>
               </div>
             </div>
@@ -524,19 +518,6 @@
         <input type="checkbox" data-task="${id}" ${done ? 'checked' : ''}>
         <span class="name">${esc(it.name)}</span>
         <span class="meta"><span class="badge">task</span>${done ? `<span class="date">${fmt(DATA.progress[id].done)}</span>` : ''}</span></label>`;
-    }
-    if (it.type === 'sd') {
-      // System-design item: a tickable task with a kind badge and a note (the chapter card / post-mortem lives in the note).
-      const done = isTaskDone(id);
-      const sp = DATA.progress[id];
-      const sdNote = (sp && sp.note) || '';
-      const sdOpen = UI.openNotes.has(id);
-      return `<div class="item sd ${done ? 'done' : ''}">
-        <input type="checkbox" data-task="${id}" ${done ? 'checked' : ''} title="${done ? 'Unmark' : 'Mark done'}">
-        <span class="name">${esc(it.name)}</span>
-        <span class="meta"><span class="badge sd">${SD_KINDS[it.kind] || 'system design'}${it.ch ? ` · ch ${it.ch}` : ''}</span>${done ? `<span class="date">${fmt(sp.done)}</span>` : ''}
-          <button class="chip btn note-chip ${sdNote ? 'has-note' : ''} ${sdOpen ? 'open' : ''}" data-note-toggle="${id}" title="${sdNote ? 'Edit note' : it.kind === 'card' ? 'Write the chapter card here' : 'Add a note (what you learned, what to fix)'}">✎${sdNote ? ' note' : ''}</button></span></div>
-        ${sdOpen ? `<div class="note-row"><textarea class="note-input" data-note="${id}" rows="${it.kind === 'card' ? 10 : 3}" placeholder="${it.kind === 'card' ? 'Problem solved · mechanisms → buys → costs · failure modes · real systems · 5 questions · diagram (describe)' : 'What you learned · what you got wrong · chapter to re-read'}">${esc(sdNote)}</textarea></div>` : ''}`;
     }
     const p = DATA.progress[id];
     const solved = !!(p && p.solved);
@@ -695,87 +676,230 @@
     Charts.bars($('#c-drills'), perWeek, { yMax: Math.max(4, ...perWeek.map((p) => p.value)), ticks: 2 });
   }
 
-  // ----- System design -----
-  function renderSD() {
+  // ----- System design (separate track: own schedule in systemDesign.weeks, own progress in sdProgress) -----
+  const SD = () => DATA.systemDesign;
+  const SDP = () => DATA.sdProgress;
+  function sdPosition() {
+    const sd = SD(); if (!sd) return null;
+    const n = diffDays(sd.startDate || today(), today());
+    const last = sd.weeks.length ? sd.weeks[sd.weeks.length - 1].week : 1;
+    if (n < 0) return { week: 1, day: 1, before: true, daysUntil: -n };
+    return { week: Math.min(last, Math.floor(n / 7) + 1), day: (n % 7) + 1, after: n >= last * 7 };
+  }
+  function sdWeek(n) { return SD().weeks.find((w) => w.week === n) || SD().weeks[0]; }
+  function sdItems() { const out = []; SD().weeks.forEach((w) => w.days.forEach((d) => d.items.forEach((it) => out.push({ ...it, week: w.week, day: d.day })))); return out; }
+  function sdDone(id) { const p = SDP().items[id]; return !!(p && p.done); }
+  function sdToggle(id) { const items = SDP().items; if (sdDone(id)) delete items[id]; else items[id] = { done: today() }; save(); render(); }
+  function sdSetNote(ref, text) { const notes = SDP().notes; if (text && text.trim()) notes[ref] = text; else delete notes[ref]; save(); }
+  function sdNote(ref) { return SDP().notes[ref] || ''; }
+  function sdConcept(id) { return SD().concepts.find((c) => c.id === id); }
+  function sdQuestion(id) { return SD().questions.find((q) => q.id === id); }
+  function sdWeekStats(w) { const items = w.days.flatMap((d) => d.items); const done = items.filter((it) => sdDone(it.id)).length; return { total: items.length, done, pct: items.length ? Math.round(100 * done / items.length) : 0 }; }
+  function sdDateOf(w, d) { return addDays(SD().startDate, (w - 1) * 7 + (d - 1)); }
+  // Where a concept / question is scheduled, and whether that session is done.
+  function sdStatus(ref) {
+    const its = sdItems().filter((it) => it.ref === ref);
+    const done = its.filter((it) => sdDone(it.id));
+    return { items: its, done, first: its[0] || null, lastDone: done.length ? SDP().items[done[done.length - 1].id].done : null };
+  }
+  const SD_KIND = { concept: ['concept', 'sd'], design: ['design', 'amber'], mock: ['mock', 'red'], recall: ['recall', 'green'] };
+  const SD_SHAPE = { concept: 'Concept day', design: 'Design day', mock: 'Mock day', recall: 'Recall day' };
+
+  function renderSDItem(it, opts = {}) {
+    const done = sdDone(it.id);
+    const [label, cls] = SD_KIND[it.kind] || [it.kind, ''];
+    const ref = it.ref;
+    const dateTxt = done ? fmt(SDP().items[it.id].done) : (opts.date ? fmt(sdDateOf(it.week, it.day)) : '');
+    const isC = ref && ref.startsWith('c');
+    return `<div class="item sd ${done ? 'done' : ''}">
+      <input type="checkbox" data-sdtask="${it.id}" ${done ? 'checked' : ''} title="${done ? 'Unmark' : 'Mark this session done'}">
+      <span class="name">${esc(it.name)}</span>
+      <span class="meta"><span class="badge ${cls}">${label}</span>${it.minutes ? `<span class="date">${it.minutes} min</span>` : ''}${dateTxt ? `<span class="date">${dateTxt}</span>` : ''}
+        ${ref ? `<button class="chip btn note-chip ${sdNote(ref) ? 'has-note' : ''}" data-sd-open="${ref}" title="Open the ${isC ? 'concept' : 'question'}: what to master, probes, your notes">${isC ? 'concept' : 'question'} →</button>` : ''}</span></div>`;
+  }
+
+  // ----- SD dashboard -----
+  function renderSDDash() {
     const el = $('#view-sd');
-    const sd = DATA.systemDesign;
+    const sd = SD();
     if (!sd) { el.innerHTML = '<div class="page-head"><div><h1>System Design</h1><div class="sub">No systemDesign section in data.json.</div></div></div>'; return; }
-    const pos = currentPosition();
+    const pos = sdPosition();
+    if (UI.sdWeek === null) UI.sdWeek = pos.week;
     const items = sdItems();
-    const done = (x) => isTaskDone(x.id);
-    const ol = (arr) => `<ol style="margin-top:8px">${arr.map((r) => `<li>${esc(r)}</li>`).join('')}</ol>`;
-    const ul = (arr) => `<ul style="margin-top:8px">${arr.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
-    const row = (x) => renderItem(x.week, x.day, x.idx, x.raw);
-
-    const reads = items.filter((x) => x.kind === 'read' || x.kind === 'card');
-    const practice = items.filter((x) => x.kind === 'exercise' || x.kind === 'mock' || x.kind === 'drill');
-    const recalls = items.filter((x) => x.kind === 'recall');
-    const chapters = (sd.chapters || []).map((c) => {
-      const mine = items.filter((x) => x.ch === c.ch && x.kind !== 'exercise');
-      const d = mine.filter(done).length;
-      const weeks = [...new Set(mine.map((x) => x.week))];
-      return { ...c, items: mine, done: d, pct: mine.length ? Math.round(100 * d / mine.length) : 0, current: weeks.includes(pos.week), weeksList: weeks };
-    });
-    const chaptersDone = chapters.filter((c) => c.items.length && c.done === c.items.length).length;
-    const thisWeek = items.filter((x) => x.week === pos.week);
-    const nextUp = items.find((x) => !done(x) && (x.kind === 'read' || x.kind === 'card'));
-    const weeksOf = (arr) => [...new Set(arr.map((x) => x.week))];
-
+    const concepts = items.filter((it) => it.kind === 'concept');
+    const designs = items.filter((it) => it.kind === 'design');
+    const mocks = items.filter((it) => it.kind === 'mock');
+    const recalls = items.filter((it) => it.kind === 'recall');
+    const doneAll = items.filter((it) => sdDone(it.id)).length;
+    const wk = sdWeek(pos.week);
+    const wkStats = sdWeekStats(wk);
+    const todayItems = pos.day <= 6 && !pos.before && !pos.after ? items.filter((it) => it.week === pos.week && it.day === pos.day) : [];
+    const isRest = pos.day === 7;
+    const sel = sdWeek(UI.sdWeek);
+    const selStats = sdWeekStats(sel);
+    const idx = sd.weeks.indexOf(sel);
+    const prev = sd.weeks[idx - 1], next = sd.weeks[idx + 1];
+    const d = new Date();
+    const longDate = d.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' });
+    const posLine = pos.before ? `Starts ${fmt(sd.startDate)} (in ${pos.daysUntil} day${pos.daysUntil === 1 ? '' : 's'})` : pos.after ? 'Track complete — keep doing mocks' : `SD week ${pos.week}, day ${pos.day} · ${esc(wk.title)}`;
+    const shape = todayItems.length ? (sd.sessionShapes || []).find((s) => s.kind.startsWith(SD_SHAPE[todayItems[0].kind] || '')) : null;
+    const strip = sd.weeks.map((w) => { const s = sdWeekStats(w); return `<button class="week-pill ${w.week === UI.sdWeek ? 'active' : ''} ${w.week === pos.week ? 'current' : ''} ${w.phase === 2 ? 'ph2' : ''}" data-sd-week="${w.week}" title="Week ${w.week} — ${esc(w.title)} · ${s.pct}%">${w.week}<div class="bar thin ${s.pct === 100 ? 'green' : ''}"><span style="width:${s.pct}%"></span></div></button>`; }).join('');
+    const days = sel.days.map((day) => `
+      <div class="card day-card ${sel.week === pos.week && day.day === pos.day ? 'today' : ''}">
+        <div class="day-head"><span class="dn">Day ${day.day}${sel.week === pos.week && day.day === pos.day ? ' <span class="badge accent">today</span>' : ''}</span><span class="df">${fmt(sdDateOf(sel.week, day.day))} · ${esc(SD_SHAPE[day.items[0] && day.items[0].kind] || '')}</span></div>
+        <div class="items">${day.items.map((it) => renderSDItem({ ...it, week: sel.week, day: day.day })).join('')}</div>
+      </div>`).join('');
     el.innerHTML = `
       <div class="page-head">
-        <div><h1>System Design</h1><div class="sub">${esc(sd.intro)}</div></div>
-        <div class="actions"><button class="btn small" data-go-week="${pos.week}">Open week ${pos.week}</button></div>
+        <div><h1>System Design</h1><div class="sub">${longDate} · ${posLine} · ${esc(sd.budget || '')}</div></div>
+        <div class="actions"><button class="btn small" data-go-view="sd-concepts">Concepts</button><button class="btn small" data-go-view="sd-questions">Questions</button><button class="btn small" data-go-view="sd-guide">Guide</button></div>
       </div>
       <div class="stack">
         <div class="grid grid-4">
-          <div class="card stat"><div class="label">Reading</div><div class="value">${reads.filter(done).length}<small>/ ${reads.length}</small></div><div class="sub">sections + chapter cards</div><div class="bar thin"><span style="width:${reads.length ? Math.round(100 * reads.filter(done).length / reads.length) : 0}%"></span></div></div>
-          <div class="card stat"><div class="label">Chapters complete</div><div class="value">${chaptersDone}<small>/ ${chapters.length}</small></div><div class="sub">${nextUp ? `next: W${nextUp.week} D${nextUp.day}` : 'book complete'}</div></div>
-          <div class="card stat"><div class="label">Design practice</div><div class="value">${practice.filter(done).length}<small>/ ${practice.length}</small></div><div class="sub">exercises · mocks · drills</div></div>
-          <div class="card stat"><div class="label">Recalls</div><div class="value">${recalls.filter(done).length}<small>/ ${recalls.length}</small></div><div class="sub">Monday 5-min aloud</div></div>
+          <div class="card stat"><div class="label">Concepts mastered</div><div class="value">${concepts.filter((it) => sdDone(it.id)).length}<small>/ ${concepts.length}</small></div><div class="sub">card written + probes answered</div><div class="bar thin"><span style="width:${concepts.length ? Math.round(100 * concepts.filter((it) => sdDone(it.id)).length / concepts.length) : 0}%"></span></div></div>
+          <div class="card stat"><div class="label">Designs done</div><div class="value">${designs.filter((it) => sdDone(it.id)).length}<small>/ ${designs.length}</small></div><div class="sub">design days · compared with a reference</div></div>
+          <div class="card stat"><div class="label">Mocks</div><div class="value">${mocks.filter((it) => sdDone(it.id)).length}<small>/ ${mocks.length}</small></div><div class="sub">recorded and scored · ${recalls.filter((it) => sdDone(it.id)).length}/${recalls.length} recall drills</div></div>
+          <div class="card stat ${wkStats.done === wkStats.total && wkStats.total ? 'good' : ''}"><div class="label">This week</div><div class="value">${wkStats.done}<small>/ ${wkStats.total}</small></div><div class="sub">sessions · week ${pos.week}</div><div class="bar thin ${wkStats.pct === 100 ? 'green' : ''}"><span style="width:${wkStats.pct}%"></span></div></div>
         </div>
-
         <div class="grid grid-21">
-          <div class="card">
-            <div class="card-title"><h3>This week · Week ${pos.week}</h3><span class="hint">Block E · ${esc(sd.block ? sd.block.duration : '45 min')}</span></div>
-            <div class="items">${thisWeek.length ? thisWeek.map((x) => `<div class="muted small" style="margin-top:6px">Day ${x.day}${x.week === pos.week && x.day === pos.day ? ' · today' : ''}</div>${row(x)}`).join('') : '<div class="empty">No system-design items this week</div>'}</div>
+          <div class="card today-card">
+            <div class="today-head"><h3>Today · SD week ${pos.week}, day ${pos.day}</h3><span class="hint muted small">${isRest ? 'rest day' : shape ? esc(shape.kind) : '1 hour'}</span></div>
+            <div class="focus">${isRest ? 'Rest day. No system design today.' : esc(wk.title)}</div>
+            <div class="items">${todayItems.length ? todayItems.map(renderSDItem).join('') : isRest ? '' : '<div class="empty">Nothing scheduled</div>'}</div>
+            ${shape ? `<p class="muted small" style="margin-top:12px"><b>${esc(shape.kind)}:</b> ${esc(shape.shape)}</p>` : ''}
           </div>
-          <div class="stack">
-            <div class="card"><h3>Where to start</h3><p class="muted small" style="margin-top:4px">${esc(sd.book || '')}</p><p style="font-size:13px;color:var(--text-2);margin-top:8px">${esc(sd.resume || '')}</p>${sd.editionNote ? `<p class="muted small" style="margin-top:8px">${esc(sd.editionNote)}</p>` : ''}</div>
-            <div class="card"><div class="card-title"><h3>Chapter progress</h3><span class="hint">reading + card + recall</span></div><canvas id="c-sd" class="chart short"></canvas></div>
-          </div>
-        </div>
-
-        <div class="sd-chapters">
-          ${chapters.map((c) => `<div class="card sd-ch ${c.current ? 'current' : ''} ${c.items.length && c.done === c.items.length ? 'complete' : ''}">
-            <div class="ch-head"><h3><span class="ch-num">${c.ch}</span>${esc(c.title)}</h3><span class="muted small">${esc(c.weeks)} · ${c.done}/${c.items.length}</span></div>
-            <div class="ch-use">${esc(c.use)}</div>
-            <div class="bar thin ${c.items.length && c.done === c.items.length ? 'green' : ''}"><span style="width:${c.pct}%"></span></div>
-            <div class="items">${c.items.map(row).join('') || '<div class="empty">No items scheduled</div>'}</div>
-          </div>`).join('')}
-        </div>
-
-        <div class="card sd-practice"><div class="card-title"><h3>Design exercises, mocks & drills</h3><span class="hint">Saturdays after the contest · mocks from week 12</span></div>
-          ${weeksOf(practice).map((w) => `<div class="wk">Week ${w}${w === pos.week ? ' · this week' : ''}</div><div class="items">${practice.filter((x) => x.week === w).map(row).join('')}</div>`).join('')}</div>
-
-        <div class="grid grid-2">
-          <div class="card"><h3>Reading protocol</h3>${ol(sd.readingProtocol || [])}</div>
-          <div class="card"><div class="card-title"><h3>Chapter card template</h3><span class="hint">one page, from memory</span></div>${ol(sd.chapterCard || [])}</div>
-        </div>
-        <div class="grid grid-2">
-          <div class="card"><div class="card-title"><h3>The 45-minute framework</h3><span class="hint">every exercise and mock</span></div>${ol(sd.framework || [])}</div>
-          <div class="stack">
-            <div class="card"><div class="card-title"><h3>Saturday exercise protocol</h3><span class="hint">90 min</span></div>${ol(sd.exerciseProtocol || [])}</div>
-            <div class="card"><div class="card-title"><h3>Numbers card</h3><span class="hint">orders of magnitude</span></div>${ul(sd.numbers || [])}</div>
+          <div class="card progress-card">
+            <div class="card-title"><h3>Progress</h3><span class="hint">${sd.weeks.length}-week track</span></div>
+            <div class="pc-top">
+              <canvas id="c-sd-overall" class="chart"></canvas>
+              <div class="pc-nums">
+                <div class="pc-num"><span class="muted">Sessions</span><b>${doneAll} / ${items.length}</b></div>
+                <div class="pc-num"><span class="muted">Concept cards written</span><b>${sd.concepts.filter((c) => sdNote(c.id)).length} / ${sd.concepts.length}</b></div>
+                <div class="pc-num"><span class="muted">Question notes</span><b>${sd.questions.filter((q) => sdNote(q.id)).length} / ${sd.questions.length}</b></div>
+                <div class="pc-num"><span class="muted">Phase</span><b>${esc((sd.phases || {})[wk.phase] || '')}</b></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="grid grid-2">
-          <div class="card"><h3>Exit criteria</h3>${ol(sd.exitCriteria || [])}</div>
-          <div class="card"><h3>Failure modes</h3>${ol(sd.failureModes || [])}</div>
+        <div class="card"><div class="card-title"><h3>Completion by week</h3><span class="hint">% of each week's sessions</span></div><canvas id="c-sd-weeks" class="chart short"></canvas></div>
+        <div class="card">
+          <div class="week-head">
+            <div class="wh-title"><span class="badge ${sel.phase === 2 ? 'red' : 'sd'}">${esc((sd.phases || {})[sel.phase] || 'Phase ' + sel.phase)}</span><h2>Week ${sel.week} — ${esc(sel.title)}</h2>${sel.week === pos.week ? '<span class="badge">current</span>' : ''}</div>
+            <div class="actions"><button class="btn small" data-sd-week="${prev ? prev.week : sel.week}" ${prev ? '' : 'disabled'}>← Week ${prev ? prev.week : ''}</button><button class="btn small" data-sd-week="${next ? next.week : sel.week}" ${next ? '' : 'disabled'}>Week ${next ? next.week : ''} →</button><span class="muted small">${selStats.done} of ${selStats.total} · ${selStats.pct}%</span></div>
+          </div>
+          <div class="week-strip" style="margin-top:12px">${strip}</div>
         </div>
-        ${sd.resources ? `<div class="card"><h3>Resources</h3><table style="margin-top:8px"><tr><th>Resource</th><th>Use it for</th></tr>${sd.resources.map((r) => `<tr><td><b>${esc(r.name)}</b></td><td>${esc(r.use)}</td></tr>`).join('')}</table></div>` : ''}
+        <div class="days-grid">${days}</div>
+        ${sel.notes && sel.notes.length ? `<div class="card"><div class="card-title"><h3>Week notes</h3><span class="hint">from the plan</span></div><div class="notes-list">${sel.notes.map((n) => `<div class="note">${esc(n)}</div>`).join('')}</div></div>` : ''}
       </div>`;
+    Charts.donut($('#c-sd-overall'), [{ value: doneAll, color: cssVar('--blue') }, { value: items.length - doneAll, color: 'transparent' }], `${items.length ? Math.round(100 * doneAll / items.length) : 0}%`, 'done');
+    Charts.bars($('#c-sd-weeks'), sd.weeks.map((w) => ({ label: 'W' + w.week, value: sdWeekStats(w).pct, color: w.phase === 2 ? cssVar('--red') : cssVar('--blue'), highlight: w.week === pos.week ? cssVar('--green') : null })), { yMax: 100, yFormat: (v) => v + '%' });
+  }
 
-    Charts.bars($('#c-sd'), chapters.map((c) => ({ label: 'Ch' + c.ch, value: c.pct, color: cssVar('--blue'), highlight: c.current ? cssVar('--green') : null })), { yMax: 100, yFormat: (v) => v + '%' });
+  // ----- SD concepts -----
+  function renderSDConcepts() {
+    const el = $('#view-sd-concepts');
+    const sd = SD(); if (!sd) { el.innerHTML = ''; return; }
+    const groups = [...new Set(sd.concepts.map((c) => c.group))];
+    const mastered = sd.concepts.filter((c) => sdStatus(c.id).done.length).length;
+    const card = (c, n) => {
+      const st = sdStatus(c.id);
+      const open = UI.sdOpen.has(c.id);
+      const done = st.done.length > 0;
+      const where = st.first ? `W${st.first.week} D${st.first.day} · ${fmt(sdDateOf(st.first.week, st.first.day))}` : 'unscheduled';
+      const note = sdNote(c.id);
+      return `<div class="card sd-ch ${done ? 'complete' : ''} ${open ? 'open' : ''}">
+        <div class="ch-head" data-sd-toggle="${c.id}" style="cursor:pointer">
+          <h3><span class="ch-num">${n}</span>${esc(c.name)}</h3>
+          <span class="row" style="gap:8px">${note ? '<span class="badge accent">card written</span>' : ''}<span class="badge ${done ? 'green' : ''}">${done ? 'mastered ' + fmt(st.lastDone) : where}</span><span class="muted small">${open ? '▾' : '▸'}</span></span>
+        </div>
+        ${open ? `
+        <div class="grid grid-2" style="margin-top:12px;gap:12px">
+          <div><div class="muted small" style="font-weight:600;margin-bottom:4px">Master</div><ul style="margin:0 0 0 18px;font-size:13px;color:var(--text-2)">${c.master.map((m) => `<li>${esc(m)}</li>`).join('')}</ul></div>
+          <div><div class="muted small" style="font-weight:600;margin-bottom:4px">Interviewer probes</div><ol style="margin:0 0 0 18px;font-size:13px;color:var(--text-2)">${c.probes.map((p) => `<li>${esc(p)}</li>`).join('')}</ol>
+            <div class="muted small" style="font-weight:600;margin:10px 0 4px">Learn from (35 min)</div><div style="font-size:13px;color:var(--text-2)">${esc(c.read)}</div></div>
+        </div>
+        <div class="muted small" style="font-weight:600;margin:12px 0 4px">Your card <span style="font-weight:400">· written from memory, then corrected · template in the SD guide</span></div>
+        <textarea class="note-input" data-sdnote="${c.id}" rows="8" placeholder="What it is · when / when not · mechanism → buys → costs · two failure modes + fixes · one real system · the three probes answered">${esc(note)}</textarea>
+        ${st.items.length ? `<div class="items" style="margin-top:10px">${st.items.map((it) => renderSDItem(it, { date: true })).join('')}</div>` : ''}` : ''}
+      </div>`;
+    };
+    let n = 0;
+    el.innerHTML = `
+      <div class="page-head">
+        <div><h1>Concepts</h1><div class="sub">${sd.concepts.length} concepts to master, one per day in phase 1. Click a concept for what to master, the interviewer probes, where to learn it and your card.</div></div>
+        <div class="actions"><span class="badge ${mastered === sd.concepts.length ? 'green' : 'sd'}">${mastered} / ${sd.concepts.length} mastered</span><button class="btn small" data-go-view="sd">SD dashboard</button></div>
+      </div>
+      <div class="stack">
+        ${groups.map((g) => { const cs = sd.concepts.filter((c) => c.group === g); const dn = cs.filter((c) => sdStatus(c.id).done.length).length; return `<div class="card-title" style="margin:6px 0 -6px"><h3>${esc(g)}</h3><span class="hint">${dn} / ${cs.length}</span></div>${cs.map((c) => card(c, ++n)).join('')}`; }).join('')}
+      </div>`;
+  }
+
+  // ----- SD questions -----
+  function renderSDQuestions() {
+    const el = $('#view-sd-questions');
+    const sd = SD(); if (!sd) { el.innerHTML = ''; return; }
+    const tiers = { 1: 'Tier 1 — fundamentals', 2: 'Tier 2 — infrastructure and correctness', 3: 'Tier 3 — open-ended, Google-style' };
+    const designed = sd.questions.filter((q) => sdStatus(q.id).done.length).length;
+    const row = (q) => {
+      const st = sdStatus(q.id);
+      const open = UI.sdOpen.has(q.id);
+      const done = st.done.length > 0;
+      const kinds = [...new Set(st.items.map((it) => it.kind))].join(' + ');
+      const where = st.first ? `W${st.first.week} D${st.first.day} · ${kinds}` : 'spare';
+      const note = sdNote(q.id);
+      return `<div class="card sd-ch ${done ? 'complete' : ''}">
+        <div class="ch-head" data-sd-toggle="${q.id}" style="cursor:pointer">
+          <h3><span class="ch-num">${q.id.slice(1).replace(/^0/, '')}</span>${esc(q.name)}</h3>
+          <span class="row" style="gap:8px">${note ? '<span class="badge accent">notes</span>' : ''}<span class="badge ${done ? 'green' : ''}">${done ? 'done ' + fmt(st.lastDone) : where}</span><span class="muted small">${open ? '▾' : '▸'}</span></span>
+        </div>
+        <div class="ch-use">${esc(q.focus)}</div>
+        <div class="row wrap" style="gap:6px">${(q.concepts || []).map((cid) => { const c = sdConcept(cid); return c ? `<button class="chip btn ${sdStatus(cid).done.length ? 'done' : ''}" data-sd-open="${cid}" title="Open concept">${esc(c.name.split(':')[0].split(',')[0])}</button>` : ''; }).join('')}<span class="chip">ref · ${esc(q.reference)}</span></div>
+        ${open ? `
+        <div class="muted small" style="font-weight:600;margin:12px 0 4px">Post-mortem and score <span style="font-weight:400">· missed concepts, hand-waved numbers, rubric score, the one fix</span></div>
+        <textarea class="note-input" data-sdnote="${q.id}" rows="6" placeholder="Design date · what I missed vs the reference · numbers I hand-waved · rubric: navigation / design / depth / scaling / communication · the one fix">${esc(note)}</textarea>
+        ${st.items.length ? `<div class="items" style="margin-top:10px">${st.items.map((it) => renderSDItem(it, { date: true })).join('')}</div>` : ''}` : ''}
+      </div>`;
+    };
+    el.innerHTML = `
+      <div class="page-head">
+        <div><h1>Design questions</h1><div class="sub">${sd.questions.length} questions scheduled across design days and mocks, tiered by difficulty. Design first, compare with the reference second, write the post-mortem third.</div></div>
+        <div class="actions"><span class="badge ${designed === sd.questions.length ? 'green' : 'sd'}">${designed} / ${sd.questions.length} designed</span><button class="btn small" data-go-view="sd">SD dashboard</button></div>
+      </div>
+      <div class="stack">
+        ${[1, 2, 3].map((t) => { const qs = sd.questions.filter((q) => q.tier === t); return qs.length ? `<div class="card-title" style="margin:6px 0 -6px"><h3>${esc(tiers[t])}</h3><span class="hint">${qs.filter((q) => sdStatus(q.id).done.length).length} / ${qs.length}</span></div>${qs.map(row).join('')}` : ''; }).join('')}
+        ${sd.spareQuestions ? `<div class="card"><div class="card-title"><h3>Spare prompts</h3><span class="hint">for extra mocks and peer sessions</span></div><div class="row wrap" style="gap:6px">${sd.spareQuestions.map((s) => `<span class="chip">${esc(s)}</span>`).join('')}</div></div>` : ''}
+      </div>`;
+  }
+
+  // ----- SD guide -----
+  function renderSDGuide() {
+    const el = $('#view-sd-guide');
+    const sd = SD(); if (!sd) { el.innerHTML = ''; return; }
+    const ol = (arr) => `<ol style="margin-top:8px">${(arr || []).map((r) => `<li>${esc(r)}</li>`).join('')}</ol>`;
+    const ul = (arr) => `<ul style="margin-top:8px">${(arr || []).map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
+    el.innerHTML = `
+      <div class="page-head"><div><h1>System design guide</h1><div class="sub">${esc(sd.intro || '')}</div></div><div class="actions"><button class="btn small" data-go-view="sd">SD dashboard</button></div></div>
+      <div class="stack">
+        <div class="card"><div class="card-title"><h3>Session shapes</h3><span class="hint">${esc(sd.budget || '')}</span></div>
+          <table style="margin-top:8px"><tr><th>Day type</th><th>The hour</th></tr>${(sd.sessionShapes || []).map((s) => `<tr><td><b>${esc(s.kind)}</b></td><td>${esc(s.shape)}</td></tr>`).join('')}</table></div>
+        <div class="grid grid-2">
+          <div class="card"><div class="card-title"><h3>The 45-minute framework</h3><span class="hint">every design and mock</span></div>${ol(sd.framework)}</div>
+          <div class="stack">
+            <div class="card"><div class="card-title"><h3>Concept card template</h3><span class="hint">from memory, then corrected</span></div>${ol(sd.cardTemplate)}</div>
+            <div class="card"><div class="card-title"><h3>Numbers card</h3><span class="hint">orders of magnitude</span></div>${ul(sd.numbers)}</div>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card"><div class="card-title"><h3>Scoring rubric</h3><span class="hint">every mock, 1–4 per axis</span></div>${ol(sd.rubric)}</div>
+          <div class="card"><div class="card-title"><h3>The Google design round</h3><span class="hint">as reported · confirm with your recruiter</span></div>${ol(sd.googleRound)}</div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card"><h3>Exit criteria</h3>${ol(sd.exitCriteria)}</div>
+          <div class="card"><h3>Failure modes</h3>${ol(sd.failureModes)}</div>
+        </div>
+        <div class="card"><h3>Resources</h3><table style="margin-top:8px"><tr><th>Resource</th><th>Use it for</th></tr>${(sd.resources || []).map((r) => `<tr><td><b>${esc(r.name)}</b></td><td>${esc(r.use)}</td></tr>`).join('')}</table></div>
+      </div>`;
   }
 
   // ----- Notes -----
@@ -857,6 +981,7 @@
       <div class="card"><h3>Plan</h3>
         <div class="field" style="margin-top:12px"><label>Plan start date (Monday of week 1)</label><input type="date" id="set-start" value="${s.startDate}"></div>
         <div class="field"><label>Re-do offsets (days, comma-separated)</label><input type="text" id="set-offsets" value="${(s.redoOffsets || [3, 14]).join(', ')}"></div>
+        ${DATA.systemDesign ? `<div class="field"><label>System design start date (Monday of SD week 1 — separate from the DSA plan)</label><input type="date" id="set-sd-start" value="${DATA.systemDesign.startDate || ''}"></div>` : ''}
         <button class="btn primary" id="set-save">Save settings</button>
       </div>
       <div class="stack">
@@ -870,7 +995,7 @@
             <button class="btn ghost" id="btn-export">Download a copy</button>
           </div></div>
         <div class="card"><h3>Danger zone</h3>
-          <p class="muted small" style="margin-top:6px">${solvedCount} problems marked solved, ${Object.keys(DATA.progress).length} progress entries, ${(DATA.drillLog || []).length} drill logs.</p>
+          <p class="muted small" style="margin-top:6px">${solvedCount} problems marked solved, ${Object.keys(DATA.progress).length} progress entries, ${(DATA.drillLog || []).length} drill logs, ${Object.keys((DATA.sdProgress || {}).items || {}).length} system-design sessions.</p>
           <button class="btn danger" id="btn-reset" style="margin-top:10px">Reset all progress</button></div>
       </div></div>`;
   }
@@ -890,6 +1015,9 @@
     if (t.id === 'btn-add-journal') { DATA.notes.journal.push({ date: today(), text: '' }); save(); render(); const ta = document.querySelector(`[data-journal="${DATA.notes.journal.length - 1}"]`); if (ta) ta.focus(); return; }
     const dj = t.closest('[data-del-journal]'); if (dj) { DATA.notes.journal.splice(Number(dj.dataset.delJournal), 1); save(); return render(); }
     const goView = t.closest('[data-go-view]'); if (goView) { UI.view = goView.dataset.goView; return render(); }
+    const sdw = t.closest('[data-sd-week]'); if (sdw && !sdw.disabled) { UI.sdWeek = Number(sdw.dataset.sdWeek); return render(); }
+    const sdo = t.closest('[data-sd-open]'); if (sdo) { const ref = sdo.dataset.sdOpen; UI.sdOpen.add(ref); UI.view = ref.startsWith('c') ? 'sd-concepts' : 'sd-questions'; render(); const card = document.querySelector(`[data-sd-toggle="${ref}"]`); if (card) card.scrollIntoView({ block: 'start', behavior: 'smooth' }); return; }
+    const sdt = t.closest('[data-sd-toggle]'); if (sdt) { const ref = sdt.dataset.sdToggle; if (UI.sdOpen.has(ref)) UI.sdOpen.delete(ref); else UI.sdOpen.add(ref); return render(); }
     const wk = t.closest('[data-week]'); if (wk && !wk.disabled) { UI.week = Number(wk.dataset.week); return render(); }
     const redo = t.closest('[data-redo]'); if (redo) return toggleRedo(redo.dataset.redo, Number(redo.dataset.redoIdx));
     const skip = t.closest('[data-skip]'); if (skip) return toggleRedo(skip.dataset.skip, Number(skip.dataset.redoIdx), true);
@@ -903,6 +1031,7 @@
       const start = $('#set-start').value; if (start) DATA.settings.startDate = start;
       const offs = $('#set-offsets').value.split(',').map((x) => parseInt(x.trim(), 10)).filter((n) => n > 0);
       if (offs.length) DATA.settings.redoOffsets = offs;
+      const sdStart = $('#set-sd-start'); if (sdStart && sdStart.value && DATA.systemDesign) { DATA.systemDesign.startDate = sdStart.value; UI.sdWeek = null; }
       save(); toast('Settings saved'); return render();
     }
     if (t.id === 'btn-export') return downloadCopy();
@@ -910,7 +1039,7 @@
     if (t.id === 'btn-reload') { readFromHandle().then(() => { toast('Reloaded from ' + fileHandle.name); render(); }).catch((err) => toast(err.message)); return; }
     if (t.id === 'btn-reset') {
       if (!resetArmed) { resetArmed = true; t.textContent = 'Click again to confirm reset'; setTimeout(() => { resetArmed = false; if (document.body.contains(t)) t.textContent = 'Reset all progress'; }, 4000); return; }
-      DATA.progress = {}; DATA.drillLog = []; resetArmed = false; save(); toast('Progress reset'); return render();
+      DATA.progress = {}; DATA.drillLog = []; DATA.sdProgress = { items: {}, notes: {} }; resetArmed = false; save(); toast('Progress reset'); return render();
     }
   });
 
@@ -919,6 +1048,7 @@
     if (!writable) { render(); return linkOnGesture(); }
     if (t.dataset.solve) return toggleSolved(t.dataset.solve);
     if (t.dataset.task) return toggleTask(t.dataset.task);
+    if (t.dataset.sdtask) return sdToggle(t.dataset.sdtask);
     if (t.dataset.solvedDate) return setSolvedDate(t.dataset.solvedDate, t.value);
     if (t.dataset.journalDate !== undefined) { const e = DATA.notes.journal[Number(t.dataset.journalDate)]; if (e && t.value) { e.date = t.value; save(); } return; }
   });
@@ -933,6 +1063,7 @@
       return;
     }
     if (t.dataset.triggers !== undefined) { DATA.notes.triggers = t.value; return save(); }
+    if (t.dataset.sdnote !== undefined) return sdSetNote(t.dataset.sdnote, t.value);
     if (t.dataset.journal !== undefined) { const en = DATA.notes.journal[Number(t.dataset.journal)]; if (en) { en.text = t.value; save(); } }
   });
 
