@@ -30,7 +30,7 @@
     const ctx = canvas.getContext('2d');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
-    ctx.font = '12px system-ui, -apple-system, Segoe UI, Roboto, sans-serif';
+    ctx.font = '12px Nunito, system-ui, -apple-system, Segoe UI, sans-serif';
     ctx.lineJoin = 'round';
     return { ctx, w, h };
   }
@@ -83,11 +83,11 @@
     ctx.fillStyle = cssVar('--text', '#e5e7eb');
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = `600 ${Math.max(16, r * 0.42)}px system-ui, sans-serif`;
+    ctx.font = `600 ${Math.max(16, r * 0.42)}px Nunito, system-ui, sans-serif`;
     ctx.fillText(centerText, cx, cy - (subText ? 6 : 0));
     if (subText) {
       ctx.fillStyle = p.text;
-      ctx.font = '12px system-ui, sans-serif';
+      ctx.font = '12px Nunito, system-ui, sans-serif';
       ctx.fillText(subText, cx, cy + Math.max(12, r * 0.22));
     }
   }
@@ -210,7 +210,7 @@
     const p = palette();
     const cols = 7;
     const rows = Math.ceil(cells.length / cols);
-    const padL = 30, padT = 18;
+    const padL = 46, padT = 18;
     const gap = 4;
     const size = Math.min((w - padL) / cols - gap, (h - padT) / rows - gap);
     const max = Math.max(1, ...cells.map((c) => c.value));

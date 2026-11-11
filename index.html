@@ -3,79 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DSA 16-Week Tracker</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3l13 13-13 13L3 16z' fill='%234f46e5'/%3E%3C/svg%3E">
+  <title>DSA Tracker</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%231565a8'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23f2b705' stroke-width='3'/%3E%3Cpath d='M16 4v6M16 22v6M4 16h6M22 16h6' stroke='%23f2b705' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;500;600;700;800;900&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <span class="logo">◆</span>
-        <div>
-          <div class="brand-title">DSA Mastery</div>
-          <div class="brand-sub">Google 2026 plan</div>
+    <div class="topstrip">
+      <span id="brand-sub">Loading…</span>
+      <span class="hud"><b id="hud-lv">LV 1</b><span id="hud-rank">Rookie</span><span class="bar thin"><span id="side-bar" style="width:0%"></span></span><span id="side-pct">0 / 100 XP</span><span id="hud-streak" title="Streak: consecutive days with anything logged">🔥 0</span><span id="hud-hp" title="HP: every overdue re-solve costs 10">❤ 100</span></span>
+      <span class="ts-save"><span class="save-state" id="save-state">●</span><span id="save-text">Not linked</span></span>
+    </div>
+
+    <header class="topbar">
+      <div class="tb-in" id="tabs">
+        <button class="brand" data-view="dashboard" aria-label="DSA Tracker — go to Today">
+          <span class="logo"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M4.9 19.1l2.9-2.9M16.2 7.8l2.9-2.9"/></svg></span>
+          <span>
+            <span class="brand-title" style="display:block">DSA Voyage</span>
+            <span class="brand-sub">Set sail for Google · January</span>
+          </span>
+        </button>
+
+        <nav class="nav" aria-label="Pages">
+          <button class="nav-item active" data-view="dashboard">Today</button>
+          <button class="nav-item" data-view="roadmap">Plan</button>
+          <button class="nav-item" data-view="revision">Revision <span class="pill zero" id="pill-due">0</span></button>
+          <button class="nav-item" data-view="drills">Drills</button>
+          <button class="nav-item" data-view="notes">Notes</button>
+          <button class="nav-item" data-view="guide">Guide</button>
+        </nav>
+
+        <div class="tb-right">
+          <button class="nav-item" data-view="settings">Settings</button>
         </div>
       </div>
-
-      <nav class="nav" id="tabs">
-        <div class="nav-group">DSA</div>
-        <button class="nav-item active" data-view="dashboard">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>
-          <span>Dashboard</span>
-        </button>
-        <button class="nav-item" data-view="roadmap">
-          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
-          <span>Roadmap</span>
-        </button>
-        <button class="nav-item" data-view="revision">
-          <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
-          <span>Revision</span><span class="pill zero" id="pill-due">0</span>
-        </button>
-        <button class="nav-item" data-view="drills">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg>
-          <span>Drills</span>
-        </button>
-        <button class="nav-item" data-view="notes">
-          <svg viewBox="0 0 24 24"><path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13 7l4 4"/></svg>
-          <span>Notes</span>
-        </button>
-        <button class="nav-item" data-view="guide">
-          <svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg>
-          <span>Guide</span>
-        </button>
-        <div class="nav-group">System Design</div>
-        <button class="nav-item sd" data-view="sd">
-          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1.5"/><rect x="14" y="4" width="7" height="6" rx="1.5"/><rect x="8.5" y="15" width="7" height="6" rx="1.5"/><path d="M6.5 10v2.5h11V10M12 12.5V15"/></svg>
-          <span>SD Dashboard</span>
-        </button>
-        <button class="nav-item sd" data-view="sd-concepts">
-          <svg viewBox="0 0 24 24"><path d="M12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5"/><path d="M3 16.5L12 21l9-4.5"/></svg>
-          <span>Concepts</span>
-        </button>
-        <button class="nav-item sd" data-view="sd-questions">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .8-1 1.5V14"/><path d="M12 17h.01"/></svg>
-          <span>Questions</span>
-        </button>
-        <button class="nav-item sd" data-view="sd-guide">
-          <svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6M9 10h6"/></svg>
-          <span>SD Guide</span>
-        </button>
-        <div class="nav-group"></div>
-        <button class="nav-item" data-view="settings">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
-          <span>Settings</span>
-        </button>
-      </nav>
-
-      <div class="side-foot">
-        <div class="today-chip">
-          <div class="tc-label">Today</div>
-          <div class="tc-main" id="brand-sub">Loading…</div>
-        </div>
-        <div class="save-line"><span class="save-state" id="save-state">●</span><span id="save-text" class="muted small">Not linked</span></div>
-      </div>
-    </aside>
+    </header>
 
     <div class="content">
       <div id="banner" class="banner" hidden></div>
@@ -85,14 +51,11 @@
         <section id="view-roadmap" class="view"></section>
         <section id="view-revision" class="view"></section>
         <section id="view-drills" class="view"></section>
-        <section id="view-sd" class="view"></section>
-        <section id="view-sd-concepts" class="view"></section>
-        <section id="view-sd-questions" class="view"></section>
-        <section id="view-sd-guide" class="view"></section>
         <section id="view-notes" class="view"></section>
         <section id="view-guide" class="view"></section>
         <section id="view-settings" class="view"></section>
       </main>
+      <footer class="footer"><div class="f-in"><span>DSA Voyage · show up, do the list, raise the bounty</span><span>Everything is stored in data.json next to this page</span></div></footer>
     </div>
   </div>
 
