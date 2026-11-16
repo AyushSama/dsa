@@ -2336,7 +2336,7 @@
         {
           "label": "+3",
           "due": "2026-11-16",
-          "done": null
+          "done": "2026-11-16"
         },
         {
           "label": "+14",
@@ -2356,7 +2356,7 @@
         {
           "label": "+3",
           "due": "2026-11-16",
-          "done": null
+          "done": "2026-11-16"
         },
         {
           "label": "+14",
@@ -2464,6 +2464,26 @@
       "name": "Binary search on answer — lo/hi + can(x) shell",
       "date": "2026-11-16",
       "minutes": 5
+    },
+    {
+      "name": "BFS by level — size = len(queue) loop",
+      "date": "2026-11-16",
+      "minutes": 5
+    },
+    {
+      "name": "Monotonic stack — next greater / prev smaller, with index bookkeeping",
+      "date": "2026-11-16",
+      "minutes": 10
+    },
+    {
+      "name": "Dijkstra with priority queue — and the path, not just the distance",
+      "date": "2026-11-16",
+      "minutes": 10
+    },
+    {
+      "name": "Memo → tabulation conversion on a 1D DP",
+      "date": "2026-11-16",
+      "minutes": 2
     }
   ],
   "notes": {
@@ -2475,5 +2495,5 @@
       }
     ]
   },
-  "updatedAt": "2026-11-16T05:40:37.510Z"
+  "updatedAt": "2026-11-16T11:09:42.527Z"
 }

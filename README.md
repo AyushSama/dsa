@@ -85,7 +85,7 @@ settings   { startDate, redoOffsets }
 guide      static text; guide.primitives[] { n, name, target, test[ { label, url } ] }
 weeks[]    { week, phase, title, drillFocus[], days[ { day, focus, items[] } ], notes[], checkpoint }
 progress   { "w1d1i0": { solved, redos:[{label, due, done, skipped?}], note } | { done } | { note } }
-drillLog[] { name, date, minutes }
+drillLog[] { name, date, minutes, seconds }   (seconds only on stopwatch-timed entries; minutes = seconds / 60)
 notes      { triggers: "text", journal: [ { date, text } ] }
 updatedAt  ISO timestamp of the last save
 ```

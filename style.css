@@ -308,7 +308,12 @@ label.item { cursor: pointer; }
 .pc-test { font-size: 13.5px; color: var(--text-2); }
 .pc-test a { font-weight: 700; text-decoration: none; }
 .pc-test a:hover { text-decoration: underline; }
-.pc-log { display: flex; gap: 8px; margin-top: auto; padding-top: 10px; }
+.pc-log { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 10px; }
+.pc-log:not(.timing) input { margin-left: auto; }
+.pcard.timing { border-color: var(--accent); box-shadow: var(--ring), var(--shadow); }
+.pc-clock { margin-right: auto; font-weight: 800; font-size: 24px; line-height: 1; font-variant-numeric: tabular-nums; color: var(--accent); }
+.pc-log.stopped .pc-clock { color: var(--green); }
+.pc-clock.over, .pc-log.stopped .pc-clock.over { color: var(--red); }
 .pc-log input { width: 84px; background: var(--panel); border: 1.5px solid var(--border-2); border-radius: 9px; padding: 5px 9px; }
 .pc-log input:focus { outline: none; border-color: var(--accent); box-shadow: var(--ring); }
 .rcard .rtext { font-size: 14px; color: var(--text-2); margin-top: 8px; }

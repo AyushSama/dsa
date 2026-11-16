@@ -347,10 +347,41 @@
     else DATA.progress[id] = { done: today(), note: prev.note || '' };
     save(); render();
   }
-  function logDrill(name, minutes) {
-    DATA.drillLog.push({ name, date: today(), minutes: minutes ? Number(minutes) : null });
+  function logDrill(name, minutes, seconds) {
+    const entry = { name, date: today(), minutes: minutes ? Number(minutes) : null };
+    if (seconds) entry.seconds = seconds;
+    DATA.drillLog.push(entry);
     toast('Drill logged'); save(); render();
   }
+
+  // ----- drill stopwatch -----
+  // Lives in memory only: nothing reaches drillLog until "Log" is pressed, so a botched attempt
+  // can be restarted or discarded without leaving an entry behind.
+  const TIMERS = {}; // primitive name -> { running, start (ms epoch), elapsed (ms, once stopped) }
+  let tickId = null;
+  const timerMs = (t) => (t.running ? Date.now() - t.start : t.elapsed);
+  const clock = (ms) => { const s = Math.floor(ms / 1000); return `${Math.floor(s / 60)}:${pad(s % 60)}`; };
+  const dur = (minutes) => clock(Math.round(minutes * 60) * 1000); // logged minutes -> m:ss
+  function tick() {
+    if (!Object.values(TIMERS).some((t) => t.running)) { clearInterval(tickId); tickId = null; return; }
+    document.querySelectorAll('[data-timer-display]').forEach((el) => {
+      const t = TIMERS[el.dataset.timerDisplay]; if (!t) return;
+      const ms = timerMs(t);
+      el.textContent = clock(ms);
+      el.classList.toggle('over', ms > Number(el.dataset.target) * 60000);
+    });
+  }
+  function timerStart(name) { TIMERS[name] = { running: true, start: Date.now(), elapsed: 0 }; if (!tickId) tickId = setInterval(tick, 250); render(); }
+  function timerStop(name) { const t = TIMERS[name]; if (!t || !t.running) return; t.elapsed = Date.now() - t.start; t.running = false; render(); }
+  function timerDiscard(name) { delete TIMERS[name]; render(); }
+  function timerLog(name) {
+    const t = TIMERS[name]; if (!t || t.running) return;
+    const seconds = Math.floor(t.elapsed / 1000);
+    if (seconds < 1) return toast('Nothing timed yet');
+    delete TIMERS[name];
+    logDrill(name, Math.round((seconds / 60) * 100) / 100, seconds);
+  }
+  window.addEventListener('beforeunload', (e) => { if (Object.keys(TIMERS).length) { e.preventDefault(); e.returnValue = ''; } });
 
   // ---------- rendering ----------
   const $ = (sel) => document.querySelector(sel);
@@ -881,13 +912,20 @@
     const pcard = (x) => {
       const p = x.p; const key = esc(p.name);
       const sched = (DATA.guide.drillSchedule || []).find((d) => d.prims.includes(p.n) || (d.optional || []).includes(p.n));
-      const status = x.lastMin !== null ? `<span class="badge ${x.lastMin <= p.target ? 'green' : 'amber'}">${x.lastMin <= p.target ? 'at target' : `${x.lastMin - p.target} min over`}</span>` : x.mine.length ? '<span class="badge">logged</span>' : '<span class="badge">not drilled yet</span>';
-      return `<div class="card pcard ${sched && sched.weekday === todayName ? 'today' : ''}">
+      const status = x.lastMin !== null ? `<span class="badge ${x.lastMin <= p.target ? 'green' : 'amber'}">${x.lastMin <= p.target ? 'at target' : `${dur(x.lastMin - p.target)} over`}</span>` : x.mine.length ? '<span class="badge">logged</span>' : '<span class="badge">not drilled yet</span>';
+      const tm = TIMERS[p.name]; const ms = tm ? timerMs(tm) : 0;
+      const logRow = !tm
+        ? `<div class="pc-log"><button class="btn small primary" data-timer-start="${key}" title="Start the stopwatch for this drill">▶ Start</button><input type="number" min="1" max="120" placeholder="min" aria-label="Minutes taken (manual entry)" data-minutes="${key}"><button class="btn small" data-drill="${key}" title="Log without the timer">Log</button></div>`
+        : `<div class="pc-log timing ${tm.running ? 'running' : 'stopped'}"><span class="pc-clock ${ms > p.target * 60000 ? 'over' : ''}" data-timer-display="${key}" data-target="${p.target}">${clock(ms)}</span>
+            ${tm.running ? `<button class="btn small primary" data-timer-stop="${key}">Stop</button>` : `<button class="btn small primary" data-timer-log="${key}">Log ${clock(ms)}</button>`}
+            <button class="btn small" data-timer-start="${key}" title="Throw this attempt away and start again from 0:00">Restart</button>
+            <button class="btn small ghost" data-timer-discard="${key}" title="Discard this attempt without logging" aria-label="Discard this attempt">✕</button></div>`;
+      return `<div class="card pcard ${sched && sched.weekday === todayName ? 'today' : ''} ${tm ? 'timing' : ''}">
         <div class="pc-head"><span class="pc-n">#${p.n}</span>${sched ? `<span class="pc-day">${esc(sched.weekday.slice(0, 3))}</span>` : ''}${status}</div>
         <div class="pc-name">${key}</div>
-        <div class="pc-meta">Target ${p.target} min${x.mine.length ? ` · ${x.mine.length}× · last ${fmt(x.last.date)}${x.best !== null ? ` · best ${x.best} min` : ''}` : ''}</div>
+        <div class="pc-meta">Target ${p.target} min${x.mine.length ? ` · ${x.mine.length}× · last ${fmt(x.last.date)}${x.best !== null ? ` · best ${dur(x.best)}` : ''}` : ''}</div>
         ${p.test && p.test.length ? `<div class="pc-test">Test on: ${p.test.map((t) => `<a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)}</a>`).join(' · ')}</div>` : ''}
-        <div class="pc-log"><input type="number" min="1" max="120" placeholder="min" aria-label="Minutes taken" data-minutes="${key}"><button class="btn small primary" data-drill="${key}">Log</button></div>
+        ${logRow}
       </div>`;
     };
     const rotation = (DATA.guide.drills || []).map((d) => {
@@ -920,7 +958,7 @@
         <div class="wk-board">${board}</div>
       </section>
       <section class="section">
-        <div class="section-head left"><h2>All primitives</h2><p>Write it from a blank file, submit it to the test problem, then log the minutes.</p></div>
+        <div class="section-head left"><h2>All primitives</h2><p>Start the timer, write it from a blank file, submit it to the test problem, then stop and log. Nothing is logged until you press Log, so restart a botched attempt freely.</p></div>
         <div class="pgrid">${info.map(pcard).join('')}</div>
       </section>
       <section class="section"><details class="more"><summary>Rotation drills · the weekday extras</summary>
@@ -931,8 +969,8 @@
         <div class="card"><div class="card-title"><h3>Drills per week</h3><span class="hint">logged attempts</span></div><canvas id="c-drills" class="chart short"></canvas>
           <div class="card-title" style="margin-top:18px"><h3>Variant prompts</h3><span class="hint">after every solve</span></div>
           <div class="row wrap" style="gap:6px">${DATA.guide.variantPrompts.map((v) => `<span class="chip">${esc(v)}</span>`).join('')}</div></div>
-        <div class="card"><div class="card-title"><h3>Recent log</h3><span class="hint">last ${recent.length}</span></div>${recent.length ? `<table><tr><th>Date</th><th>Drill</th><th>Min</th><th></th></tr>
-          ${recent.map((l) => `<tr><td>${fmt(l.date)}</td><td>${esc(l.name)}</td><td>${l.minutes || '—'}</td><td><button class="btn small ghost" data-del-drill="${log.indexOf(l)}" aria-label="Delete this log entry">✕</button></td></tr>`).join('')}</table>` : '<div class="empty">No drills logged yet</div>'}</div>
+        <div class="card"><div class="card-title"><h3>Recent log</h3><span class="hint">last ${recent.length}</span></div>${recent.length ? `<table><tr><th>Date</th><th>Drill</th><th>Time</th><th></th></tr>
+          ${recent.map((l) => `<tr><td>${fmt(l.date)}</td><td>${esc(l.name)}</td><td>${l.minutes ? dur(l.minutes) : '—'}</td><td><button class="btn small ghost" data-del-drill="${log.indexOf(l)}" aria-label="Delete this log entry">✕</button></td></tr>`).join('')}</table>` : '<div class="empty">No drills logged yet</div>'}</div>
       </div></section>`;
     Charts.bars($('#c-drills'), perWeek, { yMax: Math.max(4, ...perWeek.map((p) => p.value)), ticks: 2 });
   }
@@ -1056,6 +1094,10 @@
     const redo = t.closest('[data-redo]'); if (redo) return toggleRedo(redo.dataset.redo, Number(redo.dataset.redoIdx));
     const skip = t.closest('[data-skip]'); if (skip) return toggleRedo(skip.dataset.skip, Number(skip.dataset.redoIdx), true);
     const rq = t.closest('[data-requeue]'); if (rq) return requeue(rq.dataset.requeue);
+    const ts = t.closest('[data-timer-start]'); if (ts) return timerStart(ts.dataset.timerStart);
+    const tp = t.closest('[data-timer-stop]'); if (tp) return timerStop(tp.dataset.timerStop);
+    const tl = t.closest('[data-timer-log]'); if (tl) return timerLog(tl.dataset.timerLog);
+    const td = t.closest('[data-timer-discard]'); if (td) return timerDiscard(td.dataset.timerDiscard);
     const drill = t.closest('[data-drill]'); if (drill) {
       const inp = document.querySelector(`[data-minutes="${CSS.escape(drill.dataset.drill)}"]`);
       return logDrill(drill.dataset.drill, inp && inp.value);
