@@ -1,6 +1,6 @@
 # DSA Tracker — DP + conversion plan
 
-Plain HTML/CSS/JS site for an 11-week plan to the end of January (started Thu 12 Nov 2026).
+Plain HTML/CSS/JS site for an 11-week plan to the end of January (started Fri 13 Nov 2026).
 Weeks 1–6: two new DP problems a day, two concept-touch problems a day to keep every other topic
 warm, and daily timed drills. Weeks 7–11: every other topic, one family a week — three named
 problems a day on the clock, three mocks a week, interview scenarios and Googleyness on alternate days. No framework, no backend, no database, no browser storage.
@@ -43,10 +43,14 @@ The site has a status strip, a sticky navigation bar and seven pages. Every page
   when solved; that schedules re-solves on **+3** and **+14** days. **↻ redo** re-queues +3/+14; a second
   failure adds **+30**. **G** marks problems verified high-frequency in Google interview reports; items with
   a topic badge are concept-touch problems (25 minutes, not re-queued). A plan week starts on the weekday
-  of the start date (here Thursday): 5 working days, a contest day (Saturday) and a rest day (Sunday).
+  of the start date (here Friday): 5 working days, a contest day (Saturday) and a rest day (Sunday).
 - **Revision** — what is due now, the next 7 days grouped by date, later, and recently completed.
-- **Drills** — the weekday board (`guide.drillSchedule`, one family of primitives a day), every primitive
-  as a card with its target, best time, **test problem** links and a log box, and the rotation drills.
+- **Drills** — the weekday board (`guide.drillSchedule`: five primitives a day, each from a different
+  topic, every primitive once a week), every primitive as a card with its target, best time,
+  **test problem** links and a log box, and the rotation drills.
+  `rotationUntilWeek` on a schedule day drops its weekday extra after that week.
+  Primitives named `(optional)` sit on the board through a day's `optional` list, are marked optional,
+  and do not count towards the at-target total.
 - **Notes** — trigger notes, per-problem notes and a dated journal.
 - **Guide** — a contents rail and sections: the Google process as checked on 11 Nov 2026, rules, daily
   templates, drills, exit criteria, questions for the recruiter, resources.

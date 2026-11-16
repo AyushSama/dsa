@@ -1,6 +1,6 @@
 {
   "settings": {
-    "startDate": "2026-11-12",
+    "startDate": "2026-11-13",
     "redoOffsets": [
       3,
       14
@@ -8,7 +8,7 @@
     "theme": "light"
   },
   "guide": {
-    "intro": "Plan to the end of January, started Thu 12 Nov 2026. Weeks 1–6: DP in depth — 60 problems, two new a day — with two concept-touch problems a day (a graph problem every day for the first four weeks) and daily blind-primitive drills. Weeks 7–11: every other topic, one family a week — 75 named problems on the clock, 15 mocks, with interview scenarios and Googleyness on alternate days. Shaped by the Google process as reported in November 2026.",
+    "intro": "Plan to the end of January, started Fri 13 Nov 2026. Weeks 1–6: DP in depth — 60 problems, two new a day — with two concept-touch problems a day (a graph problem every day for the first four weeks) and daily blind-primitive drills. Weeks 7–11: every other topic, one family a week — 75 named problems on the clock, 15 mocks, with interview scenarios and Googleyness on alternate days. Shaped by the Google process as reported in November 2026.",
     "phases": {
       "1": "DP — foundations",
       "2": "DP — core and advanced",
@@ -135,12 +135,12 @@
       },
       {
         "block": "D — Drill",
-        "duration": "45m",
-        "content": "The weekday's family of blind primitives (about 20 min): Mon search & windows · Tue trees & BFS · Wed graphs · Thu DP · Fri stacks, trie, backtracking, quickselect. Each checked on its test problem. Plus the rotation: Tue debug hunt · Wed code quality · Thu ambiguity drill · Fri code comprehension · Sat cold-combo."
+        "duration": "25–55m",
+        "content": "The weekday's five blind primitives (22 to 25 min, on a stopwatch), each from a different topic: the Drills tab shows the day's five. Every primitive comes up once a week, none twice. Each checked on its test problem. Plus the weekday extra: Tue debug hunt · Wed code quality · Thu ambiguity drill · Fri code comprehension · Sat cold-combo (weeks 1–6)."
       }
     ],
     "dailyNotes": [
-      "Weekly shape: 5 working days (Thu, Fri, Mon, Tue, Wed) + contest on Saturday + rest on Sunday. Week 1 starts on a Thursday, so every plan week runs Thursday to Wednesday.",
+      "Weekly shape: 5 working days (Fri, Mon, Tue, Wed, Thu) + contest on Saturday + rest on Sunday. Week 1 starts on a Friday, so every plan week runs Friday to Thursday.",
       "Contest day (3h): 90-min LeetCode weekly or biweekly, 90-min post-mortem solving everything missed, untimed. Then stop.",
       "Touch block: a graph problem every working day in weeks 1–4 (union-find and Dijkstra first — that week was never re-solved), plus one from the rotation trees · strings · prefix/stack/intervals · binary search · heaps · backtracking · linked lists/design.",
       "Weeks 7–11 take one topic family a week (strings · arrays · binary search and heaps · linked lists, design and bits · graphs, trees and backtracking). Every problem, scenario, mock and story is named on its day. Scenario and Googleyness alternate days."
@@ -149,7 +149,7 @@
       {
         "block": "A",
         "duration": "1h 45m",
-        "content": "The day's 3 named problems from the week's topic, 35 minutes each on a hard clock, spoken aloud, brute force first, one follow-up variant each. Fri and Tue on paper or a whiteboard."
+        "content": "The day's 3 named problems from the week's topic, 35 minutes each on a hard clock, spoken aloud, brute force first, one follow-up variant each. Mon and Wed on paper or a whiteboard."
       },
       {
         "block": "B",
@@ -163,8 +163,8 @@
       },
       {
         "block": "D",
-        "duration": "45m",
-        "content": "Mock interview on the named problem (Thu, Mon, Wed), unopened until the clock starts · blind primitives (Fri, Tue)."
+        "duration": "25m–1h 10m",
+        "content": "The day's five blind primitives every working day, as on the Drills board (22 to 25 min). On Fri, Tue and Thu add the mock interview on the named problem (45 min), unopened until the clock starts."
       }
     ],
     "drills": [
@@ -191,8 +191,8 @@
       },
       {
         "name": "Blind primitives",
-        "when": "Daily · 20 min · the weekday's family",
-        "text": "One family a day, the same every week: Monday search & windows, Tuesday trees & BFS, Wednesday graphs, Thursday DP, Friday stacks, trie, backtracking and quickselect. Every primitive comes up once a week. Instantiate, don't stub. Verify every attempt by submitting it to the test problem listed under the primitive. Still over target on Friday? Repeat that one on Saturday inside the cold-combo."
+        "when": "Daily · about 25 min · five topics a day · stopwatch",
+        "text": "Five primitives a day, each from a different topic, the same every week. Binary search, windows, trees, graphs, DP and stacks all come up on two or three separate days, so no topic goes a week untouched, and no primitive appears twice in a week. The DP primitives are on Monday, Wednesday and Friday. Instantiate, don't stub. Time every attempt with a stopwatch and log the real number: a rounded guess makes the at-target badge meaningless. Verify every attempt by submitting it to the test problem listed under the primitive. KMP (Monday), Fenwick tree (Wednesday) and segment tree (Friday) are on the board as optional extras: do them after the day’s five. The five primitives take 22 to 25 minutes; the weekday extra (Tuesday to Friday) adds 20 to 30 on top. When the day runs short, cut the weekday extra first, never a re-solve."
       },
       {
         "name": "Debug hunt",
@@ -202,7 +202,7 @@
       {
         "name": "Code quality pass",
         "when": "Wednesdays · 20 min",
-        "text": "Rewrite two of the week's solutions as if for code review: descriptive names, extracted helpers, guard clauses, no magic numbers. Could an interviewer follow this while you narrate? Google grades readability explicitly."
+        "text": "Rewrite two of the week’s solutions as if for code review: descriptive names, extracted helpers, guard clauses, no magic numbers. Could an interviewer follow this while you narrate? Google grades readability explicitly."
       },
       {
         "name": "Code comprehension",
@@ -211,8 +211,8 @@
       },
       {
         "name": "Cold-combo",
-        "when": "Saturdays · 30 min",
-        "text": "Write a primitive inside an actual problem under time pressure, rather than in isolation. The check against a skeleton becoming its own memorised artifact."
+        "when": "Saturdays · 30 min · weeks 1–6 only",
+        "text": "Write a primitive inside an actual problem under time pressure, rather than in isolation. The check against a skeleton becoming its own memorised artifact. Stops after week 6: from week 7 the three timed problems a day and the mocks do the same job."
       }
     ],
     "bugLog": "Every failed primitive attempt gets one line, e.g. \"Dijkstra — forgot to skip stale PQ entries on pop\". This selects your first two primitives each day; after a month it maps your personal bug fingerprint. Keep it in Notes.",
@@ -518,6 +518,54 @@
         ]
       },
       {
+        "n": 26,
+        "name": "Heap top-K — size-k min-heap, then k-way merge with (value, source) entries",
+        "target": 6,
+        "short": "Heap top-K / k-way merge",
+        "test": [
+          {
+            "label": "LC 347 · Top K Frequent Elements",
+            "url": "https://leetcode.com/problems/top-k-frequent-elements/"
+          },
+          {
+            "label": "LC 23 · Merge k Sorted Lists",
+            "url": "https://leetcode.com/problems/merge-k-sorted-lists/"
+          }
+        ]
+      },
+      {
+        "n": 27,
+        "name": "Merge intervals — sort by start, extend or push; then a +1 / −1 sweep line",
+        "target": 5,
+        "short": "Merge intervals / sweep line",
+        "test": [
+          {
+            "label": "LC 56 · Merge Intervals",
+            "url": "https://leetcode.com/problems/merge-intervals/"
+          },
+          {
+            "label": "LC 1094 · Car Pooling",
+            "url": "https://leetcode.com/problems/car-pooling/"
+          }
+        ]
+      },
+      {
+        "n": 28,
+        "name": "Linked-list reversal — iterative prev / cur / next, then reverse a sub-range",
+        "target": 5,
+        "short": "Linked-list reversal",
+        "test": [
+          {
+            "label": "LC 206 · Reverse Linked List",
+            "url": "https://leetcode.com/problems/reverse-linked-list/"
+          },
+          {
+            "label": "LC 92 · Reverse Linked List II",
+            "url": "https://leetcode.com/problems/reverse-linked-list-ii/"
+          }
+        ]
+      },
+      {
         "n": 23,
         "name": "Segment tree — build / point update / range query (optional)",
         "target": 10,
@@ -558,7 +606,7 @@
         ]
       }
     ],
-    "primitivesGoal": "Blank file, zero reference, timed. The 22 primitives are split by weekday, one family a day, so each comes up once a week — the split is on the right. Targets are fluency targets, not learning targets. Each primitive lists a test problem: paste what you wrote and submit it, so correctness is checked by a judge and not by eye.",
+    "primitivesGoal": "Blank file, zero reference, timed. The 25 primitives are split five a day, each from a different topic, so every primitive comes up once a week and every topic two or three times. Targets are fluency targets, not learning targets. Each primitive lists a test problem: paste what you wrote and submit it, so correctness is checked by a judge and not by eye.",
     "variantPrompts": [
       "Negatives allowed",
       "Streaming input",
@@ -700,78 +748,84 @@
     "drillSchedule": [
       {
         "weekday": "Monday",
-        "theme": "Search & windows",
+        "theme": "Binary search · BFS · stack · Dijkstra · DP",
         "prims": [
           1,
-          2,
-          3,
-          4,
-          5
+          8,
+          6,
+          18,
+          19
         ],
-        "why": "Start the week with the array templates: the shortest ones, and the ones every other topic leans on."
+        "why": "Five topics, one primitive each. Dijkstra is the longest on the board, so it sits on a day with no extra drill. KMP is the optional extra: the only string-matching primitive on the board.",
+        "optional": [
+          25
+        ]
       },
       {
         "weekday": "Tuesday",
-        "theme": "Trees & BFS",
+        "theme": "Window · grid DFS · backtracking · union-find · heap",
         "prims": [
-          8,
-          9,
+          3,
           10,
-          11,
-          12
+          14,
+          15,
+          26
         ],
         "rotation": "Debug hunt",
-        "why": "Traversal shells. Tuesday is debug-hunt day, and these are where off-by-one and visited bugs hide."
+        "why": "The lightest mix, because Tuesday also carries the debug hunt."
       },
       {
         "weekday": "Wednesday",
-        "theme": "Graphs",
+        "theme": "Search on answer · tree · trie · topo sort · DP",
         "prims": [
-          15,
+          2,
+          11,
+          13,
           16,
-          17,
-          18
+          20
         ],
-        "rotation": "Code quality pass",
-        "why": "The most-asked topic in 2026 rounds and the longest primitives, so they get the middle of the week to themselves."
+        "why": "Second touch of binary search, graphs and DP for the week, each with a different primitive from Monday. Fenwick tree is the optional extra.",
+        "optional": [
+          24
+        ],
+        "rotation": "Code quality pass"
       },
       {
         "weekday": "Thursday",
-        "theme": "Dynamic programming",
+        "theme": "Counting window · inorder · deque · cycle detection · linked list",
         "prims": [
-          19,
-          20,
-          21
-        ],
-        "optional": [
-          23,
-          24
+          4,
+          12,
+          7,
+          17,
+          28
         ],
         "rotation": "Ambiguity drill",
-        "why": "Shortest list, because Thursday also carries the ambiguity drill. Segment and Fenwick trees are optional extras here."
+        "why": "Short primitives, because Thursday also carries the ambiguity drill."
       },
       {
         "weekday": "Friday",
-        "theme": "Stacks, trie, backtracking, selection",
+        "theme": "Intervals · BFS path · quickselect · LIS · prefix sums",
         "prims": [
-          6,
-          7,
-          13,
-          14,
-          22
+          27,
+          9,
+          22,
+          21,
+          5
         ],
+        "why": "Third DP touch of the week, plus the remaining array, graph and selection primitives. Segment tree is the optional extra.",
         "optional": [
-          25
+          23
         ],
-        "rotation": "Code comprehension",
-        "why": "Everything that is not a search, a traversal or a table. KMP is the optional extra."
+        "rotation": "Code comprehension"
       },
       {
         "weekday": "Saturday",
         "theme": "Contest day",
         "prims": [],
         "rotation": "Cold-combo",
-        "why": "No isolated primitives: write one inside a real problem after the contest."
+        "why": "No isolated primitives. Weeks 1–6: write one inside a real problem after the contest. From week 7 the timed problems and mocks do that job.",
+        "rotationUntilWeek": 6
       }
     ]
   },
@@ -805,6 +859,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "Kadane family",
           "items": [
             "Maximum Subarray",
@@ -818,26 +892,6 @@
               "name": "Longest Substring Without Repeating Characters",
               "type": "task",
               "topic": "Strings & sliding window"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
-              "type": "task"
             }
           ]
         },
@@ -936,6 +990,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "0/1 knapsack, variants",
           "items": [
             "Last Stone Weight II",
@@ -949,26 +1023,6 @@
               "name": "Generate Parentheses",
               "type": "task",
               "topic": "Backtracking"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
-              "type": "task"
             }
           ]
         },
@@ -1069,6 +1123,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "Chains",
           "items": [
             "Longest String Chain",
@@ -1082,26 +1156,6 @@
               "name": "Find First and Last Position of Element in Sorted Array",
               "type": "task",
               "topic": "Binary search"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
-              "type": "task"
             }
           ]
         },
@@ -1204,6 +1258,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "Two sequences, hard",
           "items": [
             {
@@ -1220,26 +1294,6 @@
               "name": "Binary Search Tree Iterator",
               "type": "task",
               "topic": "Trees"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
-              "type": "task"
             }
           ]
         },
@@ -1338,6 +1392,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "Interval DP",
           "items": [
             {
@@ -1355,26 +1429,6 @@
               "name": "Expression Add Operators",
               "type": "task",
               "topic": "Backtracking"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
-              "type": "task"
             }
           ]
         },
@@ -1473,6 +1527,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "DP on a DAG · sort + binary search",
           "items": [
             "Longest Increasing Path in a Matrix",
@@ -1487,26 +1561,6 @@
               "name": "Remove Invalid Parentheses",
               "type": "task",
               "topic": "Backtracking"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
-              "type": "task"
             }
           ]
         },
@@ -1608,6 +1662,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "Window, harder · paper day",
           "items": [
             "Permutation in String",
@@ -1619,26 +1693,6 @@
             },
             {
               "name": "G · Googleyness, 30 min: Write two stories: unclear requirements (ambiguity) · negative feedback and what you changed",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
@@ -1704,7 +1758,7 @@
         }
       ],
       "notes": [
-        "No new DP from here. Weeks 7–11 take one topic family a week, three named problems a day, all on a 35-minute clock, spoken aloud. Tuesdays and Fridays are on paper or a whiteboard: no editor, no run button.",
+        "No new DP from here. Weeks 7–11 take one topic family a week, three named problems a day, all on a 35-minute clock, spoken aloud. Mondays and Wednesdays are on paper or a whiteboard: no editor, no run button.",
         "The scenario block (C) and Googleyness (G) alternate days. Mock days are Thursday, Monday and Wednesday: do not open the mock problem before the 45-minute clock starts.",
         "One sliding-window template: expand right, shrink while invalid, record after the shrink. \"Exactly k\" is atMost(k) − atMost(k−1). Shortest Subarray with Sum at Least K breaks the template because of negatives: it needs a monotonic deque over prefix sums.",
         "Text Justification and atoi are pure edge-case problems — exactly the careful boundary handling Google grades."
@@ -1743,6 +1797,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "Monotonic stack · paper day",
           "items": [
             "Daily Temperatures",
@@ -1754,26 +1828,6 @@
             },
             {
               "name": "C · Scenario: Remove exactly one element, then decide whether the rest splits into two parts with equal sums (reported 2026, L3 onsite)",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
@@ -1850,7 +1904,8 @@
       "drillFocus": [
         5,
         6,
-        7
+        7,
+        27
       ],
       "checkpoint": "Prefix + hashmap, monotonic stack and monotonic deque blind at target time. Measurement set 7/10 or better; below that, the two weakest topics in the misses replace Block A on the first two days of week 9."
     },
@@ -1882,6 +1937,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "Binary search, hard & interactive · paper day",
           "items": [
             "Kth Smallest Element in a Sorted Matrix",
@@ -1893,26 +1968,6 @@
             },
             {
               "name": "G · Googleyness, 30 min: Rehearse aloud, 2 minutes each: ambiguity, feedback, conflict, deadline — three cross-questions on each",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
@@ -1989,7 +2044,8 @@
       "drillFocus": [
         1,
         2,
-        22
+        22,
+        26
       ],
       "checkpoint": "Binary search first-true, the can(x) shell and quickselect blind at target time. Find Median from Data Stream re-solved from a blank file."
     },
@@ -2021,6 +2077,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "Design · paper day",
           "items": [
             "Min Stack",
@@ -2032,26 +2108,6 @@
             },
             {
               "name": "C · Scenario: Design the core of a text editor: cursor moves, insert, delete, undo. Choose the data structures and defend them (reported 2026, L4 screen)",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
@@ -2128,7 +2184,8 @@
       ],
       "drillFocus": [
         23,
-        24
+        24,
+        28
       ],
       "checkpoint": "LRU Cache re-solved from a blank file in 20 minutes. Measurement set 8/10."
     },
@@ -2160,6 +2217,26 @@
         },
         {
           "day": 2,
+          "focus": "Contest",
+          "items": [
+            {
+              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "focus": "Rest",
+          "items": [
+            {
+              "name": "Full rest day. Skipping it costs two weeks you do not have.",
+              "type": "task"
+            }
+          ]
+        },
+        {
+          "day": 4,
           "focus": "Graphs — ordering and weighted paths · paper day",
           "items": [
             "Find All People With Secret",
@@ -2171,26 +2248,6 @@
             },
             {
               "name": "G · Googleyness, 30 min: Full mock round with another person asking and cross-questioning",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 3,
-          "focus": "Contest",
-          "items": [
-            {
-              "name": "LeetCode weekly or biweekly contest (90 min) + 90-min post-mortem solving everything missed. Then stop.",
-              "type": "task"
-            }
-          ]
-        },
-        {
-          "day": 4,
-          "focus": "Rest",
-          "items": [
-            {
-              "name": "Full rest day. Skipping it costs two weeks you do not have.",
               "type": "task"
             }
           ]
@@ -2268,8 +2325,147 @@
       "checkpoint": "Dijkstra, Union-Find and both topological sorts blind in under 8 minutes each. Every exit criterion in the Guide ticked or scheduled for a repeat."
     }
   ],
-  "progress": {},
-  "drillLog": [],
+  "progress": {
+    "w1d1i2": {
+      "done": "2026-11-13",
+      "note": ""
+    },
+    "w1d1i0": {
+      "solved": "2026-11-13",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-11-16",
+          "done": null
+        },
+        {
+          "label": "+14",
+          "due": "2026-11-27",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w1d1i3": {
+      "done": "2026-11-13",
+      "note": ""
+    },
+    "w1d1i1": {
+      "solved": "2026-11-13",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-11-16",
+          "done": null
+        },
+        {
+          "label": "+14",
+          "due": "2026-11-27",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w1d1i4": {
+      "done": "2026-11-13",
+      "note": ""
+    },
+    "w1d4i0": {
+      "solved": "2026-11-14",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-11-17",
+          "done": null
+        },
+        {
+          "label": "+14",
+          "due": "2026-11-28",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w1d4i1": {
+      "solved": "2026-11-14",
+      "redos": [
+        {
+          "label": "+3",
+          "due": "2026-11-17",
+          "done": null
+        },
+        {
+          "label": "+14",
+          "due": "2026-11-28",
+          "done": null
+        }
+      ],
+      "note": ""
+    },
+    "w1d4i3": {
+      "done": "2026-11-14",
+      "note": ""
+    },
+    "w1d4i2": {
+      "done": "2026-11-16",
+      "note": ""
+    },
+    "w1d2i0": {
+      "done": "2026-11-16",
+      "note": ""
+    },
+    "w1d3i0": {
+      "done": "2026-11-16",
+      "note": ""
+    }
+  },
+  "drillLog": [
+    {
+      "name": "Monotonic stack — next greater / prev smaller, with index bookkeeping",
+      "date": "2026-11-13",
+      "minutes": 5
+    },
+    {
+      "name": "Trie — insert / search / startsWith",
+      "date": "2026-11-13",
+      "minutes": 5
+    },
+    {
+      "name": "Quickselect — write partition once, reuse it",
+      "date": "2026-11-13",
+      "minutes": 10
+    },
+    {
+      "name": "Backtracking shell — choose → explore → un-choose, with duplicate skip",
+      "date": "2026-11-13",
+      "minutes": 10
+    },
+    {
+      "name": "KMP prefix function (optional)",
+      "date": "2026-11-13",
+      "minutes": 15
+    },
+    {
+      "name": "Monotonic deque — sliding window maximum",
+      "date": "2026-11-13",
+      "minutes": 10
+    },
+    {
+      "name": "Code comprehension",
+      "date": "2026-11-13",
+      "minutes": null
+    },
+    {
+      "name": "Binary search, first-true form (one template — derive last-true from it)",
+      "date": "2026-11-16",
+      "minutes": 2
+    },
+    {
+      "name": "Binary search on answer — lo/hi + can(x) shell",
+      "date": "2026-11-16",
+      "minutes": 5
+    }
+  ],
   "notes": {
     "triggers": "",
     "journal": [
@@ -2279,5 +2475,5 @@
       }
     ]
   },
-  "updatedAt": "2026-11-11T13:27:00.947Z"
+  "updatedAt": "2026-11-16T05:40:37.510Z"
 }

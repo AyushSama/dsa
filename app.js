@@ -422,6 +422,7 @@
   }
   function achievements(g) {
     const a = (icon, name, desc, have, goal) => ({ icon, name, desc, have: Math.min(have, goal), goal, done: have >= goal });
+    const corePrims = DATA.guide.primitives.filter((p) => !/\(optional\)/.test(p.name)).length;
     return [
       a('⚔️', 'First Blood', 'Solve your first problem', g.solved, 1),
       a('✅', 'Clean Sweep', 'Clear every quest in a day', g.daysCleared, 1),
@@ -433,7 +434,7 @@
       a('🧩', 'Half Century', 'Solve 50 problems', g.solved, 50),
       a('💯', 'Centurion', 'Solve 100 problems', g.solved, 100),
       a('🧰', 'Sharp Tools', '10 primitives at target time', g.atTarget, 10),
-      a('🗡️', 'Full Arsenal', 'All 22 primitives at target time', g.atTarget, 22),
+      a('🗡️', 'Full Arsenal', `All ${corePrims} primitives at target time`, g.atTarget, corePrims),
       a('🏟️', 'Contender', 'Sit 5 contests', g.contests, 5),
       a('🎤', 'Sparring Partner', 'Finish 5 mock interviews', g.mocks, 5),
       a('👑', 'Final Boss', 'Finish all 15 mock interviews', g.mocks, 15),
@@ -482,6 +483,17 @@
   const stat = (value, label, cls = '') => `<div class="s ${cls}"><div class="v">${value}</div><div class="l">${label}</div></div>`;
   function dayDone(w, day) { let n = 0; day.items.forEach((it, i) => { const p = DATA.progress[itemId(w, day.day, i)]; if (p && (p.solved || p.done)) n++; }); return n; }
   function mondayOfThisWeek() { return addDays(today(), -((new Date().getDay() + 6) % 7)); }
+  // The weekday board as it applies this plan week: a `rotationUntilWeek` extra drops off after that week.
+  // `since` is the date from which a log counts as "done" for that day's chips.
+  function drillBoard() {
+    const week = currentPosition().week;
+    const monday = mondayOfThisWeek();
+    return (DATA.guide.drillSchedule || []).map((d) => {
+      const out = Object.assign({}, d, { since: monday });
+      if (d.rotationUntilWeek && week > d.rotationUntilWeek) delete out.rotation;
+      return out;
+    });
+  }
 
   // ----- Item row (shared by Today and Plan) -----
   function renderItem(w, d, i, raw) {
@@ -545,7 +557,7 @@
     const gProblems = rows.filter((x) => x.it.type === 'problem');
     const gTouch = rows.filter((x) => x.it.type !== 'problem' && x.it.topic);
     const gTasks = rows.filter((x) => x.it.type !== 'problem' && !x.it.topic);
-    const sched = (DATA.guide.drillSchedule || []).find((d) => d.weekday === FULL_DAYS[new Date().getDay()]);
+    const sched = drillBoard().find((d) => d.weekday === FULL_DAYS[new Date().getDay()]);
     const byN = Object.fromEntries(DATA.guide.primitives.map((p) => [p.n, p]));
     const monday = mondayOfThisWeek();
     const log = DATA.drillLog || [];
@@ -668,8 +680,9 @@
             ${block(gProblems.length || gTouch.length ? '+' : '•', isContest ? 'Contest' : isRest ? 'Rest' : 'Tasks', 'tick when done', gTasks)}
             ${!todayDay ? '<div class="card"><div class="empty">Nothing scheduled</div></div>' : ''}
             <div class="card block"><div class="block-head"><span class="block-tag d">D</span><h3>Drills · ${esc(FULL_DAYS[new Date().getDay()])}</h3><button class="btn small" data-go-view="drills">Log drills</button></div>
-              ${sched && (sched.prims.length || sched.rotation) ? `<p class="muted small" style="margin-bottom:10px">${esc(sched.theme)}</p>
-                <div class="row wrap" style="gap:6px">${sched.prims.map((n) => { const p = byN[n]; if (!p) return ''; const done = log.some((l) => l.name === p.name && l.date >= monday); return `<span class="chip ${done ? 'done' : ''}" title="${esc(p.name)} · target ${p.target} min">#${n} ${esc(p.short || p.name)}</span>`; }).join('')}
+              ${!isRest && sched && (sched.prims.length || sched.rotation) ? `<p class="muted small" style="margin-bottom:10px">${esc(sched.theme)}</p>
+                <div class="row wrap" style="gap:6px">${sched.prims.map((n) => { const p = byN[n]; if (!p) return ''; const done = log.some((l) => l.name === p.name && l.date >= sched.since); return `<span class="chip ${done ? 'done' : ''}" title="${esc(p.name)} · target ${p.target} min">#${n} ${esc(p.short || p.name)}</span>`; }).join('')}
+                ${(sched.optional || []).map((n) => { const p = byN[n]; if (!p) return ''; const done = log.some((l) => l.name === p.name && l.date >= sched.since); return `<span class="chip ${done ? 'done' : ''}" title="${esc(p.name)} · target ${p.target} min">#${n} ${esc(p.short || p.name)} · optional</span>`; }).join('')}
                 ${sched.rotation ? `<span class="chip ${log.some((l) => l.name === sched.rotation && l.date >= monday) ? 'done' : 'due'}">${esc(sched.rotation)}</span>` : ''}</div>`
                 : '<div class="empty">No drills today</div>'}</div>
           </div>
@@ -858,11 +871,11 @@
     const never = core.filter((x) => !x.mine.length).length;
     const thisWeek = log.filter((l) => l.date >= monday).length;
 
-    const chip = (n, optional) => { const p = byN[n]; if (!p) return ''; const done = log.some((l) => l.name === p.name && l.date >= monday); return `<span class="chip ${done ? 'done' : ''}" title="${esc(p.name)} · target ${p.target} min">#${n} ${esc(p.short || p.name)}${optional ? ' · optional' : ''}</span>`; };
-    const board = (DATA.guide.drillSchedule || []).map((d) => `<div class="card wk-col ${d.weekday === todayName ? 'today' : ''}">
+    const chip = (n, since, optional) => { const p = byN[n]; if (!p) return ''; const done = log.some((l) => l.name === p.name && l.date >= since); return `<span class="chip ${done ? 'done' : ''}" title="${esc(p.name)} · target ${p.target} min">#${n} ${esc(p.short || p.name)}${optional ? ' · optional' : ''}</span>`; };
+    const board = drillBoard().map((d) => `<div class="card wk-col ${d.weekday === todayName ? 'today' : ''}">
         <div class="wk-day">${esc(d.weekday)}${d.weekday === todayName ? ' <span class="badge accent">today</span>' : ''}</div>
         <div class="wk-theme">${esc(d.theme)}</div>
-        <div class="wk-chips">${d.prims.map((n) => chip(n)).join('')}${(d.optional || []).map((n) => chip(n, true)).join('')}${d.rotation ? `<span class="chip ${log.some((l) => l.name === d.rotation && l.date >= monday) ? 'done' : 'due'}">${esc(d.rotation)}</span>` : ''}</div>
+        <div class="wk-chips">${d.prims.map((n) => chip(n, d.since)).join('')}${(d.optional || []).map((n) => chip(n, d.since, true)).join('')}${d.rotation ? `<span class="chip ${log.some((l) => l.name === d.rotation && l.date >= monday) ? 'done' : 'due'}">${esc(d.rotation)}</span>` : ''}</div>
         <p class="wk-why">${esc(d.why || '')}</p></div>`).join('');
 
     const pcard = (x) => {
@@ -903,7 +916,7 @@
         </div>
       </section>
       <section class="section">
-        <div class="section-head left"><h2>The week, by weekday</h2><p>One family a day, the same every week. A chip turns green once logged this week.</p></div>
+        <div class="section-head left"><h2>The week, by weekday</h2><p>Five topics a day, the same every week. No primitive comes up twice. A chip turns green once logged this week.</p></div>
         <div class="wk-board">${board}</div>
       </section>
       <section class="section">
