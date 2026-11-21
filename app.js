@@ -129,6 +129,7 @@
       const r = indexedDB.open('dsa-tracker-handle', 1);
       r.onupgradeneeded = () => r.result.createObjectStore('kv');
       r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+      r.onblocked = () => rej(new Error('Browser storage is blocked by another tab'));
     }),
     async get(k) { const db = await this.open(); return new Promise((res) => { const t = db.transaction('kv').objectStore('kv').get(k); t.onsuccess = () => res(t.result); t.onerror = () => res(null); }); },
     async set(k, v) { const db = await this.open(); return new Promise((res) => { const t = db.transaction('kv', 'readwrite').objectStore('kv').put(v, k); t.onsuccess = () => res(); t.onerror = () => res(); }); },
@@ -170,7 +171,7 @@
     fileHandle = h;
     // Ask for write access right now, while the click is still fresh; Chrome offers "Allow on every visit" here.
     if ((await h.requestPermission({ mode: 'readwrite' })) !== 'granted') throw new Error('Write access was not granted');
-    try { await idb.set('handle', h); } catch (_) { /* remembering the link is a convenience only */ }
+    try { await withTimeout(idb.set('handle', h), 3000, 'Browser storage'); } catch (_) { /* remembering the link is a convenience only */ }
     await readFromHandle();
     return true;
   }
@@ -249,21 +250,35 @@
   //      a slim banner (or the first click) grants write access.
   //   3. opened straight from disk (file://) on a first visit — Chrome blocks reading sibling files,
   //      so a one-time "Open data.json" screen is shown.
+  // A browser call that never answers (a stuck IndexedDB, a file handle on an unavailable drive)
+  // must not leave the page on "Loading…" forever: give each startup step a deadline and move on.
+  function withTimeout(promise, ms, what) {
+    return Promise.race([promise, new Promise((_, rej) => setTimeout(() => rej(new Error(`${what} did not respond within ${ms / 1000}s`)), ms))]);
+  }
+
   async function boot() {
     if (FS_OK) {
-      try { fileHandle = (await idb.get('handle')) || null; } catch (_) { fileHandle = null; }
+      try { fileHandle = (await withTimeout(idb.get('handle'), 3000, 'Browser storage')) || null; }
+      catch (e) { console.warn('[dsa-tracker] remembered file link unavailable:', e); fileHandle = null; }
       if (fileHandle) {
+        let loaded = false;
         try {
-          if ((await fileHandle.queryPermission({ mode: 'readwrite' })) === 'granted') { await readFromHandle(); return start(); }
-        } catch (_) { fileHandle = null; }
+          if ((await withTimeout(fileHandle.queryPermission({ mode: 'readwrite' }), 3000, 'File permission check')) === 'granted') {
+            await withTimeout(readFromHandle(), 5000, 'Reading the linked data.json');
+            loaded = true;
+          }
+        } catch (e) { console.warn('[dsa-tracker] could not read the linked data.json:', e); fileHandle = null; writable = false; }
+        if (loaded) return start();
       }
     }
-    try {
-      await loadViaFetch();
+    let fetched = false;
+    try { await withTimeout(loadViaFetch(), 8000, 'Loading data.json'); fetched = true; }
+    catch (e) { console.warn('[dsa-tracker] data.json could not be fetched:', e); /* file:// — fall through to the one-time gate */ }
+    if (fetched) {
       start();
       showBanner(!FS_OK ? 'unsupported' : fileHandle ? 'reconnect' : 'link');
       return;
-    } catch (_) { /* file:// — fall through to the one-time gate */ }
+    }
     if (!FS_OK) {
       return showGate(`<div class="card gate-card"><h2>Browser not supported</h2>
         <p class="muted" style="margin-top:8px">Open this folder in <b>Chrome</b> or <b>Edge</b>, which can read and write <code>data.json</code> directly.</p></div>`);
@@ -1146,5 +1161,12 @@
     }
   });
 
-  boot();
+  boot().catch((err) => {
+    // Never fail silently: a startup error is shown on the page instead of an endless "Loading…".
+    console.error('[dsa-tracker] startup failed:', err);
+    document.getElementById('brand-sub').textContent = 'Could not start';
+    showGate(`<div class="card gate-card"><h2>Could not start</h2>
+      <p class="muted" style="margin:8px 0 16px">${esc(err && err.message ? err.message : String(err))}</p>
+      <button class="btn primary" onclick="location.reload()">Reload</button></div>`);
+  });
 })();
